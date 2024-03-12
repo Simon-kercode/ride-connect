@@ -5,6 +5,6 @@
  */
 
 //Chemin absolu de l'application :
-define("RACINE", dirname(__DIR__));
+define("RACINE", dirname(dirname(__DIR__)));
 
 ?>
