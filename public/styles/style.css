@@ -26,8 +26,16 @@
 
 
 /* =====================general config===================== */
-body {
+* {
     margin: 0;
+    padding: 0;
+}
+header {
+    min-height: 10vh;
+}
+body {
+    font-family: 'Work Sans';
+    min-height: 75vh;
 }
 ul {
     list-style: none;
@@ -43,7 +51,7 @@ header {
     align-items: center;
     min-height: 80px;
 }
-#logoHeader {
+.logo {
     width: 200px;
     height: fit-content;
 }
@@ -53,6 +61,7 @@ nav img {
 }
 #menuLinks {
     position: fixed;
+    z-index: 99;
     right: 0;
     overflow: hidden;
     transition: 0.3s ease-out;
@@ -60,13 +69,13 @@ nav img {
     padding: 0;
     line-height: 4;
     text-align: center;
+    background-color: white;
 }
 #menuLinks.navOn {
     width: 100%;
 }
 #menuLinks li a {
     color: black;
-    font-family: 'Work Sans';
     font-size: 1.2rem;
 }
 .coDeco {
@@ -77,7 +86,47 @@ nav img {
     border-radius: 10px;
 }
 
+/* ================ Footer ================= */
 
+footer {
+    background-color: #202022;
+}
+#upFooter {
+    display: flex;
+    justify-content: space-between;
+    padding: 25px 0;
+}
+#ntw {
+    margin-left: 15px;
+    margin-top: 10px;
+}
+#ntw img {
+    width: 30px;
+    margin-left: 8px;
+}
+#rightFooter img {
+    width: 30px;
+    height: 30px;
+    rotate: -90deg;
+    background-color: white;
+    padding: 5px;
+    border-radius: 50px;
+    margin-left: 95px;
+    margin-top: 5px;
+}
+#rightFooter ul {
+    padding-left: 0;
+    margin-right: 20px;
+    margin-top: 30px;
+}
+#rightFooter ul li a {
+    color: white;
+}
+#copyright {
+    text-align: center;
+    background-color: #009BDB;
+    padding: 3px 0;
+}
 /* =============== Responsive ============== */
 /* ================= Header =================== */
 @media screen and (min-width: 992px){
