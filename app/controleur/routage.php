@@ -4,6 +4,7 @@ function redirectTo($action="accueil"){
     switch($action){
         case "accueil":
             return RACINE . "/app/controleur/accueil_ctl.php";
+            break;
         case "about":
             return RACINE . "/app/controleur/about_ctl.php";
             break;
