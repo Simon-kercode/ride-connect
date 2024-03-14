@@ -59,9 +59,9 @@ a {
     text-decoration: none;
 }
 .logo{
-        width: 200px;
-        height: fit-content;
-    }
+    width: 200px;
+    height: fit-content;
+}
 /*======================= header =====================*/
 
 header {
@@ -75,16 +75,16 @@ header {
     #menuLinks {
         position: fixed;
         z-index: 99;
-        right: 0;
+        right: -100%;
         overflow: hidden;
-        transition: 0.3s ease-out;
-        width: 0;
+        transition: right 0.3s ease-out;
+        width: 100vw;
         padding: 0;
         line-height: 4;
         text-align: center;
         background-color: white;
         &.navOn {
-            width: 100%;
+            right: 0;
         }
         li a {
             color: black;
@@ -92,7 +92,7 @@ header {
         }
         .coDeco {
                 background-color: $detailsBlue;
-                color: white !important;
+                color: white;
                 font-weight: 800;
                 padding: 16px;
                 border-radius: 10px;
@@ -162,7 +162,8 @@ footer {
 /*============== Header ==================*/
 @media screen and (min-width: 992px){
     #menuLinks {
-        position: inherit;
+        position: unset;
+        right: 0;
         width: 100%;
         display: flex;
 
