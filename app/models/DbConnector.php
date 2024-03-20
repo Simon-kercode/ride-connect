@@ -15,13 +15,15 @@ class DbConnector extends PDO {
 
     private function __construct() {
 
-        $dsn = 'mysql:dbname='.DB_NAME.';host='.DB_HOST;
+        $dsn = 'mysql:dbname='.self::DB_NAME.';host='.self::DB_HOST;
 
         //calling class PDO's constructor
         try {
-            parent::__construct($dsn, DB_USER, DB_PASS);
+            parent::__construct($dsn, self::DB_USER, self::DB_PASS);
 
             $this->setAttribute(PDO::MYSQL_ATTR_INIT_COMMAND, 'SET NAMES utf8');
+            $this->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
+            $this->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         }
         catch(PDOException $e) {
             error_log($e->getMessage());
