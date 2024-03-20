@@ -60,13 +60,13 @@ namespace app\core;
             if($params[0] != ''){
                 //getting the controller to instantiate
                 $controller = '\\app\\controllers\\'.ucfirst(array_shift($params)).'Controller';
-
+                // getting the 2nd parameter if it exists
                 $action = isset($params[0]) ? array_shift($params) : 'index';
 
                 $controller = new $controller();
 
                 if(method_exists($controller, $action)){
-
+                    // if there's still parameters, calling method 
                     (isset($params[0])) ? $controller->$action($params) : $controller->$action();
                 }
                 else {
