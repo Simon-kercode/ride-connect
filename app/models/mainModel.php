@@ -10,7 +10,7 @@ class MainModel extends DbConnector {
     // db's instance
     private $db;
 
-    public function query(string $sql, array $params = null) {
+    public function request(string $sql, array $params = null) {
         // getting DbConnector instance
         $this->db = DbConnector::getInstance();
 
@@ -33,11 +33,11 @@ class MainModel extends DbConnector {
         return $query->fetchAll();
     }
 
+    // method to find one or more items by some criterias
     public function findBy(array $criteria) {
         $fields = [];
         $values = [];
         
-        // DEMANDER A THIERRY POUR L'UTILISATION DU MARQUEUR DE PARAMETRE '?' au lieu de :nom
         foreach($criteria as $field => $value){
             $fields[] = "$field = ?";
             $values[] = $value;
@@ -45,7 +45,11 @@ class MainModel extends DbConnector {
         // transforms fields array into a string
         $fieldsList = implode(' AND ', $fields);
 
-        $result = $this->query('SELECT * FROM '.$this->table.' WHERE '.$fieldsList, $values)->fetchAll();
+        $result = $this->request('SELECT * FROM '.$this->table.' WHERE '.$fieldsList, $values)->fetchAll();
         return $result;
+    }
+
+    public function find(int $id) {
+        $result = $this->request('SELECT * FROM '.$this->table.' WHERE id = '.$id)->fetch();
     }
 }
