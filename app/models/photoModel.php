@@ -3,7 +3,7 @@
 namespace app\models;
 use BaladeModel;
 
-class PhotoModel extends MainModel {
+class PhotoModel extends Model {
 
     private int $idPhoto;
     private int $idBalade;

@@ -2,7 +2,7 @@
 
 namespace app\models;
 
-use mainModel;
+use Model;
 
 class BaladeModel extends Model {
 

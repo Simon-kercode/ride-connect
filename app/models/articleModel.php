@@ -2,7 +2,7 @@
 
 namespace app\models;
 
-class ArticleModel extends mainModel {
+class ArticleModel extends Model {
 
     private int $idArticle;
     private string $title;

@@ -2,7 +2,7 @@
 
 namespace app\models;
 
-class UserModel extends mainModel {
+class UserModel extends Model {
 
     protected int $idUser;
     private string $pseudo;
@@ -13,17 +13,13 @@ class UserModel extends mainModel {
     private bool $isAdmin;
 
 
-    public function __construct(string $email, string $password, string $pseudo, string $name, string $firstname, bool $isAdmin) {
+    public function __construct($email, $password) {
         $this->email = $email;
         $this->password = $password;
-        $this->pseudo = $pseudo;
-        $this->name = $name;
-        $this->firstname = $firstname;
-        $this->isAdmin = $isAdmin;
     }
 
     public function createUser(array $params) {
-        $sql = "INSERT INTO `user` VALUES (?, ?, ?, ?, ?)";
+        $sql = "INSERT INTO `_user` (mail, password, pseudo, name, firstname) VALUES (?, ?, ?, ?, ?)";
         // prepare values to execute the query
         $values = [
             $params['email'],
@@ -33,7 +29,7 @@ class UserModel extends mainModel {
             $params['firstname']
         ];
         $result = $this->request($sql, $values);
-
+        var_dump($result);
         return $result; 
     }
 
@@ -41,14 +37,14 @@ class UserModel extends mainModel {
         $fields = [];
         $values = [];
         
-        foreach($criteria as $field => $value){
+        foreach($params as $field => $value){
             $fields[] = "$field = ?";
             $values[] = $value;
         }
         // transforms fields array into a string
         $fieldsList = implode(' AND ', $fields);
 
-        $result = $this->request('SELECT * FROM `user` WHERE '.$fieldsList, $values)->fetchAll();
+        $result = $this->request('SELECT * FROM `_user` WHERE '.$fieldsList, $values)->fetchAll();
         return $result;
     }
 
@@ -62,13 +58,13 @@ class UserModel extends mainModel {
         }
 
         $fieldsList = implode(', ', $fields);
-        $result = $this->request('UPDATE `user` SET '.$fieldsList. 'WHERE id='.$idUser, $valeurs);
+        $result = $this->request('UPDATE `_user` SET '.$fieldsList. 'WHERE id='.$idUser, $valeurs);
 
         return $result;
     }
     
     public function deleteUser(){
-        $result = $this->request('DELETE FROM `user` WHERE id='.$idUser);
+        $result = $this->request('DELETE FROM `_user` WHERE id='.$idUser);
 
         return $result;
     }

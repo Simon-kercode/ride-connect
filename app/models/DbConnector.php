@@ -13,7 +13,7 @@ class DbConnector extends PDO {
     private const DB_PASS = '';
     private const DB_NAME = 'rideConnect';
 
-    private function __construct() {
+    public function __construct() {
 
         $dsn = 'mysql:dbname='.self::DB_NAME.';host='.self::DB_HOST;
 

@@ -19,7 +19,7 @@
                 <li><a href="#">Balades</a></li>
                 <li><a href="#">A propos</a></li>
                 <li><a href="#">Contact</a></li>
-                <li><a class="coDeco" href="#">Connexion / Inscription</a></li>
+                <li><a class="coDeco" href="connexion">Connexion / Inscription</a></li>
                 <li><a class="coDeco" href="#">Déconnexion</a></li>
             </ul>
         </nav>

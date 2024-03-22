@@ -12,6 +12,9 @@ $detailsBlue: #009BDB;
     justify-content: space-between;
 }
 
+// =============== functions ==================
+
+
 /*================== polices ===================*/
 
 /* work-sans-regular - latin */
@@ -51,6 +54,7 @@ body {
 }
 body, html {
     height: 100%;
+    font-size: 1rem;
 }
 ul {
     list-style: none;
@@ -145,23 +149,37 @@ footer {
 
 /*============== Accueil =================*/
 
-#welcomeSearch {
+#welcome {
     position: relative;
-    background: center / 100% cover no-repeat url("../images/photo-accueil-sombre.png");
-    figcaption {
+    // background-image: url("../images/photo-accueil-sombre.png");
+    // background-repeat: no-repeat;
+    // background-size: 100%;
+    #welcomePic {
+        width: 100%;
+    }
+    h1 {
         position: absolute;
-        bottom: 60%;
-        left: 60%;
+        top: 15%;
+        right: 15%;
         font-family: 'Anton';
         color: $backgroundLightGrey;
-        font-size: 2rem;
-        box-sizing: content-box;
+        font-size: 7vw;
+    }
+    #welcomeSearch {
+        width: 70%;
+        height: 5vh;
+        position: absolute;
+        bottom: 20%;
+        margin: auto;
+        left: 15%;
+        border-radius: 10px;
+        padding-left: 15px;
     }
 }
 /*============== Responsive ==============*/
 /*============== Header ==================*/
-@media screen and (min-width: 992px){
-    #menuLinks {
+@media screen and (min-width: 992px) {
+    header #menuLinks {
         position: unset;
         right: 0;
         width: 100%;
@@ -172,6 +190,15 @@ footer {
         }
     }
     nav img {
-        display: none !important;
+        display: none;
+    }
+
+    #welcome {
+        h1 {
+            font-size: 5vw;
+        }
+        #welcomeSearch {
+        height: 7vh;
+        }
     }
 }

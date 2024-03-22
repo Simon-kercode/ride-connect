@@ -1,1 +1,180 @@
-@font-face{font-display:swap;font-family:"Work Sans";font-style:normal;font-weight:400;src:url("../fonts/work-sans-v19-latin-regular.woff2") format("woff2")}@font-face{font-display:swap;font-family:"Work Sans bold";font-style:normal;font-weight:800;src:url("../fonts/work-sans-v19-latin-800.woff2") format("woff2")}@font-face{font-display:swap;font-family:"Anton";font-style:normal;font-weight:400;src:url("../fonts/anton-v25-latin-regular.woff2") format("woff2")}*{margin:0;padding:0}body{font-family:"Work Sans"}body,html{height:100%}ul{list-style:none}a{text-decoration:none}.logo{width:200px;height:fit-content}header{display:flex;justify-content:space-between;align-items:center;min-height:80px}header nav img{width:40px;margin-right:30px}header #menuLinks{position:fixed;z-index:99;right:-100%;overflow:hidden;transition:right .3s ease-out;width:100vw;padding:0;line-height:4;text-align:center;background-color:#fff}header #menuLinks.navOn{right:0}header #menuLinks li a{color:#000;font-size:1.2rem}header #menuLinks .coDeco{background-color:#009bdb;color:#fff;font-weight:800;padding:16px;border-radius:10px}footer{background-color:#202022}footer #upFooter{display:flex;justify-content:space-between;padding:25px 0}footer #upFooter #ntw{margin-left:15px;margin-top:10px}footer #upFooter #ntw img{width:30px;margin-left:8px}footer #upFooter #rightFooter img{width:30px;height:30px;rotate:-90deg;background-color:#fff;padding:5px;border-radius:50px;margin-left:95px;margin-top:5px}footer #upFooter #rightFooter ul{padding-left:0;margin-right:20px;margin-top:30px}footer #upFooter #rightFooter ul li a{color:#fff}footer #copyright{text-align:center;background-color:#009bdb;padding:3px 0}#welcomeSearch{position:relative;background:center/100% cover no-repeat url("../images/photo-accueil-sombre.png")}#welcomeSearch figcaption{position:absolute;bottom:60%;left:60%;font-family:"Anton";color:#cacaca;font-size:2rem;box-sizing:content-box}@media screen and (min-width: 992px){#menuLinks{position:unset;right:0;width:100%;display:flex}#menuLinks li{margin-right:30px}nav img{display:none !important}}/*# sourceMappingURL=style.css.map */
+/*================== polices ===================*/
+/* work-sans-regular - latin */
+@font-face {
+  font-display: swap; /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
+  font-family: "Work Sans";
+  font-style: normal;
+  font-weight: 400;
+  src: url("../fonts/work-sans-v19-latin-regular.woff2") format("woff2"); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
+}
+/* work-sans-800 - latin */
+@font-face {
+  font-display: swap; /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
+  font-family: "Work Sans bold";
+  font-style: normal;
+  font-weight: 800;
+  src: url("../fonts/work-sans-v19-latin-800.woff2") format("woff2"); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
+}
+/* anton-regular - latin */
+@font-face {
+  font-display: swap; /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
+  font-family: "Anton";
+  font-style: normal;
+  font-weight: 400;
+  src: url("../fonts/anton-v25-latin-regular.woff2") format("woff2"); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
+}
+/*================= general config ================*/
+* {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: "Work Sans";
+}
+
+body, html {
+  height: 100%;
+  font-size: 1rem;
+}
+
+ul {
+  list-style: none;
+}
+
+a {
+  text-decoration: none;
+}
+
+.logo {
+  width: 200px;
+  height: fit-content;
+}
+
+/*======================= header =====================*/
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  min-height: 80px;
+}
+header nav img {
+  width: 40px;
+  margin-right: 30px;
+}
+header #menuLinks {
+  position: fixed;
+  z-index: 99;
+  right: -100%;
+  overflow: hidden;
+  transition: right 0.3s ease-out;
+  width: 100vw;
+  padding: 0;
+  line-height: 4;
+  text-align: center;
+  background-color: white;
+}
+header #menuLinks.navOn {
+  right: 0;
+}
+header #menuLinks li a {
+  color: black;
+  font-size: 1.2rem;
+}
+header #menuLinks .coDeco {
+  background-color: #009BDB;
+  color: white;
+  font-weight: 800;
+  padding: 16px;
+  border-radius: 10px;
+}
+
+/*============== footer ================ */
+footer {
+  background-color: #202022;
+}
+footer #upFooter {
+  display: flex;
+  justify-content: space-between;
+  padding: 25px 0;
+}
+footer #upFooter #ntw {
+  margin-left: 15px;
+  margin-top: 10px;
+}
+footer #upFooter #ntw img {
+  width: 30px;
+  margin-left: 8px;
+}
+footer #upFooter #rightFooter img {
+  width: 30px;
+  height: 30px;
+  rotate: -90deg;
+  background-color: white;
+  padding: 5px;
+  border-radius: 50px;
+  margin-left: 95px;
+  margin-top: 5px;
+}
+footer #upFooter #rightFooter ul {
+  padding-left: 0;
+  margin-right: 20px;
+  margin-top: 30px;
+}
+footer #upFooter #rightFooter ul li a {
+  color: white;
+}
+footer #copyright {
+  text-align: center;
+  background-color: #009BDB;
+  padding: 3px 0;
+}
+
+/*============== Accueil =================*/
+#welcome {
+  position: relative;
+}
+#welcome #welcomePic {
+  width: 100%;
+}
+#welcome h1 {
+  position: absolute;
+  top: 15%;
+  right: 15%;
+  font-family: "Anton";
+  color: #CACACA;
+  font-size: 7vw;
+}
+#welcome #welcomeSearch {
+  width: 70%;
+  height: 5vh;
+  position: absolute;
+  bottom: 20%;
+  margin: auto;
+  left: 15%;
+  border-radius: 10px;
+  padding-left: 15px;
+}
+
+/*============== Responsive ==============*/
+/*============== Header ==================*/
+@media screen and (min-width: 992px) {
+  header #menuLinks {
+    position: unset;
+    right: 0;
+    width: 100%;
+    display: flex;
+  }
+  header #menuLinks li {
+    margin-right: 30px;
+  }
+  nav img {
+    display: none;
+  }
+  #welcome h1 {
+    font-size: 5vw;
+  }
+  #welcome #welcomeSearch {
+    height: 7vh;
+  }
+}/*# sourceMappingURL=style.css.map */

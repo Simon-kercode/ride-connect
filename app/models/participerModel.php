@@ -2,7 +2,7 @@
 
 namespace app\models;
 
-class ParticiperModel extends mainModel {
+class ParticiperModel extends Model {
 
     private int $idUser;
     private int $idBalade;
