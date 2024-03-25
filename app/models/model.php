@@ -54,23 +54,24 @@ class Model extends DbConnector {
     }
 
     // method to create an item 
-    public function create(Model $model){
+    public function create(){
         $fields = [];
         $inter = [];
         $values = [];
 
-        foreach($model as $field => $value) {
-            if($value !== null && $field != 'db' && $field != 'table') {
+        foreach($this as $field => $value) {
+            if($value !== null && $field != 'db' && $field != 'table' && $field != 'idUser') {
                 $fields[] = $field;
                 $inter[] = '?';
                 $values[] = $value;
             }
         }
         // transforming arrays into strings
-        $fieldsList = implode(', ', $champs);
+        $fieldsList = implode(', ', $fields);
         $interList = implode(', ', $inter);
 
         $result = $this->request('INSERT INTO '.$this->table.' ('.$fieldsList.')VALUES('.$interList.')', $values);
+        return $result;
     }
 
     // method to update an item
@@ -93,6 +94,7 @@ class Model extends DbConnector {
         $result = $this->request('UPDATE '.$this->table.' SET '. $fieldsList.' WHERE id = ?', $values);
     }
 
+    // method to delete an item
     public function delete(int $id) {
         $result = $this->request ('DELETE FROM '.$this->$table.' WHERE id = ?', [$id]);
     }

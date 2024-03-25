@@ -37,13 +37,14 @@
 // }
 
 namespace app\core;
+use app\controllers\mainController;
 
-    class Main {
+    class Routage {
 
         public function start() {
             // deleting the trailing slash at the end of the url
             $uri = $_SERVER['REQUEST_URI'];
-
+            var_dump($uri);
             if(!empty($uri) && $uri != '/' && $uri[-1] === '/'){
                 $uri = substr($uri, 0, -1);
 
@@ -56,10 +57,10 @@ namespace app\core;
 
             // separate parameters of the url by '/'
             $params = explode('/', $_GET['p']);
-
+            var_dump($params);
             if($params[0] != ''){
                 //getting the controller to instantiate
-                $controller = '\\app\\controllers\\'.ucfirst(array_shift($params)).'Controller';
+                $controller = '\\app\\controllers\\'.array_shift($params).'Controller';
                 // getting the 2nd parameter if it exists
                 $action = isset($params[0]) ? array_shift($params) : 'index';
 
@@ -67,7 +68,7 @@ namespace app\core;
 
                 if(method_exists($controller, $action)){
                     // if there's still parameters, calling method 
-                    (isset($params[0])) ? $controller->$action($params) : $controller->$action();
+                    (isset($params[0])) ? call_user_func_array([$controller,$action], $params) : $controller->$action();
                 }
                 else {
                     http_response_code(404);

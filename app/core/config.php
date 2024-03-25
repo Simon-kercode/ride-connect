@@ -1,7 +1,7 @@
 <?php
 
 //Application's absolute path :
-define("RACINE", dirname(dirname(__DIR__)));
+define("ROOT", dirname(dirname(__DIR__)));
 
 $DB_HOST = 'localhost';
 $DB_USER = 'root';

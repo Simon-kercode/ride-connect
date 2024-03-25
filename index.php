@@ -1,17 +1,14 @@
 <?php
-require dirname(__FILE__) . "/app/core/config.php";
+require "app/core/config.php";
 
 use app\autoloader;
+use app\core\routage;
 
-// require RACINE . "/app/core/routage.php";
-require RACINE . '/app/autoloader.php';
+require ROOT . '/app/autoloader.php';
 Autoloader::register();
 
-$action = "accueil";
+$routage = new Routage();
 
-if (isset($_GET["action"])) {
-	$action = redirectTo($_GET["action"]);
-}
+$routage->start();
 
-require RACINE . "/app/controllers/" . $action . "_ctl.php";
 ?>
