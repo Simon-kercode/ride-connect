@@ -72,7 +72,7 @@ header {
     @include flexSpace;
     align-items: center;
     min-height: 80px;
-    nav img {
+    #burgerIcons img {
         width: 40px;
         margin-right: 30px;
     }
@@ -93,6 +93,19 @@ header {
         li a {
             color: black;
             font-size: 1.2rem;
+        }
+        #profileLink {
+            border: solid 2px $detailsBlue;
+            border-radius: 10px;
+            padding: 16px;
+        }
+        #profileLink:hover {
+            background-color: $detailsBlue;
+            color: white;
+            transition: 0.3s;
+        }
+        #profileLink img {
+            width: 20px;
         }
         .coDeco {
                 background-color: $detailsBlue;
@@ -189,7 +202,7 @@ footer {
             margin-right: 30px;
         }
     }
-    nav img {
+    #burgerIcons img {
         display: none;
     }
 

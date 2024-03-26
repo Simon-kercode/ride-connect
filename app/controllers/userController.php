@@ -5,10 +5,11 @@ namespace app\controllers;
 use app\models\userModel;
 use app\models\model;
 
-class ConnectionController {
+class UserController {
+    
     public function index() {
         $titre = 'Connexion - Ride Connect';
-        include ROOT.'/app/views/connection.php';
+        include ROOT.'/app/views/login.php';
     }
     
     public function userLogin(){
@@ -24,7 +25,7 @@ class ConnectionController {
                 
                 if ($result == true) {
                     $_SESSION['message'] = "Vous êtes connecté en tant que ".$_SESSION['user']['pseudo'];
-                    include ROOT.'/app/views/connection.php';
+                    include ROOT.'/app/views/login.php';
                     exit;
                 }
                 else if ($result == false) {
@@ -33,5 +34,11 @@ class ConnectionController {
             }
             else $_SESSION['error'] = "Veuillez remplir tous les champs";
         }
+    }
+
+    public function userLogout() {
+        $userLogout = new UserModel;
+        $userLogout->logout();
+        header('Location: accueil');
     }
 }

@@ -2,9 +2,9 @@
 
 namespace app\core;
 use app\controllers\homeController;
-use app\controllers\inscriptionController;
-use app\controllers\connectionController;
-use app\controllers\logoutController;
+use app\controllers\registerController;
+use app\controllers\userController;
+use app\controllers\profileController;
 
     class Routage {
         public function start() {
@@ -23,19 +23,19 @@ use app\controllers\logoutController;
             $params = explode('/', $_GET['p']);
     
             switch($params[0]) {
-                case '': 
+                case '':
+                case '/': 
                     $route = new HomeController;
                     $route->index();
                     break;
 
                 case 'accueil': 
-                    session_start();
                     $route = new HomeController;
                     $route->index();
                     break;
 
                 case 'inscription': 
-                    $route = new InscriptionController;
+                    $route = new RegisterController;
                     if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                         $route->inscription();
                     }
@@ -44,7 +44,7 @@ use app\controllers\logoutController;
                     break;
 
                 case 'connexion':
-                    $route = new ConnectionController;
+                    $route = new UserController;
                     if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                         $route->userLogin();
                     }
@@ -53,8 +53,13 @@ use app\controllers\logoutController;
                     break;
 
                 case 'logout':
-                    $route = new LogoutController;
+                    $route = new UserController;
                     $route->userLogout();
+                    break;
+                
+                case 'profile':
+                    $route = new ProfileController;
+                    $route->index();
                     break;
             }
         }

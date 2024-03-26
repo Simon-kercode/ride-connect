@@ -1,4 +1,5 @@
 <?php
+session_start();
 require "app/core/config.php";
 
 use app\autoloader;

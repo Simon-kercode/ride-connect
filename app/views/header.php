@@ -11,20 +11,24 @@
     <header>
         <a href="accueil"><img class="logo" src="public/images/logo2.png" alt="Logo Ride Connect"></a>
         <nav id="principalMenu">
-            <div>
-                <img id="burger" src="public/images/burger.svg" alt="menu burger">
-                <img id="closeBurger" src="public/images/close-burger.svg" alt="croix fermeture burger">
+            <div id="burgerIcons">
+                <img id="burger" src="public/images/icons/burger.svg" alt="menu burger">
+                <img id="closeBurger" src="public/images/icons/close-burger.svg" alt="croix fermeture burger">
             </div>
             <ul id="menuLinks">
                 <li><a href="#">Balades</a></li>
                 <li><a href="#">A propos</a></li>
                 <li><a href="#">Contact</a></li>
                 <?php if (isset($_SESSION['user']) && !empty($_SESSION['user']['idUser'])) : ?>
+                    <li><a href="profile" id="profileLink">
+                        <img src="public/images/icons/user.svg" alt="icone de profil">
+                        <?= $_SESSION['user']['pseudo'] ?>
+                    </a></li>
                     <li><a class="coDeco" href="logout">Déconnexion</a></li>
                 <?php else : ?>
                     <li><a class="coDeco" href="connexion">Connexion</a></li>
+                    <li><a class="coDeco" href="inscription">Inscription</a></li>
                 <?php endif; ?>
-                <li><a class="coDeco" href="inscription">Inscription</a></li>
             </ul>
         </nav>
     </header>

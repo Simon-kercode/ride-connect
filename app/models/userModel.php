@@ -66,8 +66,26 @@ class UserModel extends Model {
     }
 
     public function findOneByMail($email) {
-        $result = $this->request('SELECT * FROM `_user` WHERE email = ?', [$email])->fetch();
-        return $result;
+
+        return $this->request('SELECT * FROM `_user` WHERE email = ?', [$email])->fetch();
+    }
+
+    public function verifyExistingMail($email) {
+
+        $result = $this->request('SELECT email FROM `_user` WHERE email = ?', [$email])->fetch();
+
+        if ($result) {
+            return false;
+        }
+    }
+
+    public function verifyExistingPseudo($pseudo) {
+
+        $result = $this->request('SELECT pseudo FROM `_user` WHERE pseudo = ?', [$pseudo])->fetch();
+
+        if ($result) {
+            return false;
+        }
     }
 
     /**
