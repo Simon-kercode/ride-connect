@@ -17,25 +17,25 @@ class UserModel extends Model {
         $this->table = '_user';
     }
     
-    public function setSession() {
+    public function setSession($idUser, $email, $pseudo) {
         $_SESSION['user'] = [
-            'idUser' => $this->idUser,
-            'email' => $this->email,
-            'pseudo'=> $this->pseudo
+            'idUser' => $idUser,
+            'email' => $email,
+            'pseudo'=> $pseudo
         ];
     }
 
-    public function login() {
+    public function login(string $email, string $password) {
         if (!isset($_SESSION)) {
             session_start();
         }
         if ($this->db = DbConnector::getInstance() !== false) {
             $userModel = new UserModel;
-            $user = $userModel->findBy(['email' => $email]);
-            $passwordDb = $user['password'];
+            $user = $userModel->findOneByMail($email);
+            $passwordDb = $user->password;
 
-            if (password_verify(trim($mdp), trim($pwDb))) {
-                $this->setSession();
+            if (password_verify(trim($password), trim($passwordDb))) {
+                $this->setSession($idUser = $user->idUser, $email, $pseudo = $user->pseudo);
                 return true;
             }
             else return false;
@@ -63,6 +63,11 @@ class UserModel extends Model {
                 return true;
             }
         }
+    }
+
+    public function findOneByMail($email) {
+        $result = $this->request('SELECT * FROM `_user` WHERE email = ?', [$email])->fetch();
+        return $result;
     }
 
     /**

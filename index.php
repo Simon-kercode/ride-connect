@@ -7,8 +7,9 @@ use app\core\routage;
 require ROOT . '/app/autoloader.php';
 Autoloader::register();
 
-$routage = new Routage();
+$routage = new Routage;
 
 $routage->start();
+
 
 ?>

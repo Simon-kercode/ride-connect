@@ -1,87 +1,104 @@
 <?php
-// function redirectTo($action="accueil"){
-
-//     switch($action){
-//         case "accueil":
-//             return RACINE . "/app/controleur/accueil_ctl.php";
-//         case "about":
-//             return RACINE . "/app/controleur/about_ctl.php";
-//             break;
-//         case "findTrip":
-//             return RACINE . "/app/controleur/findTrip_ctl.php";
-//             break;
-//         case "orgaTrip":
-//             return RACINE . "/app/controleur/orgaTrip_ctl.php";
-//             break;
-//         case "roadbook":
-//             return RACINE . "/app/controleur/roadbook_ctl.php";
-//             break;
-//         case "blog":
-//             return RACINE . "/app/controleur/blog_ctl.php";
-//             break;
-//         case "contact":
-//             return RACINE . "/app/controleur/contact_ctl.php";
-//             break;
-//         case "connection":
-//             return RACINE . "/app/controleur/connection_ctl.php";
-//             break;
-//         case "inscription":
-//             return RACINE . "/app/controleur/inscription_ctl.php";
-//             break;
-//         case "profile":
-//             return RACINE . "/app/controleur/profile_ctl.php";
-//             break;
-//         default:
-//             return RACINE . "/app/controleur/accueil_ctl.php";
-//     }
-// }
 
 namespace app\core;
-use app\controllers\mainController;
+use app\controllers\homeController;
+use app\controllers\inscriptionController;
+use app\controllers\connectionController;
+use app\controllers\logoutController;
 
     class Routage {
-
         public function start() {
             // deleting the trailing slash at the end of the url
-            $uri = $_SERVER['REQUEST_URI'];
-            var_dump($uri);
-            if(!empty($uri) && $uri != '/' && $uri[-1] === '/'){
-                $uri = substr($uri, 0, -1);
+            // $uri = $_SERVER['REQUEST_URI'];
+            // var_dump($uri);
+            // if(!empty($uri) && $uri != '/' && $uri[-1] === '/'){
+            //     $uri = substr($uri, 0, -1);
 
-                // prevent duplicate content by redirect permanently
-                http_response_code(301);
+            //     // prevent duplicate content by redirect permanently
+            //     http_response_code(301);
 
-                header('Location: '.$uri);
-                exit;
-            }
-
-            // separate parameters of the url by '/'
+            //     header('Location: '.$uri);
+            //     exit;
+            // }
             $params = explode('/', $_GET['p']);
-            var_dump($params);
-            if($params[0] != ''){
-                //getting the controller to instantiate
-                $controller = '\\app\\controllers\\'.array_shift($params).'Controller';
-                // getting the 2nd parameter if it exists
-                $action = isset($params[0]) ? array_shift($params) : 'index';
+    
+            switch($params[0]) {
+                case '': 
+                    $route = new HomeController;
+                    $route->index();
+                    break;
 
-                $controller = new $controller();
+                case 'accueil': 
+                    session_start();
+                    $route = new HomeController;
+                    $route->index();
+                    break;
 
-                if(method_exists($controller, $action)){
-                    // if there's still parameters, calling method 
-                    (isset($params[0])) ? call_user_func_array([$controller,$action], $params) : $controller->$action();
-                }
-                else {
-                    http_response_code(404);
-                    echo "La page recherchée n'existe pas.";
-                }
+                case 'inscription': 
+                    $route = new InscriptionController;
+                    if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+                        $route->inscription();
+                    }
+                    else 
+                    $route->index();
+                    break;
+
+                case 'connexion':
+                    $route = new ConnectionController;
+                    if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+                        $route->userLogin();
+                    }
+                    else
+                    $route->index();
+                    break;
+
+                case 'logout':
+                    $route = new LogoutController;
+                    $route->userLogout();
+                    break;
             }
-            else {
-                // no parameters, instantiate the default controller
-                $controller = new MainController;
-
-                $controller->index();
-            }
-
         }
+        // public function start() {
+            // // deleting the trailing slash at the end of the url
+            // $uri = $_SERVER['REQUEST_URI'];
+            // var_dump($uri);
+            // if(!empty($uri) && $uri != '/' && $uri[-1] === '/'){
+            //     $uri = substr($uri, 0, -1);
+
+            //     // prevent duplicate content by redirect permanently
+            //     http_response_code(301);
+
+            //     header('Location: '.$uri);
+            //     exit;
+            // }
+
+        //     // separate parameters of the url by '/'
+        //     $params = explode('/', $_GET['p']);
+        //     var_dump($params);
+        //     if($params[0] != ''){
+        //         //getting the controller to instantiate
+        //         $controller = '\\app\\controllers\\'.array_shift($params).'Controller';
+        //         // getting the 2nd parameter if it exists
+        //         $action = isset($params[0]) ? array_shift($params) : 'index';
+
+        //         $controller = new $controller();
+
+        //         if(method_exists($controller, $action)){
+        //             // if there's still parameters, calling method 
+        //             (isset($params[0])) ? $controller->$action($params) : $controller->$action();
+        //         }
+        //         else {
+        //             http_response_code(404);
+        //             echo "La page recherchée n'existe pas.";
+        //         }
+        //     }
+        //     else {
+        //         // no parameters, instantiate the default controller
+        //         $controller = new MainController();
+
+        //         $controller->index();
+        //     }
+
+        // }
     }
 ?>

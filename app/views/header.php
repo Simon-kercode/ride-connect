@@ -9,7 +9,7 @@
 </head>
 <body>
     <header>
-        <img class="logo" src="public/images/logo2.png" alt="Logo Ride Connect">
+        <a href="accueil"><img class="logo" src="public/images/logo2.png" alt="Logo Ride Connect"></a>
         <nav id="principalMenu">
             <div>
                 <img id="burger" src="public/images/burger.svg" alt="menu burger">
@@ -19,7 +19,11 @@
                 <li><a href="#">Balades</a></li>
                 <li><a href="#">A propos</a></li>
                 <li><a href="#">Contact</a></li>
-                <li><a class="coDeco" href="connection">Connexion</a></li>
+                <?php if (isset($_SESSION['user']) && !empty($_SESSION['user']['idUser'])) : ?>
+                    <li><a class="coDeco" href="logout">Déconnexion</a></li>
+                <?php else : ?>
+                    <li><a class="coDeco" href="connexion">Connexion</a></li>
+                <?php endif; ?>
                 <li><a class="coDeco" href="inscription">Inscription</a></li>
             </ul>
         </nav>

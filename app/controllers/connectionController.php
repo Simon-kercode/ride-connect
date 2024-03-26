@@ -5,33 +5,33 @@ namespace app\controllers;
 use app\models\userModel;
 use app\models\model;
 
-
-
 class ConnectionController {
-
-    public function connection(){
+    public function index() {
+        $titre = 'Connexion - Ride Connect';
+        include ROOT.'/app/views/connection.php';
+    }
+    
+    public function userLogin(){
 
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-            if (isset($_POST['email'], $_POST['mdp']) && !empty($_POST['email']) && !empty($_POST['mdp'])) {
-                $email = $_POST['email'];
-                $password = $_POST['mdp'];
-                var_dump($email);
-                var_dump($password);
-                $conn = new UserModel();
+            if (isset($_POST['email'], $_POST['password']) && !empty($_POST['email']) && !empty($_POST['password'])) {
+                $email = htmlspecialchars($_POST['email']);
+                $password = htmlspecialchars($_POST['password']);
+
+                $user = new UserModel();
                 
-                $req = $conn->login();
-                var_dump($req);
-                if ($req == true) {
-                    echo "Connexion réussie";
+                $result = $user->login($email, $password);
+                
+                if ($result == true) {
+                    $_SESSION['message'] = "Vous êtes connecté en tant que ".$_SESSION['user']['pseudo'];
+                    include ROOT.'/app/views/connection.php';
+                    exit;
                 }
-                else if ($req == false) {
-                    echo "Identifiants incorrects";
+                else if ($result == false) {
+                    $_SESSION['error'] = "Identifiants incorrects";
                 }
             }
-            else echo "Veuillez remplir tous les champs";
+            else $_SESSION['error'] = "Veuillez remplir tous les champs";
         }
     }
 }
-include ROOT . "/app/views/header.php";
-include ROOT . "/app/views/connection.php";
-include ROOT . "/app/views/footer.php";
