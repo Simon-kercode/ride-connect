@@ -13,7 +13,7 @@
             <p class="error"><?php if(!empty($error)) echo $error ?></p>
             <input type="submit" value="Connexion">
         </form>
-        <img src="public/images/login.jpg" alt="Couple sur une moto sur une route de campagne">
+        <img src="public/images/login.webp" alt="Couple sur une moto sur une route de campagne">
     </section>
 </main>
 

@@ -9,7 +9,7 @@
 </head>
 <body>
     <header>
-        <a href="accueil"><img class="logo" src="public/images/logo2.png" alt="Logo Ride Connect"></a>
+        <a href="accueil"><img class="logo" src="public/images/logo2.webp" alt="Logo Ride Connect"></a>
         <nav id="principalMenu">
             <div id="burgerIcons">
                 <img id="burger" src="public/images/icons/burger.svg" alt="menu burger">

@@ -1,7 +1,7 @@
 <footer>
     <div id="upFooter">
         <div id="leftFooter">
-            <a href="accueil"><img class="logo" src="public/images/logo-white.png" alt="logo Ride Connect"></a>
+            <a href="accueil"><img class="logo" src="public/images/logo-white.webp" alt="logo Ride Connect"></a>
             <div id="ntw">
                 <a href="#"><img src="public/images/icons/facebook.svg" alt="logo facebook"></a>
                 <a href="#"><img src="public/images/icons/instagram.svg" alt="logo instagram"></a>
