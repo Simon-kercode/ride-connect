@@ -8,8 +8,8 @@ class RegisterController {
 
     public function index() {
 
-        $titre = 'Inscription - Ride Connect';
-        include ROOT.'/app/views/inscription.php';
+        $title = 'Inscription - Ride Connect';
+        include ROOT.'/app/views/register.php';
     }
 
     public function inscription() {
@@ -21,16 +21,26 @@ class RegisterController {
 
                 $user = new UserModel();
                 
-                // verify that email adress doesn't exist in the database
-                if($user->verifyExistingMail(htmlspecialchars($_POST['email'])) === false) {
-                    $error = "Un compte existe déjà pour cette adresse mail.";
+                // verify the conformity of the email adress and that it doesn't already exist in the database
+                if(preg_match('/^[\p{L}\p{N}.!#$%&\'*+\/=?^_`{|}~-]+@[\p{L}\p{N}-]+(\.[\p{L}\p{N}-]+)*(\.[\p{L}]{2,})$/u', $_POST['email'])) {
+                    if($user->verifyExistingMail(htmlspecialchars($_POST['email'])) === false) {
+                        $mailError = "Un compte existe déjà pour cette adresse mail.";
+                        $title = 'Inscription - Ride Connect';
+                        include ROOT.'/app/views/register.php';
+                        exit;
+                    }
+                }
+                else {
+                    $mailError = "Cette adresse email n'est pas valide";
+                    $title = 'Inscription - Ride Connect';
                     include ROOT.'/app/views/register.php';
                     exit;
                 }
 
                 // verify that pseudo doesn't exist in the database
                 if($user->verifyExistingPseudo(htmlspecialchars($_POST['pseudo'])) === false) {
-                    $error = "Ce pseudo est déjà utilisé. Veuillez en choisir un autre.";
+                    $pseudoError = "Ce pseudo est déjà utilisé. Veuillez en choisir un autre.";
+                    $title = 'Inscription - Ride Connect';
                     include ROOT.'/app/views/register.php';
                     exit;
                 }
@@ -66,6 +76,7 @@ class RegisterController {
                         } else {
                             // error in database connection
                             $error = "Une erreur s'est produite lors de la création de l'utilisateur. Veuillez réessayer plus tard.";
+                            $title = 'Inscription - Ride Connect';
                             include ROOT.'/app/views/register.php';
                             exit;
                         }
@@ -73,13 +84,15 @@ class RegisterController {
                 }
                 else {
                     // error in password syntax
-                    $error = "Le mot de passe doit contenir au moins 8 caractères comprenant une minuscule, une majuscule, un chiffre et un caractère spécial.";
+                    $passwordError = "Le mot de passe doit contenir au moins 8 caractères comprenant une minuscule, une majuscule, un chiffre et un caractère spécial.";
+                    $title = 'Inscription - Ride Connect';
                     include ROOT.'/app/views/register.php';
                 }
             } 
             else {
                 // at least 1 field is empty
-                $error = "Veuillez fournir toutes les informations nécessaires.";
+                $error = "Veuillez remplir tous les champs pour valider votre inscription.";
+                $title = 'Inscription - Ride Connect';
                 include ROOT.'/app/views/register.php';
             }
             

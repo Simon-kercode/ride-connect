@@ -1,18 +1,20 @@
 <?php include ROOT.'/app/views/header.php'; ?>
 
-<form action="connexion" method = "post">
-    <div>
-        <label for="email">Email</label>
-        <input type="text" name="email">
-    </div>
-    <div>
-        <label for="password">MDP</label>
-        <input type="password" name="password">
-    </div>
-    <p><?php if(!empty($_SESSION['error'])) echo $_SESSION['error'] ?></p>
-    <div>
-        <input type="submit" value="Connexion">
-    </div>
-</form>
+<main id="loginPage" class="container">
+    <section id="login">
+        <form action="connexion" method = "post">
+            <h1>Connexion</h1>
+            <div>
+                <input type="text" name="email" placeholder="Adresse email">
+            </div>
+            <div>
+                <input type="password" name="password" placeholder="Mot de passe">
+            </div>
+            <p class="error"><?php if(!empty($error)) echo $error ?></p>
+            <input type="submit" value="Connexion">
+        </form>
+        <img src="public/images/login.jpg" alt="Couple sur une moto sur une route de campagne">
+    </section>
+</main>
 
 <?php include ROOT.'/app/views/footer.php'; ?>

@@ -53,6 +53,11 @@ class Model extends DbConnector {
         $result = $this->request('SELECT * FROM '.$this->table.' WHERE id = ?', [$id])->fetch();
     }
 
+    public function findOneByOneParam(string $field, string $value) {
+        $result = $this->request('SELECT * FROM '.$this->table.' WHERE '.$field.'= ?', [$value])->fetch();
+        return $result;
+    }
+
     // method to create an item 
     public function create(){
         $fields = [];

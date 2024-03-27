@@ -18,6 +18,7 @@ class UserModel extends Model {
     }
     
     public function setSession($idUser, $email, $pseudo) {
+
         $_SESSION['user'] = [
             'idUser' => $idUser,
             'email' => $email,
@@ -26,12 +27,9 @@ class UserModel extends Model {
     }
 
     public function login(string $email, string $password) {
-        if (!isset($_SESSION)) {
-            session_start();
-        }
+
         if ($this->db = DbConnector::getInstance() !== false) {
-            $userModel = new UserModel;
-            $user = $userModel->findOneByMail($email);
+            $user = $this->findOneByOneParam('email', $email);
             $passwordDb = $user->password;
 
             if (password_verify(trim($password), trim($passwordDb))) {
@@ -44,13 +42,12 @@ class UserModel extends Model {
     }
 
     public function logout(){
-        if (!isset($_SESSION)) {
-            session_start();
-        }
+
         unset($_SESSION['user']);
     }
 
     public function isLoggedOn() {
+        
         if (!isset($_SESSION)) {
             session_start();
             return false;

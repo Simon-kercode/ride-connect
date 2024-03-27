@@ -4,6 +4,8 @@ namespace app\controllers;
 class ProfileController {
 
     public function index() {
-        echo "Ceci est ma page de profil";
+
+        $titre = 'Profil - Ride Connect';
+        include 'app/views/profile.php';
     }
 }
