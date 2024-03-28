@@ -29,14 +29,25 @@
   padding: 0;
 }
 
+body, html {
+  font-size: 1rem;
+}
+
 body {
   font-family: "Work Sans";
   background-color: #F2F2F2;
 }
 
-body, html {
-  height: 100%;
-  font-size: 1rem;
+header {
+  min-height: 15vh;
+}
+
+main {
+  min-height: 70vh;
+}
+
+footer {
+  min-height: 15vh;
 }
 
 ul {
@@ -57,6 +68,14 @@ a {
   max-width: 1400px;
   width: 100%;
   margin: 0 auto;
+}
+
+.button {
+  background-color: #009BDB;
+  color: white;
+  font-weight: 800;
+  padding: 16px;
+  border-radius: 10px;
 }
 
 .error {
@@ -97,8 +116,10 @@ header #menuLinks.navOn {
   right: 0;
 }
 header #menuLinks li a {
-  color: black;
   font-size: 1.2rem;
+}
+header #menuLinks li a:not(.button) {
+  color: black;
 }
 header #menuLinks #profileLink {
   border: solid 2px #009BDB;
@@ -114,12 +135,31 @@ header #menuLinks #profileLink:hover {
 header #menuLinks #profileLink img {
   width: 20px;
 }
-header #menuLinks .coDeco {
-  background-color: #009BDB;
-  color: white;
-  font-weight: 800;
-  padding: 16px;
+
+/*============== Accueil =================*/
+#welcome {
+  position: relative;
+}
+#welcome #welcomePic {
+  width: 100%;
+}
+#welcome h1 {
+  position: absolute;
+  top: 15%;
+  right: 15%;
+  font-family: "Anton";
+  color: #CACACA;
+  font-size: 7vw;
+}
+#welcome #welcomeSearch {
+  width: 70%;
+  height: 5vh;
+  position: absolute;
+  bottom: 20%;
+  margin: auto;
+  left: 15%;
   border-radius: 10px;
+  padding-left: 15px;
 }
 
 /*============== Register ==============*/
@@ -217,6 +257,12 @@ header #menuLinks .coDeco {
   transition: 0.3s;
 }
 
+/*============== balades =============== */
+/*============== orga ================== */
+#map {
+  height: 200px;
+}
+
 /*============== footer ================ */
 footer {
   background-color: #202022;
@@ -256,32 +302,6 @@ footer #copyright {
   text-align: center;
   background-color: #009BDB;
   padding: 3px 0;
-}
-
-/*============== Accueil =================*/
-#welcome {
-  position: relative;
-}
-#welcome #welcomePic {
-  width: 100%;
-}
-#welcome h1 {
-  position: absolute;
-  top: 15%;
-  right: 15%;
-  font-family: "Anton";
-  color: #CACACA;
-  font-size: 7vw;
-}
-#welcome #welcomeSearch {
-  width: 70%;
-  height: 5vh;
-  position: absolute;
-  bottom: 20%;
-  margin: auto;
-  left: 15%;
-  border-radius: 10px;
-  padding-left: 15px;
 }
 
 /*============== Responsive ==============*/

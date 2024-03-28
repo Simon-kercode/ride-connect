@@ -56,13 +56,22 @@ $detailsBlue: #009BDB;
     margin: 0;
     padding: 0;
 }
+
+body, html {
+    font-size: 1rem;
+}
 body {
     font-family: 'Work Sans';
     background-color: $backgroundBody;
 }
-body, html {
-    height: 100%;
-    font-size: 1rem;
+header {
+    min-height: 15vh;
+}
+main {
+    min-height: 70vh;
+}
+footer {
+    min-height: 15vh;
 }
 ul {
     list-style: none;
@@ -78,6 +87,9 @@ a {
     max-width: 1400px;
     width: 100%;
     margin: 0 auto;
+}
+.button {
+    @include button;
 }
 .error {
     margin-top: 8px;
@@ -113,8 +125,10 @@ header {
             right: 0;
         }
         li a {
-            color: black;
             font-size: 1.2rem;
+        }
+        li a:not(.button) {
+            color: black;
         }
         #profileLink {
             border: solid 2px $detailsBlue;
@@ -130,9 +144,35 @@ header {
         #profileLink img {
             width: 20px;
         }
-        .coDeco {
-            @include button;
-        }
+    }
+}
+/*============== Accueil =================*/
+
+#welcome {
+    position: relative;
+    // background-image: url("../images/photo-accueil-sombre.png");
+    // background-repeat: no-repeat;
+    // background-size: 100%;
+    #welcomePic {
+        width: 100%;
+    }
+    h1 {
+        position: absolute;
+        top: 15%;
+        right: 15%;
+        font-family: 'Anton';
+        color: $backgroundLightGrey;
+        font-size: 7vw;
+    }
+    #welcomeSearch {
+        width: 70%;
+        height: 5vh;
+        position: absolute;
+        bottom: 20%;
+        margin: auto;
+        left: 15%;
+        border-radius: 10px;
+        padding-left: 15px;
     }
 }
 /*============== Register ==============*/
@@ -225,6 +265,14 @@ header {
     }
 
 }
+
+/*============== balades =============== */
+
+/*============== orga ================== */
+
+#map {
+    height: 200px;
+}
 /*============== footer ================ */
 
 footer {
@@ -268,35 +316,6 @@ footer {
     }
 }
 
-/*============== Accueil =================*/
-
-#welcome {
-    position: relative;
-    // background-image: url("../images/photo-accueil-sombre.png");
-    // background-repeat: no-repeat;
-    // background-size: 100%;
-    #welcomePic {
-        width: 100%;
-    }
-    h1 {
-        position: absolute;
-        top: 15%;
-        right: 15%;
-        font-family: 'Anton';
-        color: $backgroundLightGrey;
-        font-size: 7vw;
-    }
-    #welcomeSearch {
-        width: 70%;
-        height: 5vh;
-        position: absolute;
-        bottom: 20%;
-        margin: auto;
-        left: 15%;
-        border-radius: 10px;
-        padding-left: 15px;
-    }
-}
 /*============== Responsive ==============*/
 @media screen and (min-width: 576px){
 /*===============login====================*/
