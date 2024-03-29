@@ -4,11 +4,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="public/styles/style.css">
-    <!-- <link rel="stylesheet" href="api/style/leaflet.css"> -->
-    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    <!-- leaflet css -->
+    <link rel="stylesheet" href="api/style/leaflet.css">
+    <!-- leaflet draw css -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet-draw/dist/leaflet.draw.css" />
     <script type="text/javascript" src="public/scripts/scripts.js" defer></script>
-    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
-    <!-- <script type="text/javascript" src="api/scripts/leaflet.js" defer></script> -->
+    <!-- leaflet js -->
+    <script type="text/javascript" src="api/scripts/leaflet.js"></script>
+    <!-- leaflet draw js -->
+    <script src="https://unpkg.com/leaflet-draw/dist/leaflet.draw.js"></script>
+    <script type="text/javascript" src="public/scripts/map.js" defer></script>
     <title><?= $title ?></title>
 </head>
 <body>

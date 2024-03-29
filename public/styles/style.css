@@ -50,6 +50,10 @@ footer {
   min-height: 15vh;
 }
 
+h1 {
+  font-family: "Anton";
+}
+
 ul {
   list-style: none;
 }
@@ -60,7 +64,6 @@ a {
 
 .logo {
   width: 200px;
-  height: -moz-fit-content;
   height: fit-content;
 }
 
@@ -102,7 +105,7 @@ header #burgerIcons img {
 }
 header #menuLinks {
   position: fixed;
-  z-index: 99;
+  z-index: 1000;
   right: -100%;
   overflow: hidden;
   transition: right 0.3s ease-out;
@@ -260,7 +263,7 @@ header #menuLinks #profileLink img {
 /*============== balades =============== */
 /*============== orga ================== */
 #map {
-  height: 200px;
+  height: 400px;
 }
 
 /*============== footer ================ */

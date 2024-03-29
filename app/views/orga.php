@@ -10,7 +10,7 @@
             <label for="time">Et l'heure précise du départ</label>
             <input type="time" name="time" value="14:00">
         </div>
-        <input type="text" placeholder="Indique la commune de départ">
+        <input id="startPoint" type="text" placeholder="Indique la commune de départ">
         <div>
             <label for="rdv">Lieu de rendez vous précis. Cette information ne sera visible que pour les personnes inscrites.</label>
             <input type="text" name="rdv" placeholder="Lieu de rendez-vous">
@@ -28,14 +28,8 @@
             <label for="precisions">Pour finir, inscris les précisions que tu souhaites apporter aux participants :</label>
             <textarea name="precisions" placeholder="Exemple : Sortie en petit groupe de 10. Allure tranquille. Pause café au lac de Guerlédan avant de reprendre la route jusque Lannion."></textarea>
         </div>
+        <input type="submit" value="Enregistrer">
     </form>
 </main>
-<script>
-    let map = L.map('map').setView([46.6035, 1.888334], 6);
-
-L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-    attribution: '© OpenStreetMap contributors'
-}).addTo(map);
-</script>
 
 <?php include ROOT . "/app/views/footer.php"; ?>
