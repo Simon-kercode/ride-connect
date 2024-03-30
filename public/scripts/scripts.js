@@ -107,7 +107,5 @@ document.addEventListener('DOMContentLoaded', function() {
     dateInput.value = formattedDate;
 });
 
-// map section in orga.php
-
 
 

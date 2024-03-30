@@ -1,16 +1,16 @@
 <?php
 session_start();
-require "app/core/config.php";
 
-use app\autoloader;
+define("ROOT", dirname(__FILE__));
+
+require ROOT.'/vendor/autoload.php';
+
+$dotenv = Dotenv\Dotenv::createImmutable(__DIR__);
+$dotenv->load();
+
 use app\core\routage;
 
-require ROOT . '/app/autoloader.php';
-Autoloader::register();
-
-$routage = new Routage;
-
+$routage = new routage;
 $routage->start();
-
 
 ?>

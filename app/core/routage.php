@@ -10,6 +10,7 @@ use app\controllers\orgaController;
 
     class Routage {
         public function start() {
+            // !!!!!!!!!!!!!!!!!!! A DEBUGUER !!!!!!!!!!!!!!!!!!!!!
             // deleting the trailing slash at the end of the url
             // $uri = $_SERVER['REQUEST_URI'];
             // var_dump($uri);

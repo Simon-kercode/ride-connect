@@ -26,20 +26,22 @@ class UserController {
                     $result = $user->login($email, $password);
                     
                     if ($result == true) {
-                        include ROOT.'/app/views/profile.php';
+                        header('Location: profile');
                         exit;
                     }
-                    else if ($result == false) {
+                    elseif ($result == false) {
                         $error = "Identifiants incorrects";
                         $title = 'Connexion - Ride Connect';
                         include ROOT.'/app/views/login.php';
                         exit;
                     }
                     else {
-                        $error = 'La connexion au site est momentanément indisponible. Veuillez réessayer plus tard.';
+                        if (isset($_SESSION['error']) && !empty($_SESSION['error'])) {
+                        $error = $_SESSION['error'];
                         $title = 'Connexion - Ride Connect';
                         include ROOT.'/app/views/login.php';
                         exit;
+                        }
                     }
                 }
                 else {

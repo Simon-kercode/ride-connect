@@ -4,22 +4,17 @@ namespace app\models;
 use PDO;
 use PDOException;
 
+
 class DbConnector extends PDO {
 
     private static $instance;
 
-    private const DB_HOST = 'localhost';
-    private const DB_USER = 'root';
-    private const DB_PASS = '';
-    private const DB_NAME = 'rideConnect';
-
     public function __construct() {
-
-        $dsn = 'mysql:dbname='.self::DB_NAME.';host='.self::DB_HOST;
+        $dsn = 'mysql:dbname='.$_ENV['DB_NAME'].';host='.$_ENV['DB_HOST'];
 
         //calling class PDO's constructor
         try {
-            parent::__construct($dsn, self::DB_USER, self::DB_PASS);
+            parent::__construct($dsn, $_ENV['DB_USER'], $_ENV['DB_PASS']);
 
             $this->setAttribute(PDO::MYSQL_ATTR_INIT_COMMAND, 'SET NAMES utf8');
             $this->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
@@ -27,13 +22,18 @@ class DbConnector extends PDO {
         }
         catch(PDOException $e) {
             error_log($e->getMessage());
-            die;
         }
     }
 
-    public static function getInstance():self {
+    public static function getInstance(): ?self {
         if(self::$instance === null) {
-            self::$instance = new self();
+            try {
+                self::$instance = new self();
+            } catch(PDOException $e) {
+                error_log($e->getMessage());
+                $_SESSION['error'] = "Cette fonctionnalité est actuellement indisponible. Nos excuses pour la gêne occasionée.";
+                return null;
+            }
         }
         return self::$instance;
     }

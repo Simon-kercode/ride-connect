@@ -4,7 +4,7 @@ L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     attribution: '© OpenStreetMap contributors'
 }).addTo(map);
 
-// Configurer Leaflet Draw
+// Leaflet Draw configuration
 let drawnItems = new L.FeatureGroup();
 map.addLayer(drawnItems);
 
@@ -36,8 +36,9 @@ map.on('draw:created', function (e) {
     createRoute();
 });
 
+// function to draw itinerary between each marker and add it on the map.
 function createRoute() {
-     // Obtenir les coordonnées des marqueurs
+     // Get markers coordinates
     let waypoints = drawnItems.getLayers().map(layer => layer.getLatLng());
     console.log(waypoints);
     

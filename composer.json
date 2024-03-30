@@ -1,0 +1,20 @@
+{
+    "name": "simma/ride-connect",
+    "authors": [
+        {
+            "name": "simon-kercode",
+            "email": "sim.malry@gmail.com"
+        }
+    ],
+    "require": {
+        "vlucas/phpdotenv": "^5.6"
+    },
+    "autoload": {
+        "psr-4": {
+            "app\\controllers\\": "app/controllers",
+            "app\\models\\": "app/models",
+            "app\\core\\": "app/core/",
+            "ride-connect\\": "app/"
+        }
+    }
+}
