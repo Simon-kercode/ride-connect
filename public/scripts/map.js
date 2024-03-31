@@ -65,6 +65,7 @@ function createRoute() {
             }),
         })
         .then(response => response.json())
+
         .then(data => {
             if (routeLayer !== null) {
                 map.removeLayer(routeLayer);
@@ -72,18 +73,19 @@ function createRoute() {
 
             routeLayer = L.geoJSON(data).addTo(map);
 
-            // let route = data.features[0].properties;
-            // let distance = route.summary.distance //km;
-            // let duration = route.summary.duration/60 //minutes;
+            let route = data.features[0].properties;
+            let distance = route.summary.distance //km;
+            let duration = route.summary.duration/60 //minutes;
 
-            // console.log(route);
+            console.log(route);
             // console.log(distance);
             // console.log(duration);
-
+            console.log(data);
+            serverSubmit(data);
             // displayInfos(waypoints, distance, duration);
             // displayInstructions(route);
         })
-        .catch(error => console.error('Erreur lors de la requête OpenRouteService:', error));
+        .catch(error => console.error(error));
     }
 }
 
@@ -103,7 +105,10 @@ function updateStartPoint() {
 
         // Fetch town coordinates
         fetch(url)
-            .then(response => response.json())
+        .then(response => 
+          
+                response.json()
+            )
             .then(data => {
                 let lat = data[0].lat;
                 let lon = data[0].lon;
@@ -116,7 +121,23 @@ function updateStartPoint() {
                 createRoute();
             })
             .catch(error => {
-                console.error('Erreur lors de la récupération des coordonnées de la ville:', error);
+                console.error(error);
             });
     }
+}
+
+function serverSubmit(data) {
+
+    fetch('orgaController.php', {
+        method: 'POST',
+        headers: {
+            'Content-type': 'application/json',
+        },
+        body: JSON.stringify(data),
+    })
+        .then(response => response.json())
+        .catch(error => {
+            console.error(error);
+        })
+
 }
