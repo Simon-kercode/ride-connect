@@ -30,6 +30,7 @@ document.getElementById('startPoint').addEventListener('change', function(){
     updateStartPoint();
 });
 
+// draw itinerary
 map.on('draw:created', function (e) {
     let layer = e.layer;
     drawnItems.addLayer(layer);

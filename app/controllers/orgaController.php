@@ -11,4 +11,11 @@ class OrgaController {
         $title = 'Organiser ma balade - Ride Connect';
         include ROOT.'/app/views/orga.php';
     }
+
+    public function createBalade() {
+
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            
+        }
+    }
 }
