@@ -41,7 +41,7 @@ map.on('draw:created', function (e) {
 function createRoute() {
      // Get markers coordinates
     let waypoints = drawnItems.getLayers().map(layer => layer.getLatLng());
-    console.log(waypoints);
+    // console.log(waypoints);
     
     if (startPointMarker !== null) {
         waypoints.unshift(startPointMarker._latlng);
@@ -77,11 +77,15 @@ function createRoute() {
             let distance = route.summary.distance //km;
             let duration = route.summary.duration/60 //minutes;
 
-            console.log(route);
+            // console.log(route);
             // console.log(distance);
             // console.log(duration);
-            console.log(data);
-            serverSubmit(data);
+            // console.log(data);
+            let pointsInfos = getPointsInfos(waypoints);
+            console.log(pointsInfos);
+
+            // serverSubmit(data);
+
             // displayInfos(waypoints, distance, duration);
             // displayInstructions(route);
         })
@@ -124,6 +128,69 @@ function updateStartPoint() {
                 console.error(error);
             });
     }
+}
+
+// get city name, department and region of one waypoint
+async function getPointInfos(waypoint) {
+    let toleranceRadius = 200;
+    let waypointLatLng = L.latLng(waypoint.lat, waypoint.lng);
+
+    let url = `https://nominatim.openstreetmap.org/reverse?format=json&lat=${waypointLatLng.lat}&lon=${waypointLatLng.lng}&zoom=18&addressdetails=1&radius=${toleranceRadius}`;
+
+    try {
+        let response = await fetch(url);
+        let data = await response.json();
+
+        let adressInfos = {
+            city : data.address.city || data.address.town || data.address.village || data.address.suburb || data.address.hamlet || "Ville non reconnue",
+            department : data.address.county || "Région non reconnue",
+            region: data.address.state || "Département non reconnu"
+        };
+        return adressInfos;
+    }
+    catch (error){
+        console.error('Erreur lors du géocodage inversé:', error);
+        return null;
+    }
+}
+
+// function getPointInfos(waypoint) {
+
+//     // tolerance radius around the waypoint
+//     let toleranceRadius = 200;
+
+//         let waypointLatLng = L.latLng(waypoint.lat, waypoint.lng);
+//         // nominatim request using reverse geocoding
+//         let url = `https://nominatim.openstreetmap.org/reverse?format=json&lat=${waypointLatLng.lat}&lon=${waypointLatLng.lng}&zoom=18&addressdetails=1&radius=${toleranceRadius}`;
+
+//         fetch(url)
+//         .then(response => response.json())
+//         .then(data => {
+//             console.log(data);
+//             let adressInfos = {
+//                 city : data.address.city || data.address.town || data.address.village || data.address.suburb || data.address.hamlet || "Ville non reconnue",
+//                 department : data.address.county || "Région non reconnue",
+//                 region: data.address.state || "Département non reconnu"
+//             };
+
+//             return adressInfos
+//         })
+//         .catch(error => {
+//             console.error('Erreur lors du géocodage inversé:', error)
+//         });
+// }
+
+// get city name, department, region of many waypoints
+async function getPointsInfos(waypoints) {
+    let pointsInfos = [];
+
+    // using "for of" because "foreach" doesn't support promises awaiting
+    for (const waypoint of waypoints) {
+        let infos = await getPointInfos(waypoint);
+        pointsInfos.push(infos);
+    }
+
+    return pointsInfos;
 }
 
 function serverSubmit(data) {
