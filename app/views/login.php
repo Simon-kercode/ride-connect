@@ -4,6 +4,7 @@
     <section id="login">
         <form action="connexion" method = "post">
             <h1>Connexion</h1>
+            <p><?php if (isset($_SESSION['message'])) echo $_SESSION['message']; ?></p>
             <div>
                 <input type="text" name="email" placeholder="Adresse email">
             </div>
