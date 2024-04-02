@@ -33,6 +33,9 @@ class UserModel extends Model {
         
         if ($db !== null) {
             $user = $this->findOneByOneParam('email', $email);
+            if(!$user) {
+                return false;
+            }
             $passwordDb = $user->password;
 
             if (password_verify(trim($password), trim($passwordDb))) {

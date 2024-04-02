@@ -44,6 +44,7 @@ header {
 
 main {
   min-height: 70vh;
+  padding-top: 80px;
 }
 
 footer {
@@ -64,7 +65,6 @@ a {
 
 .logo {
   width: 200px;
-  height: -moz-fit-content;
   height: fit-content;
 }
 
@@ -99,6 +99,9 @@ header {
   align-items: center;
   min-height: 80px;
   background-color: white;
+  position: fixed;
+  z-index: 100;
+  width: 100%;
 }
 header #burgerIcons img {
   width: 40px;
@@ -143,9 +146,13 @@ header #menuLinks #profileLink img {
 /*============== Accueil =================*/
 #welcome {
   position: relative;
+  background-image: url("../images/photo-accueil-sombre.webp");
+  background-size: cover;
+  background-position: top center;
+  height: 100vh;
 }
 #welcome #welcomePic {
-  width: 100%;
+  height: 90vh;
 }
 #welcome h1 {
   position: absolute;

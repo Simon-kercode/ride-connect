@@ -18,7 +18,7 @@ class OrgaController {
             if (isset ($_POST['title'], $_POST['date'], $_POST['time'], $_POST['StartPoint'], $_POST['meetingPoint'], $_POST['partNumber'], $_POST['difficulty'], $_POST['precisions']) &&
              !empty($_POST['title']) && !empty($_POST['date']) && !empty($_POST['time']) && !empty($_POST['StartPoint']) && !empty($_POST['rdv']) && !empty($_POST['difficulty'])) {
 
-                getData();
+                $routeInfos = $this->getData();
                 include ROOT.'/app/views/orga.php';
                 exit;
 
@@ -32,9 +32,8 @@ class OrgaController {
 
     private function getData() {
 
-        $routeData = json_decode(file_get_contents('php://input'));
+        return json_decode(file_get_contents('php://input'));
 
-        var_dump($routeData);
     }
     /* Récupération des données : 
     * title, date, time, departure, meetingPoint, partNumber, difficulty, precisions : via formulaire

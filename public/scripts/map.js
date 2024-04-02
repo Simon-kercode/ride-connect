@@ -24,7 +24,8 @@ map.addControl(drawControl);
 
 let startPointMarker = null;
 let routeLayer = null;
-
+let routeInfos = null;
+let waypoints = [];
 // update start point position when user change the start point value
 document.getElementById('startPoint').addEventListener('change', function(){
     updateStartPoint();
@@ -37,10 +38,24 @@ map.on('draw:created', function (e) {
     createRoute();
 });
 
+document.querySelector('#orgaForm').addEventListener('submit', async function(event) {
+    event.preventDefault();
+    // getting infos points
+    let pointsInfos = await getPointsInfos(waypoints);
+        console.log(pointsInfos);
+        
+    let dataToSubmit = {
+        pointsInfos,
+        routeInfos,
+    }
+    console.log(dataToSubmit);
+    serverSubmit(dataToSubmit);
+})
+
 // function to draw itinerary between each marker and add it on the map.
 function createRoute() {
      // Get markers coordinates
-    let waypoints = drawnItems.getLayers().map(layer => layer.getLatLng());
+    waypoints = drawnItems.getLayers().map(layer => layer.getLatLng());
     // console.log(waypoints);
     
     if (startPointMarker !== null) {
@@ -67,22 +82,24 @@ function createRoute() {
         .then(response => response.json())
 
         .then(data => {
+            // deleting previous itinerary if a marker position is modified
             if (routeLayer !== null) {
                 map.removeLayer(routeLayer);
             }
 
             routeLayer = L.geoJSON(data).addTo(map);
-
             let route = data.features[0].properties;
-            let distance = route.summary.distance //km;
-            let duration = route.summary.duration/60 //minutes;
+
+            routeInfos = {
+                distance : route.summary.distance, //km;
+                duration : route.summary.duration/60 //minutes;
+            }
 
             // console.log(route);
             // console.log(distance);
             // console.log(duration);
             // console.log(data);
-            let pointsInfos = getPointsInfos(waypoints);
-            console.log(pointsInfos);
+            
 
             // serverSubmit(data);
 
@@ -105,7 +122,7 @@ function updateStartPoint() {
         }
 
         // Request nominatim API with the town name
-        let url = 'https://nominatim.openstreetmap.org/search?format=json&q=' + encodeURIComponent(startPoint);
+        let url = 'https://nominatim.openstreetmap.org/search?format=json&q=' + startPoint;
 
         // Fetch town coordinates
         fetch(url)
@@ -135,10 +152,10 @@ async function getPointInfos(waypoint) {
     let toleranceRadius = 200;
     let waypointLatLng = L.latLng(waypoint.lat, waypoint.lng);
 
-    let url = `https://nominatim.openstreetmap.org/reverse?format=json&lat=${waypointLatLng.lat}&lon=${waypointLatLng.lng}&zoom=18&addressdetails=1&radius=${toleranceRadius}`;
+    let url = `https://nominatim.openstreetmap.org/reverse?format=json&lat=${waypointLatLng.lat}&lon=${waypointLatLng.lng}&zoom=13&addressdetails=1&radius=${toleranceRadius}&extratags=0&namedetails=0`;
 
     try {
-        let response = await fetch(url);
+        let response = await fetch(url, {timeout: 10000});
         let data = await response.json();
 
         let adressInfos = {
@@ -185,7 +202,7 @@ async function getPointsInfos(waypoints) {
     let pointsInfos = [];
 
     // using "for of" because "foreach" doesn't support promises awaiting
-    for (const waypoint of waypoints) {
+    for (let waypoint of waypoints) {
         let infos = await getPointInfos(waypoint);
         pointsInfos.push(infos);
     }
@@ -193,18 +210,22 @@ async function getPointsInfos(waypoints) {
     return pointsInfos;
 }
 
+
 function serverSubmit(data) {
 
-    fetch('orgaController.php', {
+    fetch('app/controllers/orgaController.php', {
         method: 'POST',
         headers: {
             'Content-type': 'application/json',
         },
         body: JSON.stringify(data),
     })
+        
         .then(response => response.json())
-        .catch(error => {
-            console.error(error);
+        .then(data => {
+            console.log(data);
         })
-
+        .catch(error => {
+            console.error("Erreur lors de l'envoi des données :",error);
+        })
 }
