@@ -39,12 +39,12 @@ body {
 }
 
 header {
-  min-height: 15vh;
+  min-height: 5vh;
 }
 
 main {
   min-height: 70vh;
-  padding-top: 80px;
+  padding-top: 10vh;
 }
 
 footer {
@@ -97,7 +97,6 @@ header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  min-height: 80px;
   background-color: white;
   position: fixed;
   z-index: 100;
@@ -174,9 +173,6 @@ header #menuLinks #profileLink img {
 }
 
 /*============== Register ==============*/
-#registerPage {
-  padding: 50px 0;
-}
 #registerPage h1 {
   text-align: center;
 }
@@ -225,9 +221,6 @@ header #menuLinks #profileLink img {
 }
 
 /*============== login =================*/
-#loginPage {
-  padding: 50px 0;
-}
 #loginPage #login {
   display: flex;
   justify-content: center;
@@ -318,9 +311,6 @@ footer #copyright {
 /*============== Responsive ==============*/
 @media screen and (min-width: 576px) {
   /*===============login====================*/
-  #loginPage {
-    padding: 50px 0;
-  }
   #loginPage #login {
     justify-content: space-around;
   }

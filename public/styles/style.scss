@@ -65,11 +65,11 @@ body {
     background-color: $backgroundBody;
 }
 header {
-    min-height: 15vh;
+    min-height: 5vh;
 }
 main {
     min-height: 70vh;
-    padding-top: 80px;
+    padding-top: 10vh;
 }
 footer {
     min-height: 15vh;
@@ -108,7 +108,6 @@ input {
 header {
     @include flexSpace;
     align-items: center;
-    min-height: 80px;
     background-color: white;
     position: fixed;
     z-index: 100;
@@ -188,7 +187,6 @@ header {
 /*============== Register ==============*/
 
 #registerPage {
-    padding: 50px 0;
     h1 {
         text-align: center;
     }
@@ -237,7 +235,6 @@ header {
 /*============== login =================*/
 
 #loginPage {
-    padding: 50px 0;
     #login {
         display: flex;
         justify-content: center;
@@ -331,7 +328,7 @@ footer {
 /*===============login====================*/
 
     #loginPage {
-        padding: 50px 0;
+
         #login {
             justify-content: space-around;
             img {

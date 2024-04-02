@@ -50,6 +50,9 @@ document.querySelector('#orgaForm').addEventListener('submit', async function(ev
     }
     console.log(dataToSubmit);
     serverSubmit(dataToSubmit);
+    
+
+    document.getElementById('orgaForm').submit();
 })
 
 // function to draw itinerary between each marker and add it on the map.
@@ -211,21 +214,40 @@ async function getPointsInfos(waypoints) {
 }
 
 
-function serverSubmit(data) {
+async function serverSubmit(data) {
 
-    fetch('app/controllers/orgaController.php', {
-        method: 'POST',
-        headers: {
-            'Content-type': 'application/json',
-        },
-        body: JSON.stringify(data),
-    })
-        
-        .then(response => response.json())
-        .then(data => {
-            console.log(data);
-        })
-        .catch(error => {
-            console.error("Erreur lors de l'envoi des données :",error);
-        })
+let jsonData = JSON.stringify(data);
+console.log(jsonData);
+
+let xhr = new XMLHttpRequest();
+
+xhr.open('POST', 'app/controllers/orgaController.php', true);
+
+xhr.setRequestHeader('Content-Type', 'application/json');
+
+xhr.onload = function() {
+    if (xhr.status === 200) {
+        console.log('Données envoyées avec succès');
+    } else {
+        console.error("Erreur lors de l'envoi des données");
+    }
+};
+
+xhr.send(jsonData);
 }
+
+//     fetch('app/controllers/orgaController.php', {
+//         method: 'POST',
+//         headers: {
+//             'Content-type': 'application/json',
+//         },
+//         body: JSON.stringify({data}),
+//     })
+        
+//         .then(response => response.json())
+//         .then(data => {
+//             console.log(data);
+//         })
+//         .catch(error => {
+//             console.error("Erreur lors de l'envoi des données :",error);
+//         })

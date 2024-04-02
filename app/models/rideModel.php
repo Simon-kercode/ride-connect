@@ -9,20 +9,25 @@ class BaladeModel extends Model {
     protected int $idBalade;
     protected string $title;
     protected $date;
-    protected int $long;
+    protected $time;
+    protected int $length;
     protected float $duration;
-    protected string $level;
-    protected int $maxParticipants;
-    protected string $departure;
+    protected string $difficulty;
+    protected int $partNumber;
+    protected string $startPoint;
     protected string $arrival;
     protected string $department;
     protected string $region;
+    protected string $meetingPoint;
+    protected string $precisions;
     protected $map;
     protected array $waypoints;
 
     private function __construct() {
         $this->table = 'balade';
     }
+
+    
 
     /**
      * Get the value of idBalade
@@ -40,26 +45,6 @@ class BaladeModel extends Model {
     public function setIdBalade($idBalade)
     {
         $this->idBalade = $idBalade;
-
-        return $this;
-    }
-
-    /**
-     * Get the value of title
-     */ 
-    public function getTitle()
-    {
-        return $this->title;
-    }
-
-    /**
-     * Set the value of title
-     *
-     * @return  self
-     */ 
-    public function setTitle($title)
-    {
-        $this->title = $title;
 
         return $this;
     }
@@ -85,41 +70,61 @@ class BaladeModel extends Model {
     }
 
     /**
-     * Get the value of long
+     * Get the value of title
      */ 
-    public function getLong()
+    public function getTitle()
     {
-        return $this->long;
+        return $this->title;
     }
 
     /**
-     * Set the value of long
+     * Set the value of title
      *
      * @return  self
      */ 
-    public function setLong($long)
+    public function setTitle($title)
     {
-        $this->long = $long;
+        $this->title = $title;
 
         return $this;
     }
 
     /**
-     * Get the value of level
+     * Get the value of time
      */ 
-    public function getLevel()
+    public function getTime()
     {
-        return $this->level;
+        return $this->time;
     }
 
     /**
-     * Set the value of level
+     * Set the value of time
      *
      * @return  self
      */ 
-    public function setLevel($level)
+    public function setTime($time)
     {
-        $this->level = $level;
+        $this->time = $time;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of length
+     */ 
+    public function getLength()
+    {
+        return $this->length;
+    }
+
+    /**
+     * Set the value of length
+     *
+     * @return  self
+     */ 
+    public function setLength($length)
+    {
+        $this->length = $length;
 
         return $this;
     }
@@ -145,41 +150,81 @@ class BaladeModel extends Model {
     }
 
     /**
-     * Get the value of maxParticipants
+     * Get the value of difficulty
      */ 
-    public function getMaxParticipants()
+    public function getDifficulty()
     {
-        return $this->maxParticipants;
+        return $this->difficulty;
     }
 
     /**
-     * Set the value of maxParticipants
+     * Set the value of difficulty
      *
      * @return  self
      */ 
-    public function setMaxParticipants($maxParticipants)
+    public function setDifficulty($difficulty)
     {
-        $this->maxParticipants = $maxParticipants;
+        $this->difficulty = $difficulty;
 
         return $this;
     }
 
     /**
-     * Get the value of departure
+     * Get the value of partNumber
      */ 
-    public function getDeparture()
+    public function getPartNumber()
     {
-        return $this->departure;
+        return $this->partNumber;
     }
 
     /**
-     * Set the value of departure
+     * Set the value of partNumber
      *
      * @return  self
      */ 
-    public function setDeparture($departure)
+    public function setPartNumber($partNumber)
     {
-        $this->departure = $departure;
+        $this->partNumber = $partNumber;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of startPoint
+     */ 
+    public function getStartPoint()
+    {
+        return $this->startPoint;
+    }
+
+    /**
+     * Set the value of startPoint
+     *
+     * @return  self
+     */ 
+    public function setStartPoint($startPoint)
+    {
+        $this->startPoint = $startPoint;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of department
+     */ 
+    public function getDepartment()
+    {
+        return $this->department;
+    }
+
+    /**
+     * Set the value of department
+     *
+     * @return  self
+     */ 
+    public function setDepartment($department)
+    {
+        $this->department = $department;
 
         return $this;
     }
@@ -225,21 +270,41 @@ class BaladeModel extends Model {
     }
 
     /**
-     * Get the value of department
+     * Get the value of meetingPoint
      */ 
-    public function getDepartment()
+    public function getMeetingPoint()
     {
-        return $this->department;
+        return $this->meetingPoint;
     }
 
     /**
-     * Set the value of department
+     * Set the value of meetingPoint
      *
      * @return  self
      */ 
-    public function setDepartment($department)
+    public function setMeetingPoint($meetingPoint)
     {
-        $this->department = $department;
+        $this->meetingPoint = $meetingPoint;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of precisions
+     */ 
+    public function getPrecisions()
+    {
+        return $this->precisions;
+    }
+
+    /**
+     * Set the value of precisions
+     *
+     * @return  self
+     */ 
+    public function setPrecisions($precisions)
+    {
+        $this->precisions = $precisions;
 
         return $this;
     }

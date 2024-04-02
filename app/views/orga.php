@@ -44,6 +44,7 @@
         <p>* : Champs obligatoires</p>
         <input type="submit" value="Enregistrer">
     </form>
+    <p><?php if(isset($error)) echo $error ?></p>
 </main>
 
 <?php include ROOT . "/app/views/footer.php"; ?>
