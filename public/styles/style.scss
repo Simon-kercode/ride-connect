@@ -69,7 +69,7 @@ header {
 }
 main {
     min-height: 70vh;
-    padding-top: 10vh;
+    padding: 10vh 20px 0 20px;
 }
 footer {
     min-height: 15vh;
@@ -274,7 +274,29 @@ header {
 }
 
 /*============== balades =============== */
-
+#orgaPage {
+    form{
+        width: 90%;
+        input {
+            width: 100%;
+            padding: 10px 5px;
+            margin: 10px 0;
+            border: solid 1px $detailsBlue;
+            border-radius: 10px;
+            &:focus {
+                outline: none;
+            } 
+        }
+        #dateTime {
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+            input {
+                width: 46%;
+            }
+        }
+    }
+}
 /*============== orga ================== */
 
 #map {

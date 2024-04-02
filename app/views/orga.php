@@ -7,14 +7,18 @@
             <label for="title">Donne un petit titre sympa *</label>
             <input name="title" type="text" placeholder="ex: Visite aux anciens de Béganne">
         </div>
-        <div>
-            <label for="date">Indique la date de ta balade *</label>
+        <div id="dateTime">
+            <label for="date">Indique la date et l'heure de ta balade *</label>
+            <div>
             <input type="date" name="date" id="dateInput" value="">
-            <label for="time">Et l'heure précise du départ *</label>
+            <!-- <label for="time">Et l'heure précise du départ *</label> -->
             <input type="time" name="time" value="14:00">
+            </div>
         </div>
-        <label for="startPoint">Indique la commune de départ *</label>
-        <input name="startPoint" id="startPoint" type="text" placeholder="ex: Vannes">
+        <div>
+            <label for="startPoint">Indique la commune de départ *</label>
+            <input name="startPoint" id="startPoint" type="text" placeholder="ex: Vannes">
+        </div>
         <div>
             <label for="meetingPoint">Lieu de rendez vous précis. Cette information ne sera visible que pour les personnes inscrites. *</label>
             <input type="text" name="meetingPoint" placeholder="ex: Station essence Leclerc Vannes">

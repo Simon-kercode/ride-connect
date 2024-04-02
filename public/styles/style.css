@@ -44,7 +44,7 @@ header {
 
 main {
   min-height: 70vh;
-  padding-top: 10vh;
+  padding: 10vh 20px 0 20px;
 }
 
 footer {
@@ -262,6 +262,28 @@ header #menuLinks #profileLink img {
 }
 
 /*============== balades =============== */
+#orgaPage form {
+  width: 90%;
+}
+#orgaPage form input {
+  width: 100%;
+  padding: 10px 5px;
+  margin: 10px 0;
+  border: solid 1px #009BDB;
+  border-radius: 10px;
+}
+#orgaPage form input:focus {
+  outline: none;
+}
+#orgaPage form #dateTime {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+#orgaPage form #dateTime input {
+  width: 46%;
+}
+
 /*============== orga ================== */
 #map {
   height: 400px;
