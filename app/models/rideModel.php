@@ -22,6 +22,7 @@ class BaladeModel extends Model {
     protected string $precisions;
     protected $map;
     protected array $waypoints;
+    protected int $idUser;
 
     private function __construct() {
         $this->table = 'balade';
@@ -345,6 +346,26 @@ class BaladeModel extends Model {
     public function setWaypoints($waypoints)
     {
         $this->waypoints = $waypoints;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of idUser
+     */ 
+    public function getIdUser()
+    {
+        return $this->idUser;
+    }
+
+    /**
+     * Set the value of idUser
+     *
+     * @return  self
+     */ 
+    public function setIdUser($idUser)
+    {
+        $this->idUser = $idUser;
 
         return $this;
     }

@@ -45,11 +45,11 @@ document.querySelector('#orgaForm').addEventListener('submit', async function(ev
         console.log(pointsInfos);
         
     let dataToSubmit = {
-        pointsInfos,
-        routeInfos,
+        'pointsInfos': pointsInfos,
+        'routeInfos': routeInfos
     }
     console.log(dataToSubmit);
-    serverSubmit(dataToSubmit);
+    await serverSubmit(dataToSubmit);
     
 
     document.getElementById('orgaForm').submit();
@@ -216,38 +216,37 @@ async function getPointsInfos(waypoints) {
 
 async function serverSubmit(data) {
 
-let jsonData = JSON.stringify(data);
-console.log(jsonData);
+// let jsonData = JSON.stringify(data);
+// console.log(jsonData);
 
-let xhr = new XMLHttpRequest();
+// let xhr = new XMLHttpRequest();
 
-xhr.open('POST', 'app/controllers/orgaController.php', true);
+// xhr.open('POST', 'app/controllers/orgaController.php', true);
 
-xhr.setRequestHeader('Content-Type', 'application/json');
+// xhr.setRequestHeader('Content-Type', 'application/json');
 
-xhr.onload = function() {
-    if (xhr.status === 200) {
-        console.log('Données envoyées avec succès');
-    } else {
-        console.error("Erreur lors de l'envoi des données");
+// xhr.onload = function() {
+//     if (xhr.status === 200) {
+//         console.log('Données envoyées avec succès');
+//     } else {
+//         console.error("Erreur lors de l'envoi des données");
+//     }
+// };
+
+// xhr.send(jsonData);
+    try {
+        let response = await fetch('baladeSubmit', {
+            method: 'POST',
+            headers: {
+                'Content-type': 'application/json',
+            },
+            body: JSON.stringify(data),
+        });
+        console.log(response);
+        let responseData = await response.json();
+        console.log(responseData);
     }
-};
-
-xhr.send(jsonData);
+    catch(error) {
+        console.error("Erreur lors de l'envoi des données :",error);
+    }
 }
-
-//     fetch('app/controllers/orgaController.php', {
-//         method: 'POST',
-//         headers: {
-//             'Content-type': 'application/json',
-//         },
-//         body: JSON.stringify({data}),
-//     })
-        
-//         .then(response => response.json())
-//         .then(data => {
-//             console.log(data);
-//         })
-//         .catch(error => {
-//             console.error("Erreur lors de l'envoi des données :",error);
-//         })

@@ -73,7 +73,12 @@ use app\controllers\orgaController;
                 case 'organiser':
                     $route = new OrgaController;
                     $route->index();
-                     break;    
+                    break;   
+                     
+                case 'baladeSubmit':
+                    $route = new OrgaController;
+                    $route->createBalade();
+                    break;
                             
             }        
         }

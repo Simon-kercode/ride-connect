@@ -18,9 +18,12 @@ class OrgaController {
             if (isset ($_POST['title'], $_POST['date'], $_POST['time'], $_POST['startPoint'], $_POST['meetingPoint'], $_POST['partNumber'], $_POST['difficulty'], $_POST['precisions']) &&
              !empty($_POST['title']) && !empty($_POST['date']) && !empty($_POST['time']) && !empty($_POST['StartPoint']) && !empty($_POST['rdv']) && !empty($_POST['difficulty'])) {
 
-                $rideInfos = $this->getData();
-                var_dump($rideInfos);
-                
+
+                $jsonData = json_decode(stripslashes(file_get_contents('php://input')));
+                var_dump($jsonData);
+                header('Content-Type: application/json; charset=utf-8');
+                echo json_encode($jsonData);
+                exit;
 
                 $ride = new RideModel;
 
@@ -39,6 +42,7 @@ class OrgaController {
                 $precisions = $_POST['precisions'];
                 $map = null;
                 $waypoints = [];
+                $idUser = $_SESSION['user']['idUser'];
 
                 $ride->setTitle($title)
                     ->setDate($date)
@@ -54,7 +58,8 @@ class OrgaController {
                     ->setMeetingPoint($meetingPoint)
                     ->setPrecisions($precisions)
                     ->setMap($map)
-                    ->setWaypoints($waypoints);
+                    ->setWaypoints($waypoints)
+                    ->setIdUser($idUser);
 
                 $result->$ride->create();
 
@@ -81,10 +86,10 @@ class OrgaController {
 }
     private function getData() {
         
-        $jsonData = file_get_contents('php://input');
-
-        $data= json_decode($jsonData);
-        var_dump($data);
+        $jsonData = json_decode(stripslashes(file_get_contents('php://input')));
+        var_dump($jsonData);
+        header('Content-Type: application/json; charset=utf-8');
+        echo json_encode($jsonData);
 
     }
     /* Récupération des données : 
