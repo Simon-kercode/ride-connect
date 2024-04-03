@@ -75,9 +75,9 @@ use app\controllers\orgaController;
                     $route->index();
                     break;   
                      
-                case 'baladeSubmit':
+                case 'rideSubmit':
                     $route = new OrgaController;
-                    $route->createBalade();
+                    $route->createRide();
                     break;
                             
             }        

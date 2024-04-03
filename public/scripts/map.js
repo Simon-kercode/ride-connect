@@ -26,6 +26,7 @@ let startPointMarker = null;
 let routeLayer = null;
 let routeInfos = null;
 let waypoints = [];
+
 // update start point position when user change the start point value
 document.getElementById('startPoint').addEventListener('change', function(){
     updateStartPoint();
@@ -40,16 +41,25 @@ map.on('draw:created', function (e) {
 
 document.querySelector('#orgaForm').addEventListener('submit', async function(event) {
     event.preventDefault();
+
+    let pointsInfosInput = document.querySelector('#pointsInfos');
+    let routeInfosInput = document.querySelector('#routeInfos');
+    let waypointsInput = document.querySelector('#waypoints');
+
     // getting infos points
     let pointsInfos = await getPointsInfos(waypoints);
         console.log(pointsInfos);
-        
-    let dataToSubmit = {
-        'pointsInfos': pointsInfos,
-        'routeInfos': routeInfos
-    }
-    console.log(dataToSubmit);
-    await serverSubmit(dataToSubmit);
+    
+    pointsInfosInput.value = JSON.stringify(pointsInfos);
+    routeInfosInput.value = JSON.stringify(routeInfos);
+    waypointsInput.value = waypoints;
+
+    // let dataToSubmit = {
+    //     pointsInfos,
+    //     routeInfos
+    // }
+    // console.log(dataToSubmit);
+    // await serverSubmit(dataToSubmit);
     
 
     document.getElementById('orgaForm').submit();
@@ -216,6 +226,21 @@ async function getPointsInfos(waypoints) {
 
 async function serverSubmit(data) {
 
+    try {
+        let response = await fetch('baladeSubmit', {
+            method: 'POST',
+            headers: {
+                'Content-type': 'application/json',
+            },
+            body: JSON.stringify(data),
+        });
+        console.log(response);
+        let responseData = await response.json();
+        console.log(responseData);
+    }
+    catch(error) {
+        console.error("Erreur lors de l'envoi des données :",error);
+    }
 // let jsonData = JSON.stringify(data);
 // console.log(jsonData);
 
@@ -234,19 +259,5 @@ async function serverSubmit(data) {
 // };
 
 // xhr.send(jsonData);
-    try {
-        let response = await fetch('baladeSubmit', {
-            method: 'POST',
-            headers: {
-                'Content-type': 'application/json',
-            },
-            body: JSON.stringify(data),
-        });
-        console.log(response);
-        let responseData = await response.json();
-        console.log(responseData);
-    }
-    catch(error) {
-        console.error("Erreur lors de l'envoi des données :",error);
-    }
+
 }

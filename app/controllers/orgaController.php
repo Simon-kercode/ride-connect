@@ -2,9 +2,10 @@
 namespace app\controllers;
 
 use app\models\rideModel;
+use app\models\useModel;
 use app\models\model;
 
-class OrgaController {
+class OrgaController extends RideModel {
     
     public function index() {
 
@@ -12,63 +13,80 @@ class OrgaController {
         include ROOT.'/app/views/orga.php';
     }
 
-    public function createBalade() {
+    public function createRide() {
 
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-            if (isset ($_POST['title'], $_POST['date'], $_POST['time'], $_POST['startPoint'], $_POST['meetingPoint'], $_POST['partNumber'], $_POST['difficulty'], $_POST['precisions']) &&
-             !empty($_POST['title']) && !empty($_POST['date']) && !empty($_POST['time']) && !empty($_POST['StartPoint']) && !empty($_POST['rdv']) && !empty($_POST['difficulty'])) {
+            if (isset ($_POST['title'], $_POST['date'], $_POST['time'], $_POST['startPoint'], $_POST['meetingPoint'], $_POST['partNumber'], $_POST['difficulty'], $_POST['pointsInfos'], $_POST['routeInfos'], $_POST['waypoints'], $_POST['precisions']) &&
+             !empty($_POST['title']) && !empty($_POST['date']) && !empty($_POST['time']) && !empty($_POST['startPoint']) && !empty($_POST['meetingPoint']) && !empty($_POST['difficulty']) && !empty($_POST['pointsInfos']) && !empty($_POST['routeInfos']) && !empty($_POST['waypoints'])) {
 
-
-                $jsonData = json_decode(stripslashes(file_get_contents('php://input')));
-                var_dump($jsonData);
-                header('Content-Type: application/json; charset=utf-8');
-                echo json_encode($jsonData);
-                exit;
+                var_dump($_POST);
+                // $jsonData = $this->getData();
+                // exit;
 
                 $ride = new RideModel;
 
-                $title = $_POST['title'];
-                $date = $_POST['date'];
-                $time = $_POST['time'];
-                $length = $rideInfos['routeInfos'].distance;
-                $duration = $rideInfos['routeInfos'].duration;
-                $difficulty = $_POST['difficulty'];
-                $partNumber = $_POST['partNumber'];
-                $startPoint = $rideInfos['pointsInfos'][0]['city'];
-                $arrival = $rideInfos['pointsInfos'][-1]['city'];
-                $department = $rideInfos['pointsInfos'][0]['department'];
-                $region = $rideInfos['pointsInfos'][0]['region'];
-                $meetingPoint = $_POST['meetingPoint'];
-                $precisions = $_POST['precisions'];
-                $map = null;
-                $waypoints = [];
+                $decodedRouteInfos = json_decode($_POST['routeInfos']);
+                $decodedPointsInfos = json_decode($_POST['pointsInfos']);
+
+                $title = htmlspecialchars($_POST['title']);
+                $date = htmlspecialchars($_POST['date']);
+                $time = htmlspecialchars($_POST['time']);
+                $length = $decodedRouteInfos->distance;
+                $duration = $decodedRouteInfos->duration;
+                $difficulty = htmlspecialchars($_POST['difficulty']);
+                $partNumber = htmlspecialchars($_POST['partNumber']);
+                $startPoint = $decodedPointsInfos[0]->city;
+                $arrival = end($decodedPointsInfos)->city;
+                $department = $decodedPointsInfos[0]->department;
+                $region = $decodedPointsInfos[0]->region;
+                $meetingPoint = htmlspecialchars($_POST['meetingPoint']);
+                $precisions = htmlspecialchars($_POST['precisions']);
+                // $map = null;
+                $waypoints = $_POST['waypoints'];
                 $idUser = $_SESSION['user']['idUser'];
 
-                $ride->setTitle($title)
-                    ->setDate($date)
-                    ->setTime($time)
-                    ->setLength($length)
-                    ->setDuration($duration)
-                    ->setDifficulty($difficulty)
-                    ->setPartNumber($partNumber)
-                    ->setStartPoint($startPoint)
-                    ->setArrival($arrival)
-                    ->setDepartment($department)
-                    ->setRegion($region)
-                    ->setMeetingPoint($meetingPoint)
-                    ->setPrecisions($precisions)
-                    ->setMap($map)
-                    ->setWaypoints($waypoints)
-                    ->setIdUser($idUser);
+                $params = [
+                    'title' => $title,
+                    'date' => $date,
+                    'time' => $time,
+                    'length' => $length,
+                    'duration' => $duration,
+                    'difficulty' => $difficulty,
+                    'partNumber' => $partNumber,
+                    'startPoint' => $startPoint,
+                    'arrival' => $arrival,
+                    'department' => $department,
+                    'region' => $region,
+                    'meetingPoint' => $meetingPoint,
+                    'precisions' => $precisions,
+                    'waypoints' => $waypoints,
+                    'idUser' => $idUser
+                ];
+                // $ride->setTitle($title)
+                //     ->setDate($date)
+                //     ->setTime($time)
+                //     ->setLength($length)
+                //     ->setDuration($duration)
+                //     ->setDifficulty($difficulty)
+                //     ->setPartNumber($partNumber)
+                //     ->setStartPoint($startPoint)
+                //     ->setArrival($arrival)
+                //     ->setDepartment($department)
+                //     ->setRegion($region)
+                //     ->setMeetingPoint($meetingPoint)
+                //     ->setPrecisions($precisions)
+                //     // ->setMap($map)
+                //     ->setWaypoints($waypoints)
+                //     ->setIdUser($idUser);
 
-                $result->$ride->create();
+                $result = $ride->addBalade($params);
 
                 if (isset($result)) {
                         
                     if ($result) {
                         $title = 'Organiser ma balade - Ride Connect';
                         $error = "La balade a bien été enregistrée";
-                        include ROOT.'/app/views/orga.php';
+                        include ROOT.'/app/views/home.php';
                     }
                     else {
                         $title = 'Organiser ma balade - Ride Connect';
@@ -77,13 +95,20 @@ class OrgaController {
                     }
 
                 
+                }
+                else {
+                    $error = "Une erreur est survenue";
+                    $title = 'Organiser ma balade - Ride Connect';
+                    include ROOT.'/app/views/orga.php';
+                }
             }
             else {
-                $error = "Veuillez remplir tous les champs requis";
+            $error = "Veuillez remplir tous les champs requis";
+            $title = 'Organiser ma balade - Ride Connect';
+            include ROOT.'/app/views/orga.php';
             }
         }
     }
-}
     private function getData() {
         
         $jsonData = json_decode(stripslashes(file_get_contents('php://input')));

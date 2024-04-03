@@ -2,13 +2,13 @@
 
 <main id="orgaPage" class="container">
     <h1>Organiser ma balade</h1>
-    <form action="" method="POST" id="orgaForm">
+    <form action="rideSubmit" method="POST" id="orgaForm">
         <div>
             <label for="title">Donne un petit titre sympa *</label>
             <input name="title" type="text" placeholder="ex: Visite aux anciens de Béganne">
         </div>
         <div id="dateTime">
-            <label for="date">Indique la date et l'heure de ta balade *</label>
+            <label for="dateInput">Indique la date et l'heure de ta balade *</label>
             <div>
             <input type="date" name="date" id="dateInput" value="">
             <!-- <label for="time">Et l'heure précise du départ *</label> -->
@@ -21,11 +21,11 @@
         </div>
         <div>
             <label for="meetingPoint">Lieu de rendez vous précis. Cette information ne sera visible que pour les personnes inscrites. *</label>
-            <input type="text" name="meetingPoint" placeholder="ex: Station essence Leclerc Vannes">
+            <input type="text" name="meetingPoint" id="meetingPoint" placeholder="ex: Station essence Leclerc Vannes">
         </div>
         <div>
             <label for="partNumber">Nombre maximum de participants (laisse ce champ vide si tu n'a pas de limite de nombre)</label>
-            <input name="partNumber" type="number" min="2">
+            <input name="partNumber" id="partNumber" type="number" min="2">
         </div>
         <figure>
             <figcaption>Construis maintenant ton itinéraire *:</figcaption>
@@ -41,14 +41,18 @@
             </select>
         </div>
         <div>
-            <!--!!!!!!!!!!!!!!!!!! ajouter à la BDD et au MCD !!!!!!!!!!!!!!!!!!! -->
             <label for="precisions">Pour finir, inscris les précisions que tu souhaites apporter aux participants :</label>
-            <textarea name="precisions" placeholder="Exemple : Sortie en petit groupe de 10. Allure tranquille. Pause café au lac de Guerlédan avant de reprendre la route jusque Lannion."></textarea>
+            <textarea name="precisions" id="precisions" placeholder="Exemple : Sortie en petit groupe de 10. Allure tranquille. Pause café au lac de Guerlédan avant de reprendre la route jusque Lannion."></textarea>
+        </div>
+        <div hidden>
+            <input type="text" name="pointsInfos" id="pointsInfos">
+            <input type="text" name="routeInfos" id="routeInfos">
+            <input type="text" name="waypoints" id="waypoints">
         </div>
         <p>* : Champs obligatoires</p>
         <input type="submit" value="Enregistrer">
     </form>
-    <p><?php if(isset($error)) echo $error ?></p>
+    <p><?php if(isset($error) && !empty($error)) echo $error ?></p>
 </main>
 
 <?php include ROOT . "/app/views/footer.php"; ?>

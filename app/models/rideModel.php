@@ -2,11 +2,11 @@
 
 namespace app\models;
 
-use Model;
+use app\models\model;
 
-class BaladeModel extends Model {
+class RideModel extends Model {
 
-    protected int $idBalade;
+    private int $idBalade;
     protected string $title;
     protected $date;
     protected $time;
@@ -21,10 +21,10 @@ class BaladeModel extends Model {
     protected string $meetingPoint;
     protected string $precisions;
     protected $map;
-    protected array $waypoints;
+    protected string $waypoints;
     protected int $idUser;
 
-    private function __construct() {
+    public function __construct() {
         $this->table = 'balade';
     }
 
@@ -33,7 +33,7 @@ class BaladeModel extends Model {
     /**
      * Get the value of idBalade
      */ 
-    public function getIdBalade()
+    protected function getIdBalade()
     {
         return $this->idBalade;
     }
@@ -43,7 +43,7 @@ class BaladeModel extends Model {
      *
      * @return  self
      */ 
-    public function setIdBalade($idBalade)
+    protected function setIdBalade($idBalade)
     {
         $this->idBalade = $idBalade;
 
@@ -53,7 +53,7 @@ class BaladeModel extends Model {
     /**
      * Get the value of date
      */ 
-    public function getDate()
+    protected function getDate()
     {
         return $this->date;
     }
@@ -63,7 +63,7 @@ class BaladeModel extends Model {
      *
      * @return  self
      */ 
-    public function setDate($date)
+    protected function setDate($date)
     {
         $this->date = $date;
 
@@ -73,7 +73,7 @@ class BaladeModel extends Model {
     /**
      * Get the value of title
      */ 
-    public function getTitle()
+    protected function getTitle()
     {
         return $this->title;
     }
@@ -83,7 +83,7 @@ class BaladeModel extends Model {
      *
      * @return  self
      */ 
-    public function setTitle($title)
+    protected function setTitle($title)
     {
         $this->title = $title;
 
@@ -93,7 +93,7 @@ class BaladeModel extends Model {
     /**
      * Get the value of time
      */ 
-    public function getTime()
+    protected function getTime()
     {
         return $this->time;
     }
@@ -103,7 +103,7 @@ class BaladeModel extends Model {
      *
      * @return  self
      */ 
-    public function setTime($time)
+    protected function setTime($time)
     {
         $this->time = $time;
 
@@ -113,7 +113,7 @@ class BaladeModel extends Model {
     /**
      * Get the value of length
      */ 
-    public function getLength()
+    protected function getLength()
     {
         return $this->length;
     }
@@ -123,7 +123,7 @@ class BaladeModel extends Model {
      *
      * @return  self
      */ 
-    public function setLength($length)
+    protected function setLength($length)
     {
         $this->length = $length;
 
@@ -133,7 +133,7 @@ class BaladeModel extends Model {
     /**
      * Get the value of duration
      */ 
-    public function getDuration()
+    protected function getDuration()
     {
         return $this->duration;
     }
@@ -143,7 +143,7 @@ class BaladeModel extends Model {
      *
      * @return  self
      */ 
-    public function setDuration($duration)
+    protected function setDuration($duration)
     {
         $this->duration = $duration;
 
@@ -153,7 +153,7 @@ class BaladeModel extends Model {
     /**
      * Get the value of difficulty
      */ 
-    public function getDifficulty()
+    protected function getDifficulty()
     {
         return $this->difficulty;
     }
@@ -163,7 +163,7 @@ class BaladeModel extends Model {
      *
      * @return  self
      */ 
-    public function setDifficulty($difficulty)
+    protected function setDifficulty($difficulty)
     {
         $this->difficulty = $difficulty;
 
@@ -173,7 +173,7 @@ class BaladeModel extends Model {
     /**
      * Get the value of partNumber
      */ 
-    public function getPartNumber()
+    protected function getPartNumber()
     {
         return $this->partNumber;
     }
@@ -183,7 +183,7 @@ class BaladeModel extends Model {
      *
      * @return  self
      */ 
-    public function setPartNumber($partNumber)
+    protected function setPartNumber($partNumber)
     {
         $this->partNumber = $partNumber;
 
@@ -193,7 +193,7 @@ class BaladeModel extends Model {
     /**
      * Get the value of startPoint
      */ 
-    public function getStartPoint()
+    protected function getStartPoint()
     {
         return $this->startPoint;
     }
@@ -203,7 +203,7 @@ class BaladeModel extends Model {
      *
      * @return  self
      */ 
-    public function setStartPoint($startPoint)
+    protected function setStartPoint($startPoint)
     {
         $this->startPoint = $startPoint;
 
@@ -213,7 +213,7 @@ class BaladeModel extends Model {
     /**
      * Get the value of department
      */ 
-    public function getDepartment()
+    protected function getDepartment()
     {
         return $this->department;
     }
@@ -223,7 +223,7 @@ class BaladeModel extends Model {
      *
      * @return  self
      */ 
-    public function setDepartment($department)
+    protected function setDepartment($department)
     {
         $this->department = $department;
 
@@ -233,7 +233,7 @@ class BaladeModel extends Model {
     /**
      * Get the value of arrival
      */ 
-    public function getArrival()
+    protected function getArrival()
     {
         return $this->arrival;
     }
@@ -243,7 +243,7 @@ class BaladeModel extends Model {
      *
      * @return  self
      */ 
-    public function setArrival($arrival)
+    protected function setArrival($arrival)
     {
         $this->arrival = $arrival;
 
@@ -253,7 +253,7 @@ class BaladeModel extends Model {
     /**
      * Get the value of region
      */ 
-    public function getRegion()
+    protected function getRegion()
     {
         return $this->region;
     }
@@ -263,7 +263,7 @@ class BaladeModel extends Model {
      *
      * @return  self
      */ 
-    public function setRegion($region)
+    protected function setRegion($region)
     {
         $this->region = $region;
 
@@ -273,7 +273,7 @@ class BaladeModel extends Model {
     /**
      * Get the value of meetingPoint
      */ 
-    public function getMeetingPoint()
+    protected function getMeetingPoint()
     {
         return $this->meetingPoint;
     }
@@ -283,7 +283,7 @@ class BaladeModel extends Model {
      *
      * @return  self
      */ 
-    public function setMeetingPoint($meetingPoint)
+    protected function setMeetingPoint($meetingPoint)
     {
         $this->meetingPoint = $meetingPoint;
 
@@ -293,7 +293,7 @@ class BaladeModel extends Model {
     /**
      * Get the value of precisions
      */ 
-    public function getPrecisions()
+    protected function getPrecisions()
     {
         return $this->precisions;
     }
@@ -303,7 +303,7 @@ class BaladeModel extends Model {
      *
      * @return  self
      */ 
-    public function setPrecisions($precisions)
+    protected function setPrecisions($precisions)
     {
         $this->precisions = $precisions;
 
@@ -313,7 +313,7 @@ class BaladeModel extends Model {
     /**
      * Get the value of map
      */ 
-    public function getMap()
+    protected function getMap()
     {
         return $this->map;
     }
@@ -323,7 +323,7 @@ class BaladeModel extends Model {
      *
      * @return  self
      */ 
-    public function setMap($map)
+    protected function setMap($map)
     {
         $this->map = $map;
 
@@ -333,7 +333,7 @@ class BaladeModel extends Model {
     /**
      * Get the value of waypoints
      */ 
-    public function getWaypoints()
+    protected function getWaypoints()
     {
         return $this->waypoints;
     }
@@ -343,7 +343,7 @@ class BaladeModel extends Model {
      *
      * @return  self
      */ 
-    public function setWaypoints($waypoints)
+    protected function setWaypoints($waypoints)
     {
         $this->waypoints = $waypoints;
 
@@ -353,7 +353,7 @@ class BaladeModel extends Model {
     /**
      * Get the value of idUser
      */ 
-    public function getIdUser()
+    protected function getIdUser()
     {
         return $this->idUser;
     }
@@ -363,7 +363,7 @@ class BaladeModel extends Model {
      *
      * @return  self
      */ 
-    public function setIdUser($idUser)
+    protected function setIdUser($idUser)
     {
         $this->idUser = $idUser;
 

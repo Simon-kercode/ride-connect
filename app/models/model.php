@@ -58,6 +58,29 @@ class Model extends DbConnector {
         return $result;
     }
 
+    public function addBalade(array $params) {
+        $sql = "INSERT INTO `balade` (title, date, time, length, duration, difficulty, partNumber, startPoint, arrival, department, region, meetingPoint, precisions, waypoints, idUser) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+
+        $values = [
+            $params['title'],
+            $params['date'],
+            $params['time'],
+            $params['length'],
+            $params['duration'],
+            $params['difficulty'],
+            $params['partNumber'],
+            $params['startPoint'],
+            $params['arrival'],
+            $params['department'],
+            $params['region'],
+            $params['meetingPoint'],
+            $params['precisions'],
+            $params['waypoints'],
+            $params['idUser']
+        ];
+        $result = $this->request($sql, $values);
+        return $result;
+    }
     // method to create an item 
     public function create(){
         $fields = [];
