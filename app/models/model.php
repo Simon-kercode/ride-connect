@@ -33,6 +33,33 @@ class Model extends DbConnector {
         return $query->fetchAll();
     }
 
+    // method to find some one or more parameters of one or more items by none or some criterias
+    public function findSomeBy(array $columns = [], array $params = [], $operator) {
+        if (empty($columns)) {
+            $columnsList = ' * ';
+        }
+        else {
+            $columnsList = implode(', ', $columns);
+        }
+        
+        $where = '';
+        $values = [];
+
+        if (!empty($params)) {
+            $where = ' WHERE ';
+            $fields = [];
+
+            foreach($params as $field => $value) {
+                $fields[] = "$field = ?";
+                $values[] = $value;
+            }
+            $where .= implode(' '.$operator.' ', $fields);
+        }
+
+        $result = $this->request('SELECT '.$columnsList.' FROM '.$this->table.$where, $values)->fetchAll();
+        return $result;
+    }
+
     // method to find one or more items by some criterias
     public function findBy(array $params) {
         $fields = [];
@@ -48,13 +75,52 @@ class Model extends DbConnector {
         $result = $this->request('SELECT * FROM '.$this->table.' WHERE '.$fieldsList, $values)->fetchAll();
         return $result;
     }
+
     // method to find one item by its id
     public function find(int $id) {
         $result = $this->request('SELECT * FROM '.$this->table.' WHERE id = ?', [$id])->fetch();
     }
 
+    // method to find one item by one criteria
     public function findOneByOneParam(string $field, string $value) {
         $result = $this->request('SELECT * FROM '.$this->table.' WHERE '.$field.'= ?', [$value])->fetch();
+        return $result;
+    }
+
+    public function findSomeWithJoin(array $columns, array $joinParams, array $params) {
+    // SELECT $columnsList FROM $this->table JOIN $table ON ($param)
+
+        if (empty($columns)) {
+            $columnsList = ' * ';
+        }
+        else {
+            $columnsList = implode(', ', $columns);
+        }
+
+        $query = 'SELECT '.$columnsList.' FROM ' .$this->table;
+
+        if (!empty($joinParams)) {
+            foreach($joinParams as $joinParam) {
+                $query .= ' JOIN ' .$joinParam['table'].' ON '.$joinParam['condition'];
+            }
+        }
+
+        $where = '';
+        $values = [];
+
+        if (!empty($params)) {
+            $where = ' WHERE ';
+            $fields = [];
+
+            foreach($params as $field => $value) {
+                $fields[] = "$field = ?";
+                $values[] = $value;
+            }
+            $where .= implode(' AND ', $fields);
+        }
+        $query .= $where;
+
+        $result = $this->request($query, $values)->fetchAll();
         return $result;
     }
 

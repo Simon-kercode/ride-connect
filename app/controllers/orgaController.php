@@ -19,7 +19,6 @@ class OrgaController extends RideModel {
             if (isset ($_POST['title'], $_POST['date'], $_POST['time'], $_POST['startPoint'], $_POST['meetingPoint'], $_POST['partNumber'], $_POST['difficulty'], $_POST['pointsInfos'], $_POST['routeInfos'], $_POST['waypoints'], $_POST['precisions']) &&
              !empty($_POST['title']) && !empty($_POST['date']) && !empty($_POST['time']) && !empty($_POST['startPoint']) && !empty($_POST['meetingPoint']) && !empty($_POST['difficulty']) && !empty($_POST['pointsInfos']) && !empty($_POST['routeInfos']) && !empty($_POST['waypoints'])) {
 
-                var_dump($_POST);
                 // $jsonData = $this->getData();
                 // exit;
 
@@ -93,8 +92,6 @@ class OrgaController extends RideModel {
                         $error = "Une erreur est survenue";
                         include ROOT.'/app/views/orga.php';
                     }
-
-                
                 }
                 else {
                     $error = "Une erreur est survenue";

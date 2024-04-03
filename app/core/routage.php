@@ -68,6 +68,7 @@ use app\controllers\orgaController;
                 case 'balades':
                     $route = new RidesController;
                     $route->index();
+                    $route->makeRidesList();
                     break;
 
                 case 'organiser':
