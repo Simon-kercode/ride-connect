@@ -6,7 +6,7 @@ use app\models\model;
 
 class RideModel extends Model {
 
-    private int $idBalade;
+    protected int $idBalade;
     protected string $title;
     protected $date;
     protected $time;
@@ -29,7 +29,7 @@ class RideModel extends Model {
     }
 
      // get the pseudo of a ride's creator
-     protected function getCreatorPseudo($ride, $params) {
+    protected function getCreatorPseudo($ride, $params) {
         $columns = ['_user.pseudo'];
         $joinParams = [
             [

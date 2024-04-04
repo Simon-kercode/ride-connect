@@ -11,9 +11,7 @@ class RideDetailsController extends RideModel{
         $ride = $this->getRide();
         $params = ['idBalade' => $ride->idBalade];
         $pseudo = $this->getCreatorPseudo($ride, $params);
-        var_dump($pseudo);
-        
-        var_dump($ride->idUser);
+
         include ROOT.'/app/views/rideDetails.php';
     }
 

@@ -2,7 +2,7 @@
 namespace app\controllers;
 
 use app\models\rideModel;
-use app\models\useModel;
+use app\models\participantModel;
 use app\models\model;
 
 class OrgaController extends RideModel {
@@ -81,6 +81,9 @@ class OrgaController extends RideModel {
                 // $result = $ride->create();
 
                 $result = $ride->addBalade($params);
+                $idBalade = $this->getLastId();
+                $participant = new ParticipantModel($_SESSION['user']['idUser'], $idBalade);
+                $storedParticipant = $participant->create();
 
                 if (isset($result)) {
                         

@@ -28,13 +28,18 @@ class Model extends DbConnector {
 
     }
 
+    public function getLastId() {
+        $this->db = DbConnector::getInstance();
+        return $this->db->lastInsertId();
+    }
+
     public function findAll() {
         $query= $this->query("SELECT * FROM ".$this->table);
         return $query->fetchAll();
     }
 
-    // method to find some one or more parameters of one or more items by none or some criterias
-    public function findSomeBy(array $columns = [], array $params = [], $operator) {
+    // method to find one or more parameters of one or more items by none or some criterias
+    public function findSomeBy(array $columns = [], array $params = [], $operator = 'AND') {
         if (empty($columns)) {
             $columnsList = ' * ';
         }

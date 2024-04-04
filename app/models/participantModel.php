@@ -2,18 +2,19 @@
 
 namespace app\models;
 
-class ParticiperModel extends Model {
+class ParticipantModel extends Model {
 
     private int $idUser;
     private int $idBalade;
 
     public function __construct($idUser, $idBalade) {
+        $this->table = 'participate';
         $this->idUser = $idUser;
         $this->idBalade = $idBalade;
     }
 
     public function createParticipant(array $params) {
-        $sql = "INSERT INTO `participer` VALUES (?, ?)";
+        $sql = "INSERT INTO $this->table VALUES (?, ?)";
 
         $values = [
             $params['idUser'],
@@ -35,13 +36,7 @@ class ParticiperModel extends Model {
         // transforms fields array into a string
         $fieldsList = implode(' AND ', $fields);
 
-        $result = $this->request('SELECT * FROM `participant` WHERE '.$fieldsList, $values)->fetchAll();
-        return $result;
-    }
-
-    public function deletePhoto(int $idUser) {
-        $result = $this->request('DELETE FROM `participant` WHERE id='.$idUser);
-
+        $result = $this->request('SELECT * FROM '.$this->table.' WHERE '.$fieldsList, $values)->fetchAll();
         return $result;
     }
 }

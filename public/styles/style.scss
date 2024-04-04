@@ -14,9 +14,20 @@ $detailsBlue: #009BDB;
 @mixin button {
     background-color: $detailsBlue;
     color: white;
+    font-family: 'Work Sans';
     font-weight: 800;
     padding: 16px;
     border-radius: 10px;
+    box-shadow: none;
+}
+@mixin particle {
+    background-color: $detailsBlue;
+    color: white;
+    font-family: 'Anton';
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    text-align: center;
 }
 
 // =============== functions ==================
@@ -89,7 +100,6 @@ a {
 }
 .container {
     max-width: 1400px;
-    width: 100%;
     margin: 0 auto;
 }
 .button {
@@ -284,6 +294,41 @@ header {
 #rideDetailsPage {
     #mapDetails {
         height: 400px;
+    }
+    .container, h2 {
+        margin: 20px 16px;
+    }
+    div .flex {
+        display: flex;
+        align-items: center;
+    }
+    .bold {
+        font-weight: 800;
+    }
+    .particle {
+        @include particle;
+        margin-right: 16px
+    }
+    div .flexBetween {
+        @include flexSpace;
+        margin-bottom: 16px;
+    }
+    #startEnd {
+        text-align: center;
+        margin-bottom: 16px;
+    }
+    #gps {
+        margin: 16px 0;
+    }
+    #rideInfos p:nth-of-type(2) {
+        border-left: solid 2px $detailsBlue;
+        border-right: solid 2px $detailsBlue;
+        text-align: center;
+        width: 40%;
+    //     padding: 0 12%;
+    }
+    button {
+        margin-left: 40%;
     }
 }
 /*============== balades =============== */

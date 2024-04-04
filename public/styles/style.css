@@ -65,21 +65,23 @@ a {
 
 .logo {
   width: 200px;
+  height: -moz-fit-content;
   height: fit-content;
 }
 
 .container {
   max-width: 1400px;
-  width: 100%;
   margin: 0 auto;
 }
 
 .button {
   background-color: #009BDB;
   color: white;
+  font-family: "Work Sans";
   font-weight: 800;
   padding: 16px;
   border-radius: 10px;
+  box-shadow: none;
 }
 
 .error {
@@ -203,9 +205,11 @@ header #menuLinks #profileLink img {
 #registerPage .formBtn {
   background-color: #009BDB;
   color: white;
+  font-family: "Work Sans";
   font-weight: 800;
   padding: 16px;
   border-radius: 10px;
+  box-shadow: none;
   display: block;
   font-size: 1.2rem;
   margin: auto;
@@ -247,9 +251,11 @@ header #menuLinks #profileLink img {
 #loginPage #login form input[type=submit] {
   background-color: #009BDB;
   color: white;
+  font-family: "Work Sans";
   font-weight: 800;
   padding: 16px;
   border-radius: 10px;
+  box-shadow: none;
   display: block;
   font-size: 1.2rem;
   margin: auto;
@@ -270,6 +276,47 @@ header #menuLinks #profileLink img {
 /*============== rideDetails =========== */
 #rideDetailsPage #mapDetails {
   height: 400px;
+}
+#rideDetailsPage .container, #rideDetailsPage h2 {
+  margin: 20px 16px;
+}
+#rideDetailsPage div .flex {
+  display: flex;
+  align-items: center;
+}
+#rideDetailsPage .bold {
+  font-weight: 800;
+}
+#rideDetailsPage .particle {
+  background-color: #009BDB;
+  color: white;
+  font-family: "Anton";
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  text-align: center;
+  margin-right: 16px;
+}
+#rideDetailsPage div .flexBetween {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 16px;
+}
+#rideDetailsPage #startEnd {
+  text-align: center;
+  margin-bottom: 16px;
+}
+#rideDetailsPage #gps {
+  margin: 16px 0;
+}
+#rideDetailsPage #rideInfos p:nth-of-type(2) {
+  border-left: solid 2px #009BDB;
+  border-right: solid 2px #009BDB;
+  text-align: center;
+  width: 40%;
+}
+#rideDetailsPage button {
+  margin-left: 40%;
 }
 
 /*============== balades =============== */
