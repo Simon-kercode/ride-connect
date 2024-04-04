@@ -52,7 +52,7 @@ document.querySelector('#orgaForm').addEventListener('submit', async function(ev
     
     pointsInfosInput.value = JSON.stringify(pointsInfos);
     routeInfosInput.value = JSON.stringify(routeInfos);
-    waypointsInput.value = waypoints;
+    waypointsInput.value = JSON.stringify(waypoints);
 
     // let dataToSubmit = {
     //     pointsInfos,

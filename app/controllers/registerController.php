@@ -50,7 +50,7 @@ class RegisterController {
 
                     // if all conditions ok, get the fields content
                     $email = htmlspecialchars($_POST['email']);
-                    $password = password_hash(htmlspecialchars($_POST['password']), PASSWORD_DEFAULT);
+                    $password = password_hash(($_POST['password']), PASSWORD_DEFAULT);
                     $pseudo = htmlspecialchars($_POST['pseudo']);
                     $name = htmlspecialchars($_POST['name']);
                     $firstname = htmlspecialchars($_POST['firstname']);

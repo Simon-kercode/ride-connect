@@ -7,6 +7,7 @@ use app\controllers\userController;
 use app\controllers\profileController;
 use app\controllers\ridesController;
 use app\controllers\orgaController;
+use app\controllers\rideDetailsController;
 
     class Routage {
         public function start() {
@@ -68,19 +69,34 @@ use app\controllers\orgaController;
                 case 'balades':
                     $route = new RidesController;
                     $route->index();
-                    $route->makeRidesList();
                     break;
 
                 case 'organiser':
                     $route = new OrgaController;
+                    if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+                        $route->createRide();
+                    }
+                    else {
                     $route->index();
+                    }
                     break;   
                      
                 case 'rideSubmit':
                     $route = new OrgaController;
                     $route->createRide();
                     break;
-                            
+
+                case 'details':
+                    if(isset($params[1])) {
+                        $route = new RideDetailsController;
+                        $route->index();
+                    }
+                    else {
+                        // METTRE UNE PAGE 404 !!!!!!!!!!!!!!!!!!!!!!!!!
+                        $route = new RidesController;
+                        $route->index();
+                    }
+                    break;           
             }        
         }
     }

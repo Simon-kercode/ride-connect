@@ -88,8 +88,6 @@ class Model extends DbConnector {
     }
 
     public function findSomeWithJoin(array $columns, array $joinParams, array $params) {
-    // SELECT $columnsList FROM $this->table JOIN $table ON ($param)
-
         if (empty($columns)) {
             $columnsList = ' * ';
         }

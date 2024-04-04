@@ -26,18 +26,19 @@ class OrgaController extends RideModel {
 
                 $decodedRouteInfos = json_decode($_POST['routeInfos']);
                 $decodedPointsInfos = json_decode($_POST['pointsInfos']);
+                
 
                 $title = htmlspecialchars($_POST['title']);
                 $date = htmlspecialchars($_POST['date']);
                 $time = htmlspecialchars($_POST['time']);
                 $length = $decodedRouteInfos->distance;
                 $duration = $decodedRouteInfos->duration;
-                $difficulty = htmlspecialchars($_POST['difficulty']);
+                $difficulty = ($_POST['difficulty']);
                 $partNumber = htmlspecialchars($_POST['partNumber']);
                 $startPoint = $decodedPointsInfos[0]->city;
                 $arrival = end($decodedPointsInfos)->city;
-                $department = $decodedPointsInfos[0]->department;
-                $region = $decodedPointsInfos[0]->region;
+                $department = str_replace('-', ' ', $decodedPointsInfos[0]->department);
+                $region = str_replace('-', ' ', $decodedPointsInfos[0]->region);
                 $meetingPoint = htmlspecialchars($_POST['meetingPoint']);
                 $precisions = htmlspecialchars($_POST['precisions']);
                 // $map = null;
@@ -77,6 +78,7 @@ class OrgaController extends RideModel {
                 //     // ->setMap($map)
                 //     ->setWaypoints($waypoints)
                 //     ->setIdUser($idUser);
+                // $result = $ride->create();
 
                 $result = $ride->addBalade($params);
 

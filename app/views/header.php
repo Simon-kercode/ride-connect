@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
+    <base href="http://localhost/ride-connect/">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="public/styles/style.css">
@@ -13,7 +14,12 @@
     <script type="text/javascript" src="api/scripts/leaflet.js"></script>
     <!-- leaflet draw js -->
     <script src="https://unpkg.com/leaflet-draw/dist/leaflet.draw.js"></script>
-    <script type="text/javascript" src="public/scripts/map.js" defer></script>
+    <?php if ($_SERVER['REQUEST_URI'] === '/ride-connect/organiser') { ?>
+    <script type="text/javascript" src="public/scripts/mapOrga.js" defer></script>
+    <?php } 
+    elseif (strpos($_SERVER['REQUEST_URI'], '/ride-connect/details') !== false) {?>
+    <script type="text/javascript" src="public/scripts/mapDetails.js" defer></script>
+    <?php } ?>
     <title><?= $title ?></title>
 </head>
 <body>

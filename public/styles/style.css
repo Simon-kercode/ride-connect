@@ -65,7 +65,6 @@ a {
 
 .logo {
   width: 200px;
-  height: -moz-fit-content;
   height: fit-content;
 }
 
@@ -262,10 +261,24 @@ header #menuLinks #profileLink img {
   transition: 0.3s;
 }
 
+/*============== rides ================= */
+#ridesPage #searchCreate {
+  display: flex;
+  justify-content: space-between;
+}
+
+/*============== rideDetails =========== */
+#rideDetailsPage #mapDetails {
+  height: 400px;
+}
+
 /*============== balades =============== */
 #orgaPage {
   padding-left: 20px;
   padding-right: 20px;
+}
+#orgaPage #map {
+  height: 400px;
 }
 #orgaPage form {
   width: 90%;
@@ -290,10 +303,6 @@ header #menuLinks #profileLink img {
 }
 
 /*============== orga ================== */
-#map {
-  height: 400px;
-}
-
 /*============== footer ================ */
 footer {
   background-color: #202022;

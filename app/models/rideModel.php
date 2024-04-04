@@ -21,14 +21,25 @@ class RideModel extends Model {
     protected string $meetingPoint;
     protected string $precisions;
     protected $map;
-    protected string $waypoints;
+    protected array $waypoints;
     protected int $idUser;
 
     public function __construct() {
         $this->table = 'balade';
     }
 
-    
+     // get the pseudo of a ride's creator
+     protected function getCreatorPseudo($ride, $params) {
+        $columns = ['_user.pseudo'];
+        $joinParams = [
+            [
+            'table' => '_user',
+            'condition' => 'balade.idUser = _user.idUser'
+            ]
+        ];
+        // $params = ['balade.idUser' => $ride->idUser];
+        return $this->findSomeWithJoin($columns, $joinParams, $params);
+    }
 
     /**
      * Get the value of idBalade

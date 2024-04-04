@@ -2,7 +2,7 @@
 
 <main id="orgaPage" class="container">
     <h1>Organiser ma balade</h1>
-    <form action="rideSubmit" method="POST" id="orgaForm">
+    <form action="organiser" method="POST" id="orgaForm">
         <div>
             <label for="title">Donne un petit titre sympa *</label>
             <input name="title" type="text" placeholder="ex: Visite aux anciens de Béganne">
