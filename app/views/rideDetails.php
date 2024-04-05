@@ -20,7 +20,18 @@
         <p id="startEnd"><?= $ride->startPoint ?> --> <?= $ride->arrival ?></p>
         <div id="rideInfos" class="flexBetween">
             <p>Distance<br><span class="bold"><?= $ride->length ?> km</span></p>
-            <p>Durée<br><span class="bold"><?= $ride->duration ?></span></p>
+            <p>Durée<br>
+                <span class="bold"> 
+                    <?php 
+                        if((($ride->duration)/60) < 1) {
+                            echo (round(($ride->duration)%60).' min');
+                        }
+                        else {
+                            echo (floor(($ride->duration)/60).'h'.sprintf('%02d', (round(($ride->duration)%60)))) ;
+                        }
+                    ?>
+                </span>
+            </p>
             <p>Niveau<br><span class="bold"><?= ucfirst($ride->difficulty) ?></span></p>
         </div>
         <p>Inscrits : <?= $partQuantity ?>/<?= $ride->partNumber ?></p>
@@ -29,7 +40,7 @@
             <div id="gps"></div>
         </div>
     </div>
-    <a class="button" href="details/<?=$ride->idBalade?>">Je participe !</a>
+    <a class="button" href="balades/<?=$ride->idBalade?>/participer">Je participe !</a>
     <p class="isConnected"><?php if (isset($_SESSION['message']) && !empty($_SESSION['message'])) {echo $_SESSION['message']; unset($_SESSION['message']);}?></p>
 
 

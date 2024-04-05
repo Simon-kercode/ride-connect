@@ -81,10 +81,12 @@ class Model extends DbConnector {
         return $result;
     }
     public function findAndOrder(array $columns, array $params, $operator, $order, $way) {
+        $orberBy = '';
 
         if(!empty($order)) {
             $orderBy = ' ORDER BY '.$order." $way";
         }
+
         if (empty($columns)) {
             $columnsList = ' * ';
         }
@@ -119,7 +121,7 @@ class Model extends DbConnector {
         return $result;
     }
 
-    public function findSomeWithJoin(array $columns, array $joinParams, array $params) {
+    public function findSomeWithJoin(array $columns = [], array $joinParams = [], array $params = []) {
         if (empty($columns)) {
             $columnsList = ' * ';
         }
@@ -149,6 +151,48 @@ class Model extends DbConnector {
             $where .= implode(' AND ', $fields);
         }
         $query .= $where;
+
+        $result = $this->request($query, $values)->fetchAll();
+        return $result;
+    }
+
+    public function findSomeWithJoinAndOrder(array $columns = [], array $joinParams = [], array $params = [], string $order ="", string $way = "") {
+        if (empty($columns)) {
+            $columnsList = ' * ';
+        }
+        else {
+            $columnsList = implode(', ', $columns);
+        }
+
+        $query = 'SELECT '.$columnsList.' FROM ' .$this->table;
+
+        if (!empty($joinParams)) {
+            foreach($joinParams as $joinParam) {
+                $query .= ' JOIN ' .$joinParam['table'].' ON '.$joinParam['condition'];
+            }
+        }
+        $where = '';
+        $values = [];
+
+        if (!empty($params)) {
+            $where = ' WHERE ';
+            $fields = [];
+
+            foreach($params as $field => $value) {
+                $fields[] = "$field = ?";
+                $values[] = $value;
+            }
+            $where .= implode(' AND ', $fields);
+        }
+        $query .= $where;
+
+        $orderBy = '';
+
+        if(!empty($order)) {
+            $orderBy = ' ORDER BY '.$order." $way";
+        }
+
+        $query .= $orderBy;
 
         $result = $this->request($query, $values)->fetchAll();
         return $result;

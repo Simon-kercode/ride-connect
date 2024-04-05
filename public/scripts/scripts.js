@@ -17,7 +17,23 @@ closeBurger.addEventListener('click', function() {
     closeBurger.style.display = 'none';
 })
 
+// ============ Script for register Page ===============
 if (paramIndex('inscription') !== -1) {
+    formVerification();
+}
+
+// ============== script for orga page ===========
+if (paramIndex('organiser') !== -1) {
+    dateFormat();
+}
+
+// ============ script for profile page ============
+if (paramIndex('profil') !== -1) {
+    displayProfilePart();
+}
+
+
+function formVerification() {
     // lock the submit button if checkbox is not checked
     let checkbox = document.querySelector('.checkbox');
     checkbox.addEventListener('change', function() {
@@ -87,8 +103,8 @@ if (paramIndex('inscription') !== -1) {
     });
 }
 
-if (paramIndex('organiser') !== -1) {
-    // display actual date in the date field
+// display actual date in the date field
+function dateFormat() {
     document.addEventListener('DOMContentLoaded', function() {
 
         let dateInput = document.querySelector('#dateInput');
@@ -99,7 +115,36 @@ if (paramIndex('organiser') !== -1) {
 
         dateInput.value = formattedDate;
     });
+} 
+
+// display the selected profile part
+function displayProfilePart() {
+    let myInfo = document.querySelector('#myInfo');
+    let myRides = document.querySelector('#myRides');
+    let mySubscribedRides = document.querySelector('#mySubscribedRides');
+
+    let myInfoBtn = document.querySelector('#myInfoBtn');
+    let myRidesBtn = document.querySelector('#myRidesBtn');
+    let mySubscribedRidesBtn = document.querySelector('#mySubscribedRidesBtn');
+
+    myInfoBtn.addEventListener('click', function(){
+        myInfo.style.display = 'block';
+        myRides.style.display = 'none';
+        mySubscribedRides.style.display = 'none';
+    });
+    myRidesBtn.addEventListener('click', function(){
+        myInfo.style.display = 'none';
+        myRides.style.display = 'block';
+        mySubscribedRides.style.display = 'none';
+    });
+    mySubscribedRidesBtn.addEventListener('click', function(){
+        myInfo.style.display = 'none';
+        myRides.style.display = 'none';
+        mySubscribedRides.style.display = 'block';
+    });
+
 }
+
 
 function displayError(inputElement, errorMessage) {
     // Create p element to display the error message
@@ -111,6 +156,7 @@ function displayError(inputElement, errorMessage) {
     inputElement.parentNode.insertBefore(errorElement, inputElement.nextSibling);
 }
 
+// looking for the presence of an element in url
 function paramIndex($param) {
     let url = window.location.href;
     let segments = url.split('/')

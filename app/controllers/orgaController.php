@@ -19,9 +19,6 @@ class OrgaController extends RideModel {
             if (isset ($_POST['title'], $_POST['date'], $_POST['time'], $_POST['startPoint'], $_POST['meetingPoint'], $_POST['partNumber'], $_POST['difficulty'], $_POST['pointsInfos'], $_POST['routeInfos'], $_POST['waypoints'], $_POST['precisions']) &&
              !empty($_POST['title']) && !empty($_POST['date']) && !empty($_POST['time']) && !empty($_POST['startPoint']) && !empty($_POST['meetingPoint']) && !empty($_POST['difficulty']) && !empty($_POST['pointsInfos']) && !empty($_POST['routeInfos']) && !empty($_POST['waypoints'])) {
 
-                // $jsonData = $this->getData();
-                // exit;
-
                 $ride = new RideModel;
 
                 $decodedRouteInfos = json_decode($_POST['routeInfos']);
@@ -112,14 +109,7 @@ class OrgaController extends RideModel {
             }
         }
     }
-    private function getData() {
-        
-        $jsonData = json_decode(stripslashes(file_get_contents('php://input')));
-        var_dump($jsonData);
-        header('Content-Type: application/json; charset=utf-8');
-        echo json_encode($jsonData);
 
-    }
     /* Récupération des données : 
     * title, date, time, departure, meetingPoint, partNumber, difficulty, precisions : via formulaire
     * arrival, department, region : nominatim

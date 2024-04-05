@@ -67,10 +67,28 @@ use app\controllers\rideDetailsController;
                     break;
 
                 case 'balades':
-                    $route = new RidesController;
-                    $route->index();
+                    if (isset($params[2]) && $params[2] === 'participer') {
+                        if(isset($_SESSION['user']) && !empty($_SESSION['user'])) {
+                            $route = new rideDetailsController;
+                            $_SESSION['message'] = "Vous êtes bien inscrit à cette balade ! Retrouvez y les détails sur votre profil.";
+                            $route->index();
+                        }
+                        else {
+                            $route = new rideDetailsController;
+                            $_SESSION['message'] = "Vous devez être connecté pour participer à une balade.";
+                            $route->index();
+                        }
+                    }
+                    elseif (isset($params[1]) && ctype_digit($params[1])) {
+                        $route = new rideDetailsController;
+                        $route->index();
+                    }
+                    else {
+                        $route = new RidesController;
+                        $route->index();
+                    }
                     break;
-
+                    
                 case 'organiser':
                     $route = new OrgaController;
                     if ($_SERVER['REQUEST_METHOD'] == 'POST') {
@@ -99,29 +117,6 @@ use app\controllers\rideDetailsController;
                         $route->index();
                     }
                     break;
-                
-                /*case "details/<?=$ride->idBalade?>":
-                    if(isset($_SESSION['user']) && !empty($_SESSION['user'])) {
-                        $_SESSION['message'] = "Vous êtes bien inscrit à cette balade ! Retrouvez y les détails sur votre profil.";
-                        if(isset($params[1])) {
-                        $route = new RideDetailsController; 
-                        $route->index();
-                        }
-                    }
-                    else {
-                        $_SESSION['message'] = "Vous devez être connecté pour participer à une balade.";   
-                        if(isset($params[1])) {
-                        $route = new RideDetailsController;
-                        $route->index();
-                        }
-                        else {
-                            // METTRE UNE PAGE 404 !!!!!!!!!!!!!!!!!!!!!!!!!
-                            $route = new RidesController;
-                            $route->index();
-                        }
-                    }
-                    break;
-                    */
                 
             }       
         }

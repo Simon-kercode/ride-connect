@@ -23,7 +23,7 @@ class ParticipantModel extends Model {
         return $result;
     }
 
-    public function getParticipants(int $idBalade) {
+    public function getParticipantsNumber(int $idBalade) {
         $result = $this->findBy(['idBalade' => $idBalade]);
         if($result) {
             $participants = count($result);

@@ -16,23 +16,32 @@
         <div>
             <?php foreach ($rides as $index => $ride) {?>
             <article>
-                <a href="details/<?= $ride->idBalade ?>"><h3>
+                <a href="balades/<?= $ride->idBalade ?>"><h3>
                     <?= $ride->title?>
                 </h3></a>
                 <div> 
-                    <?= substr($pseudo[$index]->pseudo, 0, 1) ?>
-                    <?= $pseudo[$index]->pseudo ?>
+                    <p><?= substr($pseudo[$index]->pseudo, 0, 1) ?></p>
+                    <p><?= $pseudo[$index]->pseudo ?></p>
                 </div>
                 <div>
-                    <?= $ride->department ?>
+                    <p><?= $ride->department ?></p>
                 </div>
                 <div>
-                    <?= $ride->date ?>
-                    <?= $ride->length ?>
+                    <p><?= date("d/m/Y", strtotime($ride->date)) ?></p>
+                    <p><?= $ride->length ?> km</p>
                 </div>
                 <div>
-                    <?= $ride->duration ?>
-                    <?= $ride->difficulty ?>
+                    <p>
+                        <?php 
+                        if((($ride->duration)/60) < 1) {
+                            echo (round(($ride->duration)%60).' min');
+                        }
+                        else {
+                            echo (floor(($ride->duration)/60).'h'.sprintf('%02d', (round(($ride->duration)%60)))) ;
+                        }
+                        ?>
+                    </p>
+                    <p><?= $ride->difficulty ?></p>
                 </div>
             </article> 
             <?php } ?>

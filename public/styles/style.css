@@ -66,6 +66,7 @@ a {
 
 .logo {
   width: 200px;
+  height: -moz-fit-content;
   height: fit-content;
 }
 
