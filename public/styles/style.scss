@@ -113,6 +113,10 @@ input {
     font-family: 'Work Sans';
     font-size: 1.1rem
 }
+.isConnected {
+    text-align: center;
+    height: 15px
+}
 /*======================= header =====================*/
 
 header {
@@ -120,7 +124,7 @@ header {
     align-items: center;
     background-color: white;
     position: fixed;
-    z-index: 100;
+    z-index: 1000;
     width: 100%;
     #burgerIcons img {
         width: 40px;
@@ -284,9 +288,15 @@ header {
 }
 /*============== rides ================= */
 #ridesPage {
+    margin: 20px 16px;
     #searchCreate {
         display: flex;
         justify-content: space-between;
+        align-items: center;
+        padding: 20px 0;
+    }
+    #rideList {
+        margin-top: 20px;
     }
 }
 
@@ -294,6 +304,7 @@ header {
 #rideDetailsPage {
     #mapDetails {
         height: 400px;
+        z-index: 900;
     }
     .container, h2 {
         margin: 20px 16px;
@@ -317,9 +328,6 @@ header {
         text-align: center;
         margin-bottom: 16px;
     }
-    #gps {
-        margin: 16px 0;
-    }
     #rideInfos p:nth-of-type(2) {
         border-left: solid 2px $detailsBlue;
         border-right: solid 2px $detailsBlue;
@@ -327,16 +335,55 @@ header {
         width: 40%;
     //     padding: 0 12%;
     }
-    button {
-        margin-left: 40%;
+    #preciGPS {
+        display: flex;
+        margin: 16px 0;
     }
+    #gps {
+        width: 500px;
+    }
+    .accordion {
+        background-color: $backgroundLightGrey;
+        color: #444;
+        cursor: pointer;
+        padding: 18px;
+        width: 100%;
+        font-family: 'Work Sans';
+        font-size: 1rem;
+        text-align: left;
+        border: none;
+        outline: none;
+        transition: 0.4s;
+        &.active, &:hover{
+            background-color: $detailsBlue;
+            color: white
+        }
+        &:after {
+            content: '\02795'; /* Unicode character for "plus" sign (+) */
+            font-size: 0.6rem;
+            color: $detailsBlue;
+            float: right;
+            margin-left: 5px;
+        }
+    }
+    .panel {
+        padding: 0 18px;
+        background-color: $backgroundBody;
+        overflow: hidden;
+        max-height: 0;
+        transition: max-height 0.3s ease-out;
+      }      
+      .active:after {
+        content: "\2796"; /* Unicode character for "minus" sign (-) */
+      }
 }
-/*============== balades =============== */
+/*============== orga =============== */
 #orgaPage {
     padding-left: 20px;
     padding-right: 20px;
     #map {
     height: 400px;
+    z-index: 900;
     }
     form{
         width: 90%;
@@ -360,7 +407,6 @@ header {
         }
     }
 }
-/*============== orga ================== */
 
 
 /*============== footer ================ */

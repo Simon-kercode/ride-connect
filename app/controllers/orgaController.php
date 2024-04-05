@@ -83,14 +83,15 @@ class OrgaController extends RideModel {
                 $result = $ride->addBalade($params);
                 $idBalade = $this->getLastId();
                 $participant = new ParticipantModel($_SESSION['user']['idUser'], $idBalade);
-                $storedParticipant = $participant->create();
+                $storedParticipant = $participant->createParticipant(['idUser' => $_SESSION['user']['idUser'], 'idBalade' => $idBalade]);
 
                 if (isset($result)) {
                         
                     if ($result) {
                         $title = 'Organiser ma balade - Ride Connect';
-                        $error = "La balade a bien été enregistrée";
-                        include ROOT.'/app/views/home.php';
+                        $_SESSION['message'] = "Ta balade a bien été enregistrée !";
+                        include ROOT.'/app/views/profile.php';
+                        unset($_SESSION['message']);
                     }
                     else {
                         $title = 'Organiser ma balade - Ride Connect';

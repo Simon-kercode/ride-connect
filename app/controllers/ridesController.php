@@ -25,12 +25,12 @@ class RidesController extends RideModel {
         $columns = ['idUser', 'idBalade', 'title', 'department', 'date', 'length', 'duration', 'difficulty'];
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             if (isset($_POST['rideSearch']) && !empty($_POST['rideSearch'])) {
-                $rides = $this->findSomeBy($columns, ['region' => $_POST['rideSearch'], 'department' => $_POST['rideSearch']], 'OR');
+                $rides = $this->findAndOrder($columns, ['region' => $_POST['rideSearch'], 'department' => $_POST['rideSearch']], 'OR', 'date', 'DESC');
             }
         }
         // DEFAULT
         else {
-            $rides = $this->findSomeBy($columns, $params = [], "");
+            $rides = $this->findAndOrder($columns, $params = [], "", 'date', 'DESC');
         }
         return $rides;
     }

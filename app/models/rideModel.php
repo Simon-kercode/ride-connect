@@ -41,6 +41,18 @@ class RideModel extends Model {
         return $this->findSomeWithJoin($columns, $joinParams, $params);
     }
 
+    protected function getpartQuantity($idBalade) {
+        $request = $this->findOneByOneParam('idBalade', $idBalade);
+        var_dump($request);
+        exit;
+
+        if($request) {
+            $partQuantity = $request->rowCount();
+            return $partQuantity;
+        }
+        else return 0;
+    }
+
     /**
      * Get the value of idBalade
      */ 

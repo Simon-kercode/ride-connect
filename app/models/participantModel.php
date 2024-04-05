@@ -7,10 +7,8 @@ class ParticipantModel extends Model {
     private int $idUser;
     private int $idBalade;
 
-    public function __construct($idUser, $idBalade) {
+    public function __construct() {
         $this->table = 'participate';
-        $this->idUser = $idUser;
-        $this->idBalade = $idBalade;
     }
 
     public function createParticipant(array $params) {
@@ -25,18 +23,12 @@ class ParticipantModel extends Model {
         return $result;
     }
 
-    public function findParticipantBy(array $params) {
-        $fields = [];
-        $values = [];
-        
-        foreach($criteria as $field => $value){
-            $fields[] = "$field = ?";
-            $values[] = $value;
+    public function getParticipants(int $idBalade) {
+        $result = $this->findBy(['idBalade' => $idBalade]);
+        if($result) {
+            $participants = count($result);
+            return $participants;
         }
-        // transforms fields array into a string
-        $fieldsList = implode(' AND ', $fields);
-
-        $result = $this->request('SELECT * FROM '.$this->table.' WHERE '.$fieldsList, $values)->fetchAll();
-        return $result;
+        else return 0;
     }
 }

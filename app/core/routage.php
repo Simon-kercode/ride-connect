@@ -77,14 +77,16 @@ use app\controllers\rideDetailsController;
                         $route->createRide();
                     }
                     else {
-                    $route->index();
+                        if(isset($_SESSION['user']) && !empty($_SESSION['user'])) {
+                        $route->index();
+                        }
+                        else {
+                            $_SESSION['message'] = "Vous devez être connecté pour organiser une balade.";
+                            $route = new RidesController;
+                            $route->index();
+                        }
                     }
                     break;   
-                     
-                case 'rideSubmit':
-                    $route = new OrgaController;
-                    $route->createRide();
-                    break;
 
                 case 'details':
                     if(isset($params[1])) {
@@ -96,8 +98,32 @@ use app\controllers\rideDetailsController;
                         $route = new RidesController;
                         $route->index();
                     }
-                    break;           
-            }        
+                    break;
+                
+                /*case "details/<?=$ride->idBalade?>":
+                    if(isset($_SESSION['user']) && !empty($_SESSION['user'])) {
+                        $_SESSION['message'] = "Vous êtes bien inscrit à cette balade ! Retrouvez y les détails sur votre profil.";
+                        if(isset($params[1])) {
+                        $route = new RideDetailsController; 
+                        $route->index();
+                        }
+                    }
+                    else {
+                        $_SESSION['message'] = "Vous devez être connecté pour participer à une balade.";   
+                        if(isset($params[1])) {
+                        $route = new RideDetailsController;
+                        $route->index();
+                        }
+                        else {
+                            // METTRE UNE PAGE 404 !!!!!!!!!!!!!!!!!!!!!!!!!
+                            $route = new RidesController;
+                            $route->index();
+                        }
+                    }
+                    break;
+                    */
+                
+            }       
         }
     }
 ?>

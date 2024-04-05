@@ -80,7 +80,34 @@ class Model extends DbConnector {
         $result = $this->request('SELECT * FROM '.$this->table.' WHERE '.$fieldsList, $values)->fetchAll();
         return $result;
     }
+    public function findAndOrder(array $columns, array $params, $operator, $order, $way) {
 
+        if(!empty($order)) {
+            $orderBy = ' ORDER BY '.$order." $way";
+        }
+        if (empty($columns)) {
+            $columnsList = ' * ';
+        }
+        else {
+            $columnsList = implode(', ', $columns);
+        }
+        
+        $where = '';
+        $values = [];
+
+        if (!empty($params)) {
+            $where = ' WHERE ';
+            $fields = [];
+
+            foreach($params as $field => $value) {
+                $fields[] = "$field = ?";
+                $values[] = $value;
+            }
+            $where .= implode(' '.$operator.' ', $fields);
+        }
+        $result = $this->request('SELECT '.$columnsList.' FROM '.$this->table.$where.$orderBy, $values)->fetchAll();
+        return $result;
+    }
     // method to find one item by its id
     public function find(int $id) {
         $result = $this->request('SELECT * FROM '.$this->table.' WHERE id = ?', [$id])->fetch();
@@ -157,7 +184,7 @@ class Model extends DbConnector {
         $values = [];
 
         foreach($this as $field => $value) {
-            if($value !== null && $field != 'db' && $field != 'table' && $field != 'idUser') {
+            if($value !== null && $field != 'db' && $field != 'table') {
                 $fields[] = $field;
                 $inter[] = '?';
                 $values[] = $value;

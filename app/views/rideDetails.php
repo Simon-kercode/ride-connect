@@ -23,12 +23,14 @@
             <p>Durée<br><span class="bold"><?= $ride->duration ?></span></p>
             <p>Niveau<br><span class="bold"><?= ucfirst($ride->difficulty) ?></span></p>
         </div>
-        <p>Inscrits : /<?= $ride->partNumber ?></p>
-        <div id="gps"></div>
-        <p><?= $ride->precisions ?></p>
+        <p>Inscrits : <?= $partQuantity ?>/<?= $ride->partNumber ?></p>
+        <div id="preciGPS">
+            <p><?= $ride->precisions ?></p>
+            <div id="gps"></div>
+        </div>
     </div>
-    <button class="button">Je m'inscris !</button>
-
+    <a class="button" href="details/<?=$ride->idBalade?>">Je participe !</a>
+    <p class="isConnected"><?php if (isset($_SESSION['message']) && !empty($_SESSION['message'])) {echo $_SESSION['message']; unset($_SESSION['message']);}?></p>
 
 
     <script>document.addEventListener('DOMContentLoaded', function(event) {

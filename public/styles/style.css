@@ -1,3 +1,4 @@
+@charset "UTF-8";
 /*================== polices ===================*/
 /* work-sans-regular - latin */
 @font-face {
@@ -65,7 +66,6 @@ a {
 
 .logo {
   width: 200px;
-  height: -moz-fit-content;
   height: fit-content;
 }
 
@@ -94,6 +94,11 @@ input {
   font-size: 1.1rem;
 }
 
+.isConnected {
+  text-align: center;
+  height: 15px;
+}
+
 /*======================= header =====================*/
 header {
   display: flex;
@@ -101,7 +106,7 @@ header {
   align-items: center;
   background-color: white;
   position: fixed;
-  z-index: 100;
+  z-index: 1000;
   width: 100%;
 }
 header #burgerIcons img {
@@ -268,14 +273,23 @@ header #menuLinks #profileLink img {
 }
 
 /*============== rides ================= */
+#ridesPage {
+  margin: 20px 16px;
+}
 #ridesPage #searchCreate {
   display: flex;
   justify-content: space-between;
+  align-items: center;
+  padding: 20px 0;
+}
+#ridesPage #rideList {
+  margin-top: 20px;
 }
 
 /*============== rideDetails =========== */
 #rideDetailsPage #mapDetails {
   height: 400px;
+  z-index: 900;
 }
 #rideDetailsPage .container, #rideDetailsPage h2 {
   margin: 20px 16px;
@@ -306,26 +320,62 @@ header #menuLinks #profileLink img {
   text-align: center;
   margin-bottom: 16px;
 }
-#rideDetailsPage #gps {
-  margin: 16px 0;
-}
 #rideDetailsPage #rideInfos p:nth-of-type(2) {
   border-left: solid 2px #009BDB;
   border-right: solid 2px #009BDB;
   text-align: center;
   width: 40%;
 }
-#rideDetailsPage button {
-  margin-left: 40%;
+#rideDetailsPage #preciGPS {
+  display: flex;
+  margin: 16px 0;
+}
+#rideDetailsPage #gps {
+  width: 500px;
+}
+#rideDetailsPage .accordion {
+  background-color: #CACACA;
+  color: #444;
+  cursor: pointer;
+  padding: 18px;
+  width: 100%;
+  font-family: "Work Sans";
+  font-size: 1rem;
+  text-align: left;
+  border: none;
+  outline: none;
+  transition: 0.4s;
+}
+#rideDetailsPage .accordion.active, #rideDetailsPage .accordion:hover {
+  background-color: #009BDB;
+  color: white;
+}
+#rideDetailsPage .accordion:after {
+  content: "➕"; /* Unicode character for "plus" sign (+) */
+  font-size: 0.6rem;
+  color: #009BDB;
+  float: right;
+  margin-left: 5px;
+}
+#rideDetailsPage .panel {
+  padding: 0 18px;
+  background-color: #F2F2F2;
+  overflow: hidden;
+  max-height: 0;
+  transition: max-height 0.3s ease-out;
+}
+#rideDetailsPage .active:after {
+  content: "➖"; /* Unicode character for "minus" sign (-) */
 }
 
-/*============== balades =============== */
+/*============== orga =============== */
 #orgaPage {
   padding-left: 20px;
   padding-right: 20px;
 }
 #orgaPage #map {
   height: 400px;
+  z-index: 900;
 }
 #orgaPage form {
   width: 90%;
@@ -349,7 +399,6 @@ header #menuLinks #profileLink img {
   width: 46%;
 }
 
-/*============== orga ================== */
 /*============== footer ================ */
 footer {
   background-color: #202022;
