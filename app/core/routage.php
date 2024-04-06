@@ -8,6 +8,7 @@ use app\controllers\profileController;
 use app\controllers\ridesController;
 use app\controllers\orgaController;
 use app\controllers\rideDetailsController;
+use app\controllers\modifyController;
 
     class Routage {
         public function start() {
@@ -75,20 +76,40 @@ use app\controllers\rideDetailsController;
                     break;
 
                 case 'balades':
-                    if (isset($params[2]) && $params[2] === 'participer') {
+                    if(isset($params[2]) && $params[2] === 'modifier') {
+                        if (isset($_SESSION['user']) && !empty($_SESSION['user'])) {
+                            $route = new RideDetailsController;
+                            if ($route->getRide()->idUser == $_SESSION['user']['idUser']) {
+                                $route = new ModifyController;
+                                $route->index();
+                            }  
+                            else {
+                                $route = new RidesController;
+                                $_SESSION['message'] = "Vous devez vous connecter pour modifier cette balade.";
+                                $route->index();
+                            }
+                        }
+                        else {
+                            $route = new RidesController;
+                            $_SESSION['message'] = "Vous devez vous connecter pour modifier cette balade.";
+                            $route->index();
+                        }
+                        
+                    }
+                    elseif (isset($params[2]) && $params[2] === 'participer') {
                         if(isset($_SESSION['user']) && !empty($_SESSION['user'])) {
-                            $route = new rideDetailsController;
+                            $route = new RideDetailsController;
                             $_SESSION['message'] = "Vous êtes bien inscrit à cette balade ! Retrouvez y les détails sur votre profil.";
                             $route->index();
                         }
                         else {
-                            $route = new rideDetailsController;
+                            $route = new RideDetailsController;
                             $_SESSION['message'] = "Vous devez être connecté pour participer à une balade.";
                             $route->index();
                         }
                     }
                     elseif (isset($params[1]) && ctype_digit($params[1])) {
-                        $route = new rideDetailsController;
+                        $route = new RideDetailsController;
                         $route->index();
                     }
                     else {

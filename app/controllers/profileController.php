@@ -39,4 +39,13 @@ class ProfileController extends RideModel {
         
         return $subscribedRides;
     }
+
+    private function updateInfos() {
+
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            if (isset($_POST['profileEmail']) || isset($_POST['profilePseudo']) || isset($_POST['profileName']) || isset($_POST['profileFirstname']) && !empty($_POST['email']) && !empty($_POST['password'])) {
+
+            }
+        }
+    }
 }

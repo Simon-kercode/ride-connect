@@ -30,6 +30,7 @@ if (paramIndex('organiser') !== -1) {
 // ============ script for profile page ============
 if (paramIndex('profil') !== -1) {
     displayProfilePart();
+    displayInput();
 }
 
 
@@ -142,7 +143,52 @@ function displayProfilePart() {
         myRides.style.display = 'none';
         mySubscribedRides.style.display = 'block';
     });
+}
 
+function displayInput() {
+    let inputs = [
+    document.querySelector('#newEmail'),
+    document.querySelector('#newPseudo'),
+    document.querySelector('#newName'),
+    document.querySelector('#newFirstname'),
+    document.querySelector('#inputPasswordUpdate')
+    ];
+    
+    let btns = [
+    document.querySelector('#emailUpdateBtn'),
+    document.querySelector('#pseudoUpdateBtn'),
+    document.querySelector('#nameUpdateBtn'),
+    document.querySelector('#firstnameUpdateBtn'),
+    document.querySelector('#passwordUpdateBtn')
+    ];
+    
+    // display corresponding input and hide the btn
+    for (let i = 0; i < btns.length; i++) {
+        btns[i].addEventListener('click', function() {
+            if (inputs[i].style.display === 'none') {
+                inputs[i].style.display = 'block';
+                btns[i].style.display = 'none';
+            }
+        });
+    }
+
+    let resetBtn = document.querySelector('#resetBtn');
+    // on reset button, display all buttons, delete inputs values and hid it
+    resetBtn.addEventListener('click', function() {
+        inputs.forEach(input => {
+            if (input.value !== null) {
+                input.value = null;
+            }
+            if (input.style.display !== 'none') {
+                input.style.display = 'none';
+            }
+        });
+        btns.forEach(btn => {
+            if (btn.style.display !== 'block') {
+                btn.style.display = 'block';
+            }
+        });
+    });
 }
 
 

@@ -443,22 +443,37 @@ header {
             line-height: 87px;
         }
     }
-    section {
-        margin: 0 16px;
-        &#myInfo {
+    #profileContent {
+        margin: 0 30px;
+        width: 100%;
+        #myInfo {
             display: block;
+            width: 100%;
+            margin: auto;
             form {
-                width: 100%;
+                // margin: auto;
                 display: flex;
                 flex-direction: column;
-                align-items: center;
-
+                input {
+                    width: 50%;
+                }
+                .hiddenInput {
+                    display: none;
+                }
+                #passwordUpdate {
+                    width: 50%;
+                    display: flex;
+                    flex-direction: column;
+                    input {
+                        width: 100%;
+                    }
+                }
             }
         }
-        &#myRides {
+        #myRides {
             display: none;
         }
-        &#mySubscribedRides {
+        #mySubscribedRides {
             display: none;
         }
     }
@@ -605,9 +620,9 @@ footer {
             align-items: center;
             .particle {
                 margin: 30px auto;
-                width: 180px;
-                height: 180px;
-                line-height: 164px;
+                width: 160px;
+                height: 160px;
+                line-height: 144px;
                 font-size: 62px;
             }
             #profileBtn {

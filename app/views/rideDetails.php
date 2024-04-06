@@ -40,7 +40,12 @@
             <div id="gps"></div>
         </div>
     </div>
+    <?php 
+        if (isset($_SESSION['user']) && !empty($_SESSION['user']['idUser']) && ($ride->idUser === $_SESSION['user']['idUser'])) { ?>
+        <a class="button" href="balades/<?=$ride->idBalade?>/modifier">Modifier</a>
+    <?php } else {?>
     <a class="button" href="balades/<?=$ride->idBalade?>/participer">Je participe !</a>
+    <?php } ?>
     <p class="isConnected"><?php if (isset($_SESSION['message']) && !empty($_SESSION['message'])) {echo $_SESSION['message']; unset($_SESSION['message']);}?></p>
 
 

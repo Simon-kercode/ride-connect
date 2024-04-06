@@ -11,32 +11,54 @@
             <button id="mySubscribedRidesBtn">Balades prévues</button>
         </div>
     </aside>
-    <section>
+    <section id="profileContent">
         <section id="myInfo">
-            <form action="">
+            <form action="" method="POST">
                 <div>
                     <label for="profileEmail">Mon Email</label>
-                    <input type="email" id="profileEmail" name="profileEmail" value="<?= $_SESSION['user']['email']?>">
+                    <div>
+                        <p><?= $_SESSION['user']['email']?></p>
+                        <button id="emailUpdateBtn">Modifier</button>
+                    </div>
+                    <input class="hiddenInput" type="email" id="newEmail" name="profileEmail">
                 </div>
                 <div>
                     <label for="profilePseudo">Mon pseudo</label>
-                    <input type="text" id="profileEmail" name="profilePseudo" value="<?= $_SESSION['user']['pseudo']?>">
+                    <div>
+                        <p><?= $_SESSION['user']['pseudo']?></p>
+                        <button id="pseudoUpdateBtn">Modifier</button>
+                    </div>
+                    <input class="hiddenInput" type="text" id="newPseudo" name="profilePseudo">
                 </div>
                 <div>
-                    <label for="profileName">Mon nom</label>
-                    <input type="text" id="profileName" name="profileName" value="<?= $_SESSION['user']['name']?>">
-                    <label for="profileFirstname">Mon prénom</label>
-                    <input type="text" id="profileFirstname" name="profileFirstname" value="<?= $_SESSION['user']['firstname']?>">
+                    <div>
+                        <label for="profileName">Mon nom</label>
+                        <div>
+                            <p><?= $_SESSION['user']['name']?></p>
+                            <button id="nameUpdateBtn">Modifier</button>
+                        </div>
+                        <input class="hiddenInput" type="text" id="newName" name="profileName">
+                    </div>
+                    <div>
+                        <label for="profileFirstname">Mon prénom</label>
+                        <div>
+                            <p><?= $_SESSION['user']['firstname']?></p>
+                            <button id="firstnameUpdateBtn">Modifier</button>
+                        </div>
+                        <input class="hiddenInput" type="text" id="newFirstname" name="profileFirstname">
+                    </div>
                 </div>
-                <div>
+                <div id="passwordUpdate">
                     <button id="passwordUpdateBtn">Modifier mon mot de passe</button>
-                    <input type="password" id="oldPassword" name="oldPassword">
-                    <input type="password" id="newPassword" name="newPassword">
-                    <input type="password" id="newPasswordConfirm" name="newPasswordConfirm">
+                        <div class="hiddenInput" id="inputPasswordUpdate">
+                            <input type="password" id="oldPassword" name="oldPassword">
+                            <input type="password" id="newPassword" name="newPassword">
+                            <input type="password" id="newPasswordConfirm" name="newPasswordConfirm">
+                        </div>
                 </div>
                 <div>
                     <input type="submit" value="Enregistrer les modifications">
-                    <input type="reset" value="Annuler">
+                    <input type="reset" id="resetBtn" value="Annuler">
                 </div>
             </form>
         </section>

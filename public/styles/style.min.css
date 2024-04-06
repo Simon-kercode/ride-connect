@@ -445,22 +445,37 @@ header #menuLinks #profileLink img {
   height: 100px;
   line-height: 87px;
 }
-#profilePage section {
-  margin: 0 16px;
-}
-#profilePage section#myInfo {
-  display: block;
-}
-#profilePage section#myInfo form {
+#profilePage #profileContent {
+  margin: 0 30px;
   width: 100%;
+}
+#profilePage #profileContent #myInfo {
+  display: block;
+  width: 100%;
+  margin: auto;
+}
+#profilePage #profileContent #myInfo form {
   display: flex;
   flex-direction: column;
-  align-items: center;
 }
-#profilePage section#myRides {
+#profilePage #profileContent #myInfo form input {
+  width: 50%;
+}
+#profilePage #profileContent #myInfo form .hiddenInput {
   display: none;
 }
-#profilePage section#mySubscribedRides {
+#profilePage #profileContent #myInfo form #passwordUpdate {
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+}
+#profilePage #profileContent #myInfo form #passwordUpdate input {
+  width: 100%;
+}
+#profilePage #profileContent #myRides {
+  display: none;
+}
+#profilePage #profileContent #mySubscribedRides {
   display: none;
 }
 
@@ -589,9 +604,9 @@ footer #copyright {
   }
   #profilePage aside .particle {
     margin: 30px auto;
-    width: 180px;
-    height: 180px;
-    line-height: 164px;
+    width: 160px;
+    height: 160px;
+    line-height: 144px;
     font-size: 62px;
   }
   #profilePage aside #profileBtn {
