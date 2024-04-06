@@ -408,6 +408,61 @@ header {
     }
 }
 
+/*============== profile =============== */
+
+#profilePage {
+    aside {
+        display: flex;
+        justify-content: space-between;
+        width: 100%;
+        background-color: $backgroundFooter;
+        #profileBtn {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            }
+            button {
+                @include button;
+                width: 180px;
+                cursor: pointer;
+                border: none;
+                margin: 8px 30px 8px 0;
+                font-size: 16px;
+                &:hover {
+                transition: 0.3s ease-out;
+                background-color: white;
+                color: black;
+            }
+        }
+        .particle {
+            @include particle;
+            margin: auto;
+            font-size: 50px;
+            width: 100px;
+            height: 100px;
+            line-height: 87px;
+        }
+    }
+    section {
+        margin: 0 16px;
+        &#myInfo {
+            display: block;
+            form {
+                width: 100%;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+
+            }
+        }
+        &#myRides {
+            display: none;
+        }
+        &#mySubscribedRides {
+            display: none;
+        }
+    }
+}
 
 /*============== footer ================ */
 
@@ -538,4 +593,34 @@ footer {
         height: 7vh;
         }
     }
+
+    /*============= profile =================*/
+    #profilePage {
+        display: flex;
+        aside {
+            padding-top: 30px;
+            width: 20%;
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: center;
+            .particle {
+                margin: 30px auto;
+                width: 180px;
+                height: 180px;
+                line-height: 164px;
+                font-size: 62px;
+            }
+            #profileBtn {
+                width: 100%;
+                margin-top: 30px;
+                align-items: flex-end;
+                button {
+                    width: 80%;
+                    text-align: left;
+                    margin-right: 0;
+                    border-radius: 10px 0 0 10px;
+                }
+            }
+        }
+    }    
 }

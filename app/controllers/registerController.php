@@ -60,8 +60,7 @@ class RegisterController {
                         ->setPassword($password)
                         ->setPseudo($pseudo)
                         ->setName($name)
-                        ->setFirstname($firstname)
-                        ->setIsAdmin(0);
+                        ->setFirstname($firstname);
                     
                     $result = $user->create();
 

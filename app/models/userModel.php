@@ -17,12 +17,14 @@ class UserModel extends Model {
         $this->table = '_user';
     }
     
-    public function setSession($idUser, $email, $pseudo, $isAdmin) {
+    public function setSession($idUser, $email, $pseudo, $name, $firstname, $isAdmin) {
 
         $_SESSION['user'] = [
             'idUser' => $idUser,
             'email' => $email,
             'pseudo' => $pseudo,
+            'name' => $name,
+            'firstname' => $firstname,
             'isAdmin' => $isAdmin
         ];
     }
@@ -39,7 +41,7 @@ class UserModel extends Model {
             $passwordDb = $user->password;
 
             if (password_verify(trim($password), trim($passwordDb))) {
-                $this->setSession($idUser = $user->idUser, $email, $pseudo = $user->pseudo, $isAdmin = $user->isAdmin);
+                $this->setSession($idUser = $user->idUser, $email, $pseudo = $user->pseudo, $name = $user->name, $firstname = $user->firstname, $isAdmin = $user->isAdmin);
                 return true;
             }
             else return false;

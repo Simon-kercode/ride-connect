@@ -43,8 +43,9 @@ use app\controllers\rideDetailsController;
                     if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                         $route->inscription();
                     }
-                    else 
-                    $route->index();
+                    else {
+                        $route->index();
+                    } 
                     break;
 
                 case 'connexion':
@@ -52,8 +53,9 @@ use app\controllers\rideDetailsController;
                     if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                         $route->userLogin();
                     }
-                    else
-                    $route->index();
+                    else {
+                        $route->index();
+                    } 
                     break;
 
                 case 'logout':
@@ -61,9 +63,15 @@ use app\controllers\rideDetailsController;
                     $route->userLogout();
                     break;
                 
-                case 'profile':
-                    $route = new ProfileController;
-                    $route->index();
+                case 'profil':
+                    if (isset($_SESSION['user']) && !empty($_SESSION['user'])) {
+                        $route = new ProfileController;
+                        $route->index();
+                    }
+                    else {
+                        $route = new HomeController;
+                        $route->index();
+                    }
                     break;
 
                 case 'balades':
@@ -105,18 +113,6 @@ use app\controllers\rideDetailsController;
                         }
                     }
                     break;   
-
-                case 'details':
-                    if(isset($params[1])) {
-                        $route = new RideDetailsController;
-                        $route->index();
-                    }
-                    else {
-                        // METTRE UNE PAGE 404 !!!!!!!!!!!!!!!!!!!!!!!!!
-                        $route = new RidesController;
-                        $route->index();
-                    }
-                    break;
                 
             }       
         }

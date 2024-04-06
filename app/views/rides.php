@@ -41,7 +41,7 @@
                         }
                         ?>
                     </p>
-                    <p><?= $ride->difficulty ?></p>
+                    <p><?= ucfirst($ride->difficulty) ?></p>
                 </div>
             </article> 
             <?php } ?>

@@ -26,7 +26,7 @@ class UserController {
                     $result = $user->login($email, $password);
                     
                     if ($result == true) {
-                        header('Location: profile');
+                        header('Location: profil');
                         exit;
                     }
                     elseif ($result == false) {

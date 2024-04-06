@@ -35,7 +35,7 @@
                 <li><a href="#">A propos</a></li>
                 <li><a href="#">Contact</a></li>
                 <?php if (isset($_SESSION['user']) && !empty($_SESSION['user']['idUser'])) : ?>
-                    <li><a href="profile" id="profileLink">
+                    <li><a href="profil" id="profileLink">
                         <img src="public/images/icons/user.svg" alt="icone de profil">
                         <?= $_SESSION['user']['pseudo'] ?>
                     </a></li>

@@ -80,6 +80,7 @@ class Model extends DbConnector {
         $result = $this->request('SELECT * FROM '.$this->table.' WHERE '.$fieldsList, $values)->fetchAll();
         return $result;
     }
+    
     public function findAndOrder(array $columns, array $params, $operator, $order, $way) {
         $orberBy = '';
 
