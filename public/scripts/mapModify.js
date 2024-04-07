@@ -55,11 +55,10 @@ document.querySelector('#modifyForm').addEventListener('submit', async function(
     
     document.getElementById('modifyForm').submit();
 })
-
-let routeLayer = null;
-let startPointMarker = null;
-let routeInfos = null;
 let waypoints = [];
+let routeLayer = null;
+let routeInfos = null;
+let startPointMarker = null;
 
 document.getElementById('startPointModify').addEventListener('change', function(){
     updateStartPoint();
@@ -67,17 +66,12 @@ document.getElementById('startPointModify').addEventListener('change', function(
 
 function updateWaypoints() {
     waypoints = drawnItems.getLayers().map(layer => layer.getLatLng());
-
     createRoute(waypoints);
 }
 
 function createRoute(waypoints) {
     if (waypoints.length < 2 && routeLayer !== null) {
         map.removeLayer(routeLayer);
-    }
-    
-    if (startPointMarker !== null) {
-        waypoints.unshift(startPointMarker._latlng);
     }
 
     if (waypoints.length >= 2) {
@@ -102,15 +96,15 @@ function createRoute(waypoints) {
                     map.removeLayer(routeLayer);
                 }
 
-                routeLayer = L.geoJSON(data).addTo(map)
-                map.fitBounds(routeLayer.getBounds())
+                routeLayer = L.geoJSON(data).addTo(map);
+                map.fitBounds(routeLayer.getBounds());
 
                 let route = data.features[0].properties;
 
                 routeInfos = {
-                    distance : route.summary.distance, //km;
-                    duration : route.summary.duration/60 //minutes;
-                }
+                    distance : route.summary.distance, //km
+                    duration : route.summary.duration/60 //minutes
+                };
 
             })
             .catch(error => console.error(error));
@@ -119,45 +113,60 @@ function createRoute(waypoints) {
 }
 
 function displayInitial(initialWaypoints) {
-    // waypoints = initialWaypoints.map(waypoint => [waypoint.lng, waypoint.lat]);
     
     initialWaypoints.forEach(waypoint => {
-        let marker = L.marker([waypoint.lat, waypoint.lng], {draggable: true});
-        drawnItems.addLayer(marker);
+        if (initialWaypoints.indexOf() === 0) {
+            startPointMarker = L.marker(initialWaypoints[0].lat, initialWaypoints[0].lng);
+            // drawnItems.addLayer(startPointMarker);
+        }
+        else {
+            let marker = L.marker([waypoint.lat, waypoint.lng], {draggable: true});
+            drawnItems.addLayer(marker);
+        }
     })
+    
+
     updateWaypoints();  
 }
 
-function updateStartPoint() {
+async function updateStartPoint() {
     // get the starting point
     let startPoint = document.getElementById('startPointModify').value;
 
+    if (startPointMarker == null) {
+    startPointMarker = L.marker([waypoints[0].lat, waypoints[0].lng]);
+    }
     // check if the starting point is not empty
     if (startPoint !== "") {
         // clear previous startPoint marker
         if (startPointMarker !== null) {
-            map.removeLayer(startPointMarker);
+            drawnItems.removeLayer(startPointMarker);
         }
 
         // Request nominatim API with the town name
         let url = 'https://nominatim.openstreetmap.org/search?format=json&q=' + startPoint;
 
         // Fetch town coordinates
-        fetch(url)
-        .then(response => 
-          
-                response.json()
-            )
+        await fetch(url)
+            .then(response => response.json())
             .then(data => {
                 let lat = data[0].lat;
                 let lon = data[0].lon;
 
                 // Add new startPoint marker to the map
-                startPointMarker = L.marker([lat, lon]).addTo(map);
+                startPointMarker = L.marker([lat, lon], {draggable: true});
+                // drawnItems.addLayer(startPointMarker);
 
                 // Set the view of the map to the startPoint
                 map.setView([lat, lon], 9);
-                createRoute();
+
+                if (startPointMarker !== null && waypoints.length > 0) {
+                    let newLatLng = startPointMarker.getLatLng();
+                    waypoints[0].lat = newLatLng.lat;
+                    waypoints[0].lng = newLatLng.lng;
+                    createRoute(waypoints);
+                }
+                
             })
             .catch(error => {
                 console.error(error);

@@ -222,6 +222,17 @@ class Model extends DbConnector {
         $result = $this->request($sql, $values);
         return $result;
     }
+    public function updateBalade(array $params) {
+
+
+        $values = [];
+            foreach($params as $param => $value) {
+                $values[] = $params[$param];
+            }
+        
+        $result = $this->request($sql, $values);
+        return $result;
+    }
     // method to create an item 
     public function create(){
         $fields = [];
@@ -244,11 +255,11 @@ class Model extends DbConnector {
     }
 
     // method to update an item
-    public function update(int $id, Model $model) {
+    public function update(string $idColumn, int $id) {
         $fields = [];
         $values = [];
 
-        foreach($model as $field => $value) {
+        foreach($this as $field => $value) {
             if($value !== null && $field != 'db' && $field != 'table') {
                 $fields[] = "$field = ?";
                 $values[] = $value;
@@ -260,7 +271,8 @@ class Model extends DbConnector {
         // transforming array into string
         $fieldsList = implode(', ', $fields);
 
-        $result = $this->request('UPDATE '.$this->table.' SET '. $fieldsList.' WHERE id = ?', $values);
+        $result = $this->request('UPDATE '.$this->table.' SET '. $fieldsList.' WHERE '.$idColumn.' = ?', $values);
+        return $result;
     }
 
     // method to delete an item

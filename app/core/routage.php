@@ -78,10 +78,12 @@ use app\controllers\modifyController;
                 case 'balades':
                     if(isset($params[2]) && $params[2] === 'modifier') {
                         if (isset($_SESSION['user']) && !empty($_SESSION['user'])) {
-                            $route = new RideDetailsController;
+                            $route = new ModifyController;
                             if ($route->getRide()->idUser == $_SESSION['user']['idUser']) {
-                                $route = new ModifyController;
                                 $route->index();
+                                if($_SERVER['REQUEST_METHOD'] == 'POST') {
+                                    $route->updateRide();
+                                }
                             }  
                             else {
                                 $route = new RidesController;

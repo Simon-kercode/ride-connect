@@ -3,7 +3,7 @@
 <main id="modifyPage" class="container">
     <h1>Modifier ma balade</h1>
     <?php var_dump($ride); ?>
-    <form action="organiser" method="POST" id="modifyForm">
+    <form  method="POST" id="modifyForm">
         <div>
             <label for="title">Donne un petit titre sympa *</label>
             <input name="title" type="text" placeholder="ex: Visite aux anciens de Béganne" value="<?= $ride->title?>">
@@ -48,7 +48,7 @@
         <div hidden>
             <input type="text" name="pointsInfos" id="pointsInfosModify">
             <input type="text" name="routeInfos" id="routeInfosModify">
-            <input type="text" name="waypoints" id="waypointsModify" <?= $ride->waypoints ?>>
+            <input type="text" name="waypoints" id="waypointsModify" value="<?= $ride->waypoints ?>">
         </div>
         <p>* : Champs obligatoires</p>
         <input type="submit" value="Enregistrer">
