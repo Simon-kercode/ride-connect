@@ -1,4 +1,4 @@
-let map = L.map('map').setView([46.6035, 1.888334], 6);
+let map = L.map('mapModify').setView([46.6035, 1.888334], 6);
 
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     attribution: '© OpenStreetMap contributors'
@@ -22,29 +22,28 @@ let drawControl = new L.Control.Draw({
 });
 map.addControl(drawControl);
 
-let startPointMarker = null;
-let routeLayer = null;
-let routeInfos = null;
-let waypoints = [];
-
-// update start point position when user change the start point value
-document.getElementById('startPoint').addEventListener('change', function(){
-    updateStartPoint();
-});
-
-// draw itinerary
+// Event listeners :
+// marker added
 map.on('draw:created', function (e) {
     let layer = e.layer;
     drawnItems.addLayer(layer);
-    createRoute();
+    updateWaypoints();
+});
+// marker moved
+map.on('draw:edited', function (e) {
+    updateWaypoints();
+});
+// marker deleted
+map.on('draw:deleted', function (e) {
+    updateWaypoints();
 });
 
-document.querySelector('#orgaForm').addEventListener('submit', async function(event) {
+document.querySelector('#modifyForm').addEventListener('submit', async function(event) {
     event.preventDefault();
 
-    let pointsInfosInput = document.querySelector('#pointsInfos');
-    let routeInfosInput = document.querySelector('#routeInfos');
-    let waypointsInput = document.querySelector('#waypoints');
+    let pointsInfosInput = document.querySelector('#pointsInfosModify');
+    let routeInfosInput = document.querySelector('#routeInfosModify');
+    let waypointsInput = document.querySelector('#waypointsModify');
 
     // getting infos points
     let pointsInfos = await getPointsInfos(waypoints);
@@ -54,19 +53,32 @@ document.querySelector('#orgaForm').addEventListener('submit', async function(ev
     routeInfosInput.value = JSON.stringify(routeInfos);
     waypointsInput.value = JSON.stringify(waypoints);
     
-    document.getElementById('orgaForm').submit();
+    document.getElementById('modifyForm').submit();
 })
 
-// function to draw itinerary between each marker and add it on the map.
-function createRoute() {
-     // Get markers coordinates
+let routeLayer = null;
+let startPointMarker = null;
+let routeInfos = null;
+let waypoints = [];
+
+document.getElementById('startPointModify').addEventListener('change', function(){
+    updateStartPoint();
+});
+
+function updateWaypoints() {
     waypoints = drawnItems.getLayers().map(layer => layer.getLatLng());
-    // console.log(waypoints);
+
+    createRoute(waypoints);
+}
+
+function createRoute(waypoints) {
+    if (waypoints.length < 2 && routeLayer !== null) {
+        map.removeLayer(routeLayer);
+    }
     
     if (startPointMarker !== null) {
         waypoints.unshift(startPointMarker._latlng);
     }
-    console.log(waypoints);
 
     if (waypoints.length >= 2) {
         // Use OpenRouteService to get the route
@@ -84,29 +96,41 @@ function createRoute() {
                 "units": "km"
             }),
         })
-        .then(response => response.json())
+            .then(response => response.json())
+            .then(data => {
+                if(routeLayer !== null) {
+                    map.removeLayer(routeLayer);
+                }
 
-        .then(data => {
-            // deleting previous itinerary if a marker position is modified
-            if (routeLayer !== null) {
-                map.removeLayer(routeLayer);
-            }
+                routeLayer = L.geoJSON(data).addTo(map)
+                map.fitBounds(routeLayer.getBounds())
 
-            routeLayer = L.geoJSON(data).addTo(map);
-            let route = data.features[0].properties;
+                let route = data.features[0].properties;
 
-            routeInfos = {
-                distance : route.summary.distance, //km;
-                duration : route.summary.duration/60 //minutes;
-            }
-        })
-        .catch(error => console.error(error));
+                routeInfos = {
+                    distance : route.summary.distance, //km;
+                    duration : route.summary.duration/60 //minutes;
+                }
+
+            })
+            .catch(error => console.error(error));
+ 
     }
+}
+
+function displayInitial(initialWaypoints) {
+    // waypoints = initialWaypoints.map(waypoint => [waypoint.lng, waypoint.lat]);
+    
+    initialWaypoints.forEach(waypoint => {
+        let marker = L.marker([waypoint.lat, waypoint.lng], {draggable: true});
+        drawnItems.addLayer(marker);
+    })
+    updateWaypoints();  
 }
 
 function updateStartPoint() {
     // get the starting point
-    let startPoint = document.getElementById('startPoint').value;
+    let startPoint = document.getElementById('startPointModify').value;
 
     // check if the starting point is not empty
     if (startPoint !== "") {
@@ -176,24 +200,4 @@ async function getPointsInfos(waypoints) {
     }
 
     return pointsInfos;
-}
-
-
-async function serverSubmit(data) {
-
-    try {
-        let response = await fetch('baladeSubmit', {
-            method: 'POST',
-            headers: {
-                'Content-type': 'application/json',
-            },
-            body: JSON.stringify(data),
-        });
-        console.log(response);
-        let responseData = await response.json();
-        console.log(responseData);
-    }
-    catch(error) {
-        console.error("Erreur lors de l'envoi des données :",error);
-    }
 }

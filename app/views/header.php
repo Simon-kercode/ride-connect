@@ -17,8 +17,11 @@
     <?php if ($_SERVER['REQUEST_URI'] === '/ride-connect/organiser') { ?>
     <script type="text/javascript" src="public/scripts/mapOrga.js" defer></script>
     <?php } 
-    elseif (strpos($_SERVER['REQUEST_URI'], '/ride-connect/balades/') !== false) {?>
+    elseif ($_SERVER['REQUEST_URI'] === '/ride-connect/balades/'.$ride->idBalade) {?>
     <script type="text/javascript" src="public/scripts/mapDetails.js" defer></script>
+    <?php } 
+    elseif ($_SERVER['REQUEST_URI'] === '/ride-connect/balades/'.$ride->idBalade.'/modifier') {?>
+        <script type="text/javascript" src="public/scripts/mapModify.js" defer></script>
     <?php } ?>
     <title><?= $title ?></title>
 </head>

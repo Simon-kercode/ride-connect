@@ -400,6 +400,11 @@ header #menuLinks #profileLink img {
   width: 46%;
 }
 
+/*============== modify ================ */
+#modifyPage #mapModify {
+  height: 400px;
+}
+
 /*============== profile =============== */
 #profilePage aside {
   display: flex;
