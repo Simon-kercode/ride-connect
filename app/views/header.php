@@ -17,10 +17,10 @@
     <?php if ($_SERVER['REQUEST_URI'] === '/ride-connect/organiser') { ?>
     <script type="text/javascript" src="public/scripts/mapOrga.js" defer></script>
     <?php } 
-    elseif ($_SERVER['REQUEST_URI'] === '/ride-connect/balades/'.$ride->idBalade) {?>
+    elseif (isset($ride->idBalade) && $_SERVER['REQUEST_URI'] === '/ride-connect/balades/'.$ride->idBalade) {?>
     <script type="text/javascript" src="public/scripts/mapDetails.js" defer></script>
     <?php } 
-    elseif ($_SERVER['REQUEST_URI'] === '/ride-connect/balades/'.$ride->idBalade.'/modifier') {?>
+    elseif (isset($ride->idBalade) && $_SERVER['REQUEST_URI'] === '/ride-connect/balades/'.$ride->idBalade.'/modifier') {?>
         <script type="text/javascript" src="public/scripts/mapModify.js" defer></script>
     <?php } ?>
     <title><?= $title ?></title>
@@ -42,6 +42,9 @@
                         <img src="public/images/icons/user.svg" alt="icone de profil">
                         <?= $_SESSION['user']['pseudo'] ?>
                     </a></li>
+                    <?php if ($_SESSION['user']['isAdmin'] === 1) : ?>
+                        <li><a class="button" href="administration">Administration</a></li>
+                    <?php endif; ?>
                     <li><a class="button" href="logout">Déconnexion</a></li>
                 <?php else : ?>
                     <li><a class="button" href="connexion">Connexion</a></li>

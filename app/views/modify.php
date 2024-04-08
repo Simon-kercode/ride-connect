@@ -2,8 +2,7 @@
 
 <main id="modifyPage" class="container">
     <h1>Modifier ma balade</h1>
-    <?php var_dump($ride); ?>
-    <form  method="POST" id="modifyForm">
+    <form action='balades/<?=$ride->idBalade ?>/modifier' method="POST" id="modifyForm">
         <div>
             <label for="title">Donne un petit titre sympa *</label>
             <input name="title" type="text" placeholder="ex: Visite aux anciens de Béganne" value="<?= $ride->title?>">

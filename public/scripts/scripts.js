@@ -163,10 +163,11 @@ function displayInput() {
     ];
     
     // display corresponding input and hide the btn
-    for (let i = 0; i < btns.length; i++) {
-        btns[i].addEventListener('click', function() {
-            if (inputs[i].style.display === 'none') {
-                inputs[i].style.display = 'block';
+    for (let i = 0; i < btns.length; i++) {   
+        btns[i].addEventListener('click', function(event) {
+            event.preventDefault();
+            if (inputs[i].classList.contains('hiddenInput')) {
+                inputs[i].classList.remove('hiddenInput');
                 btns[i].style.display = 'none';
             }
         });
@@ -176,11 +177,11 @@ function displayInput() {
     // on reset button, display all buttons, delete inputs values and hid it
     resetBtn.addEventListener('click', function() {
         inputs.forEach(input => {
-            if (input.value !== null) {
-                input.value = null;
+            if (input.value !== "") {
+                input.value = "";
             }
-            if (input.style.display !== 'none') {
-                input.style.display = 'none';
+            if (!input.classList.contains('hiddenInput')) {
+                input.classList.add('hiddenInput');
             }
         });
         btns.forEach(btn => {
@@ -190,7 +191,6 @@ function displayInput() {
         });
     });
 }
-
 
 function displayError(inputElement, errorMessage) {
     // Create p element to display the error message

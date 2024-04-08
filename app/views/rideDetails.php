@@ -37,6 +37,7 @@
         <p>Inscrits : <?= $partQuantity ?>/<?= $ride->partNumber ?></p>
         <div id="preciGPS">
             <p><?= $ride->precisions ?></p>
+            <!-- !!!!!!!!!!!!!! a caché si non inscrit!!!!!!!!!!!!!!!! -->
             <div id="gps"></div>
         </div>
     </div>

@@ -42,7 +42,6 @@ class ModifyController extends RideModel {
                 $waypoints = $_POST['waypoints'];
                 $idUser = $_SESSION['user']['idUser'];
 
-
                     if ($title !== $initialRide->title) {
                         $ride->setTitle($title);
                     }
@@ -92,27 +91,30 @@ class ModifyController extends RideModel {
                         if ($result) {
                             $title = 'Profil - Ride Connect';
                             $_SESSION['message'] = "Ta balade a bien été modifiée !";
-                            include ROOT.'/app/views/profile.php';
-                            unset($_SESSION['message']);
+                            header('Location: /ride-connect/profil');
+                            
+                            exit;
                         }
                         else {
-                            $this->getRide();
-                            $title = $title= $ride->title.' - Ride Connect';
+                            $ride = $this->getRide();
+                            $title = $ride->title.' - Ride Connect';
                             $error = "Une erreur est survenue. Merci de réessayer plus tard.";
                             include ROOT.'/app/views/modify.php';
+                            exit;
                         }
                     }
                     else {
-                        $this->getRide();
+                        $ride = $this->getRide();
                         $error = "Une erreur est survenue. Merci de réessayer plus tard.";
-                        $title = $title= $ride->title.' - Ride Connect';
+                        $title = $ride->title.' - Ride Connect';
                         include ROOT.'/app/views/modify.php';
+                        exit;
                     }
             }
             else {
-                $this->getRide();
+                $ride = $this->getRide();
                 $error = "Veuillez remplir tous les champs requis";
-                $title = $title= $ride->title.' - Ride Connect';
+                $title = $ride->title.' - Ride Connect';
                 include ROOT.'/app/views/modify.php';
             }
 

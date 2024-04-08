@@ -29,6 +29,16 @@ class UserModel extends Model {
         ];
     }
 
+    public function isInitialized() {
+        $objectAttributes = get_object_vars($this);
+        foreach($objectAttributes as $attribute => $value) {
+            if(!empty($value)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     public function login(string $email, string $password) {
         $db = DbConnector::getInstance();
         var_dump($db);

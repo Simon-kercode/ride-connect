@@ -9,6 +9,7 @@ use app\controllers\ridesController;
 use app\controllers\orgaController;
 use app\controllers\rideDetailsController;
 use app\controllers\modifyController;
+use app\controllers\adminController;
 
     class Routage {
         public function start() {
@@ -67,23 +68,32 @@ use app\controllers\modifyController;
                 case 'profil':
                     if (isset($_SESSION['user']) && !empty($_SESSION['user'])) {
                         $route = new ProfileController;
-                        $route->index();
+                        if($_SERVER['REQUEST_METHOD'] == 'POST') {
+                            $route->updateInfos();
+                        }
+                        else {
+                            $route->index();
+                        }
                     }
                     else {
                         $route = new HomeController;
+                        $_SESSION['message'] = "Vous devez vous connecter pour accéder à votre profil";
                         $route->index();
                     }
                     break;
-
+                case 'delete': 
+                    $route = new ProfileController;
+                    $route->rideDelete();
+                    $route->index();
                 case 'balades':
                     if(isset($params[2]) && $params[2] === 'modifier') {
                         if (isset($_SESSION['user']) && !empty($_SESSION['user'])) {
                             $route = new ModifyController;
-                            if ($route->getRide()->idUser == $_SESSION['user']['idUser']) {
-                                $route->index();
-                                if($_SERVER['REQUEST_METHOD'] == 'POST') {
+                            if($_SERVER['REQUEST_METHOD'] == 'POST') {
                                     $route->updateRide();
                                 }
+                            elseif ($route->getRide()->idUser == $_SESSION['user']['idUser']) {
+                                $route->index();
                             }  
                             else {
                                 $route = new RidesController;
@@ -96,13 +106,11 @@ use app\controllers\modifyController;
                             $_SESSION['message'] = "Vous devez vous connecter pour modifier cette balade.";
                             $route->index();
                         }
-                        
                     }
                     elseif (isset($params[2]) && $params[2] === 'participer') {
                         if(isset($_SESSION['user']) && !empty($_SESSION['user'])) {
                             $route = new RideDetailsController;
-                            $_SESSION['message'] = "Vous êtes bien inscrit à cette balade ! Retrouvez y les détails sur votre profil.";
-                            $route->index();
+                            $route->addParticipant();
                         }
                         else {
                             $route = new RideDetailsController;
@@ -135,8 +143,19 @@ use app\controllers\modifyController;
                             $route->index();
                         }
                     }
-                    break;   
-                
+                    break;
+
+                    case 'administration': 
+                        if(isset($_SESSION['user']) && !empty($_SESSION['user']) && $_SESSION['user']['isAdmin'] === 1) {
+                            $route = new AdminController;
+                            $route->index();
+                        }
+                        else {
+                            $_SESSION['message'] = "Vous n'avez pas l'autorisation d'accéder à cette partie du site.";
+                            $route = new HomeController;
+                            $route->index();
+                        }
+                        break;
             }       
         }
     }

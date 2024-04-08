@@ -276,7 +276,7 @@ class Model extends DbConnector {
     }
 
     // method to delete an item
-    public function delete(int $id) {
-        $result = $this->request ('DELETE FROM '.$this->$table.' WHERE id = ?', [$id]);
+    public function delete(string $idColumn, int $id) {
+        $result = $this->request ('DELETE FROM '.$this->$table.' WHERE '.$idColumn.' = ?', [$id]);
     }
 }
