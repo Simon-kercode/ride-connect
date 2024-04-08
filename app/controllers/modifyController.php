@@ -7,7 +7,7 @@ class ModifyController extends RideModel {
 
     public function index() {
 
-        $ride = $this->getRide();
+        $ride = $this->getRide('modifier', 3);
         $title= $ride->title.' - Ride Connect';
         include ROOT.'/app/views/modify.php';
     }
@@ -19,7 +19,7 @@ class ModifyController extends RideModel {
              !empty($_POST['title']) && !empty($_POST['date']) && !empty($_POST['time']) && !empty($_POST['startPoint']) && !empty($_POST['meetingPoint']) && !empty($_POST['difficulty']) && !empty($_POST['pointsInfos']) && !empty($_POST['routeInfos']) && !empty($_POST['waypoints'])) {
 
                 $ride = new RideModel;
-                $initialRide = $ride->getRide();
+                $initialRide = $ride->getRide('modifier', 3);
 
                 $decodedRouteInfos = json_decode($_POST['routeInfos']);
                 $decodedPointsInfos = json_decode($_POST['pointsInfos']);
@@ -96,7 +96,7 @@ class ModifyController extends RideModel {
                             exit;
                         }
                         else {
-                            $ride = $this->getRide();
+                            $ride = $this->getRide('modifier', 3);
                             $title = $ride->title.' - Ride Connect';
                             $error = "Une erreur est survenue. Merci de réessayer plus tard.";
                             include ROOT.'/app/views/modify.php';
@@ -104,7 +104,7 @@ class ModifyController extends RideModel {
                         }
                     }
                     else {
-                        $ride = $this->getRide();
+                        $ride = $this->getRide('modifier', 3);
                         $error = "Une erreur est survenue. Merci de réessayer plus tard.";
                         $title = $ride->title.' - Ride Connect';
                         include ROOT.'/app/views/modify.php';
@@ -112,7 +112,7 @@ class ModifyController extends RideModel {
                     }
             }
             else {
-                $ride = $this->getRide();
+                $ride = $this->getRide('modifier', 3);
                 $error = "Veuillez remplir tous les champs requis";
                 $title = $ride->title.' - Ride Connect';
                 include ROOT.'/app/views/modify.php';

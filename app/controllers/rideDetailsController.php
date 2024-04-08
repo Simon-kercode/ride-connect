@@ -11,7 +11,7 @@ class RideDetailsController extends RideModel{
         
         $rideModel = new RideModel;
         // get ride's attributes
-        $ride = $this->getRide();
+        $ride = $this->getRide('', 3);
 
         // get ride's creator
         $params = ['idBalade' => $ride->idBalade];
@@ -29,14 +29,17 @@ class RideDetailsController extends RideModel{
     }
 
     public function addParticipant() {
+        $rideModel = new RideModel;
+        $ride = $this->getRide('', 3);
+
         $participantModel = new ParticipantModel;
-        $result = $participantModel->createParticipant(['idUser'=>$_SESSION['idUser'], 'idBalade'=>$ride->idBalade]);
+        $result = $participantModel->createParticipant(['idUser'=>$_SESSION['user']['idUser'], 'idBalade'=>$ride->idBalade]);
         
         if (isset($result)) {
             if($result) {
                 $_SESSION['message'] = "Vous êtes bien inscrit à cette balade ! Retrouvez y les détails sur votre profil.";
                 $title = $ride->title.' - Ride Connect';
-                include ROOT.'/app/views/rideDetails.php';
+                header('Location: /ride-connect/balades/'.$ride->idBalade);
             }
             else {
                 $_SESSION['message'] = "Une erreur est survenue. Veuillez réessayer plus tard.";

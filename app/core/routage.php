@@ -68,7 +68,10 @@ use app\controllers\adminController;
                 case 'profil':
                     if (isset($_SESSION['user']) && !empty($_SESSION['user'])) {
                         $route = new ProfileController;
-                        if($_SERVER['REQUEST_METHOD'] == 'POST') {
+                        if(isset($params[1]) && $params[1] === 'supprimer' && isset($params[2]) && ctype_digit($params[2])) {
+                            $route->rideDelete();
+                        }    
+                        elseif($_SERVER['REQUEST_METHOD'] == 'POST') {
                             $route->updateInfos();
                         }
                         else {
@@ -81,10 +84,7 @@ use app\controllers\adminController;
                         $route->index();
                     }
                     break;
-                case 'delete': 
-                    $route = new ProfileController;
-                    $route->rideDelete();
-                    $route->index();
+
                 case 'balades':
                     if(isset($params[2]) && $params[2] === 'modifier') {
                         if (isset($_SESSION['user']) && !empty($_SESSION['user'])) {
@@ -92,7 +92,7 @@ use app\controllers\adminController;
                             if($_SERVER['REQUEST_METHOD'] == 'POST') {
                                     $route->updateRide();
                                 }
-                            elseif ($route->getRide()->idUser == $_SESSION['user']['idUser']) {
+                            elseif ($route->getRide('modifier', 3)->idUser == $_SESSION['user']['idUser']) {
                                 $route->index();
                             }  
                             else {

@@ -38,6 +38,13 @@ map.on('draw:created', function (e) {
     drawnItems.addLayer(layer);
     createRoute();
 });
+map.on('draw:edited', function (e) {
+    createRoute();
+});
+// marker deleted
+map.on('draw:deleted', function (e) {
+    createRoute();
+});
 
 document.querySelector('#orgaForm').addEventListener('submit', async function(event) {
     event.preventDefault();
@@ -66,7 +73,11 @@ function createRoute() {
     if (startPointMarker !== null) {
         waypoints.unshift(startPointMarker._latlng);
     }
-    console.log(waypoints);
+
+    // add draggable option to each marker
+    drawnItems.eachLayer(layer => {
+        layer.dragging.enable();
+    });
 
     if (waypoints.length >= 2) {
         // Use OpenRouteService to get the route

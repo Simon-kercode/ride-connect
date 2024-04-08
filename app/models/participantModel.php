@@ -23,6 +23,10 @@ class ParticipantModel extends Model {
         return $result;
     }
 
+    public function deleteAllParticipants(int $idBalade) {
+        return $this->delete('idBalade', $idBalade);
+    }
+
     public function getParticipantsNumber(int $idBalade) {
         $result = $this->findBy(['idBalade' => $idBalade]);
         if($result) {

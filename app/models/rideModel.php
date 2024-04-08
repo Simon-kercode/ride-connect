@@ -57,14 +57,13 @@ class RideModel extends Model {
      * verify if url has 'participer' param
      * get idBalade position in url and use it to make the request
     */
-    public function getRide() {
+    public function getRide(string $action, int $pos) {
         $url = $_SERVER['REQUEST_URI'];
         $explodeURL = explode('/', $url);
-
         $id = end($explodeURL);
-
-        if(strpos($url, 'participer' || 'modifier') !== false) {
-            $id = $explodeURL[3];
+ 
+        if(strpos($url, $action) !== false) {
+            $id = $explodeURL[$pos];
         }
 
         if (isset($id) && !empty($id) && ctype_digit($id)) {

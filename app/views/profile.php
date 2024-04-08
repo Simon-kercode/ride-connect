@@ -70,7 +70,7 @@
         </section>
         <!--================ user's rides ============ -->
         <section id="myRides">
-        <?php if(isset($rides)) {foreach ($rides as $index => $ride) {?>
+        <?php if(isset($rides) && !empty($rides)) {foreach ($rides as $index => $ride) {?>
                 <article>
                     <a href="balades/<?= $ride->idBalade ?>"><h3>
                         <?= $ride->title?>
@@ -102,7 +102,7 @@
                     </div>
                     <div>
                         <a href="balades/<?= $ride->idBalade?>/modifier">Modifier</a>
-                        <a href="delete">Supprimer</a>
+                        <a href="profil/supprimer/<?=$ride->idBalade?>">Supprimer</a>
                     </div>
                 </article> 
                 <?php }} else {?>
@@ -111,7 +111,7 @@
         </section>
         <!-- =============== user's subscribed rides ==============-->
         <section id="mySubscribedRides">
-        <?php if (isset($subscribedRides)) {foreach ($subscribedRides as $index => $subscribedRide) {?>
+        <?php if (isset($subscribedRides) && !empty($subscribedRides)) {foreach ($subscribedRides as $index => $subscribedRide) {?>
                 <article>
                     <a href="balades/<?= $subscribedRide->idBalade ?>"><h3>
                         <?= $subscribedRide->title?>

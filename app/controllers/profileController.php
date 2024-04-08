@@ -4,6 +4,7 @@ namespace app\controllers;
 use app\models\model;
 use app\models\rideModel;
 use app\models\userModel;
+use app\models\participantModel;
 
 class ProfileController extends RideModel {
 
@@ -16,7 +17,14 @@ class ProfileController extends RideModel {
             $params = ['balade.idUser' => $ride->idUser];
             $pseudo = $this->getCreatorPseudo($ride, $params);
         }
+
         $subscribedRides = $this->getMySubscribedRides();
+
+        foreach($subscribedRides as $subscribedRide) {
+            $params = ['balade.idUser' => $subscribedRide->idUser];
+            $pseudo = $this->getCreatorPseudo($subscribedRide, $params);
+        }
+
         include 'app/views/profile.php';
     }
 
@@ -42,9 +50,27 @@ class ProfileController extends RideModel {
 
     public function rideDelete() {
         $rideModel = new RideModel;
+        $ride = $rideModel->getRide('supprimer', 4);
 
-        $result = $this->delete($idBalade);
-        return $result;
+        $participantModel = new ParticipantModel;
+        $participants = $participantModel->deleteAllParticipants($ride->idBalade);
+
+        $result = $rideModel->delete('idBalade', $ride->idBalade);
+        
+        if (isset($result)) {
+            if($result) {
+                $_SESSION['message'] = "La balade a bien été supprimée.";
+                $title = 'Profil - Ride Connect';
+                header('Location: profil');
+                exit;
+            }
+        }
+        else {
+            $_SESSION['message'] = "Une erreur est survenue. Veuillez réessayer plus tard.";
+            $title = 'Profil - Ride Connect';
+            include ROOT.'/app/views/profile.php';
+            exit;
+        }
     }
 
     public function updateInfos() {
