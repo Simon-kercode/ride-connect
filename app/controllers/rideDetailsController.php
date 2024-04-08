@@ -33,6 +33,7 @@ class RideDetailsController extends RideModel{
         $ride = $this->getRide('', 3);
 
         $participantModel = new ParticipantModel;
+        
         $result = $participantModel->createParticipant(['idUser'=>$_SESSION['user']['idUser'], 'idBalade'=>$ride->idBalade]);
         
         if (isset($result)) {
