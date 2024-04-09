@@ -27,7 +27,7 @@ class ProfileController extends RideModel {
 
         include 'app/views/profile.php';
     }
-
+    
     private function getMyRides() {
         $rideModel = new RideModel;
         $columns = ['idUser', 'idBalade', 'title', 'department', 'date', 'length', 'duration', 'difficulty', 'meetingPoint'];
@@ -61,7 +61,7 @@ class ProfileController extends RideModel {
             if($result) {
                 $_SESSION['message'] = "La balade a bien été supprimée.";
                 $title = 'Profil - Ride Connect';
-                header('Location: profil');
+                header('Location: /ride-connect/profil');
                 exit;
             }
         }
@@ -202,5 +202,26 @@ class ProfileController extends RideModel {
                 }
             }
         }
+    }
+
+    public function accountDelete($idUser) {
+        $userModel = new UserModel;
+        $result = $userModel->delete('idUser', $_SESSION['user']['idUser']);
+        session_destroy();
+        if(isset($result)) {
+            if($result) {
+                $_SESSION['message'] = "Compte supprimé avec succès ! Au revoir.";
+                $title = 'Ride Connect';
+                header('Location: /ride-connect/accueil');
+                exit;
+            }
+            else {
+                $_SESSION['message'] = "Une erreur s'est produit lors de la suppression de votre compte. Veuillez réessayer plus tard.";
+                $title = 'Profil - Ride Connect';
+                include ROOT.'/app/views/profile.php';
+                exit;
+            }
+        }
+
     }
 }

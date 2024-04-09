@@ -17,7 +17,7 @@
     <?php if ($_SERVER['REQUEST_URI'] === '/ride-connect/organiser') { ?>
     <script type="text/javascript" src="public/scripts/mapOrga.js" defer></script>
     <?php } 
-    elseif (isset($ride->idBalade) && $_SERVER['REQUEST_URI'] === '/ride-connect/balades/'.$ride->idBalade) {?>
+    elseif (isset($ride->idBalade) && ($_SERVER['REQUEST_URI'] === '/ride-connect/balades/'.$ride->idBalade || $_SERVER['REQUEST_URI'] === '/ride-connect/balades/'.$ride->idBalade.'/participer')) {?>
     <script type="text/javascript" src="public/scripts/mapDetails.js" defer></script>
     <?php } 
     elseif (isset($ride->idBalade) && $_SERVER['REQUEST_URI'] === '/ride-connect/balades/'.$ride->idBalade.'/modifier') {?>
@@ -36,7 +36,7 @@
             <ul id="menuLinks">
                 <li><a href="balades">Balades</a></li>   
                 <li><a href="#">A propos</a></li>
-                <li><a href="#">Contact</a></li>
+                <li><a href="contact">Contact</a></li>
                 <?php if (isset($_SESSION['user']) && !empty($_SESSION['user']['idUser'])) : ?>
                     <li><a href="profil" id="profileLink">
                         <img src="public/images/icons/user.svg" alt="icone de profil">

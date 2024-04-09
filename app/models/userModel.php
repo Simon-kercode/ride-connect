@@ -41,7 +41,6 @@ class UserModel extends Model {
 
     public function login(string $email, string $password) {
         $db = DbConnector::getInstance();
-        var_dump($db);
         
         if ($db !== null) {
             $user = $this->findOneByOneParam('email', $email);
@@ -83,6 +82,16 @@ class UserModel extends Model {
     public function findOneByMail($email) {
 
         return $this->request('SELECT * FROM `_user` WHERE email = ?', [$email])->fetch();
+    }
+
+    public function findOneByURL($pos) {
+        $url = $_SERVER['REQUEST_URI'];
+        $explodeURL = explode('/', $url);
+        $id = $explodeURL[$pos];
+
+        if (isset($id) && !empty($id) && ctype_digit($id)) {
+            return($this->findOneByOneParam('idUser', $id));
+        }
     }
 
     public function verifyExistingMail($email) {

@@ -66,6 +66,7 @@
                     <input type="submit" value="Enregistrer les modifications">
                     <input type="reset" id="resetBtn" value="Annuler">
                 </div>
+                <div><a href="profil/supprimer">Supprimer mon compte</a></div>
             </form>
         </section>
         <!--================ user's rides ============ -->

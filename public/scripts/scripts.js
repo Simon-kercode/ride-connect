@@ -32,6 +32,10 @@ if (paramIndex('profil') !== -1) {
     displayProfilePart();
     displayInput();
 }
+// ============ script for admin page ==============
+if (paramIndex('administration') !== -1) {
+    displayAdminPart();
+}
 
 
 function formVerification() {
@@ -189,6 +193,23 @@ function displayInput() {
                 btn.style.display = 'block';
             }
         });
+    });
+}
+
+function displayAdminPart() {
+    let usersList = document.querySelector('#usersList');
+    let ridesList = document.querySelector('#ridesList');
+
+    let usersBtn = document.querySelector('#usersBtn');
+    let ridesBtn = document.querySelector('#ridesBtn');
+
+    usersBtn.addEventListener('click', function(){
+        usersList.style.display = 'block';
+        ridesList.style.display = 'none';
+    });
+    ridesBtn.addEventListener('click', function(){
+        usersList.style.display = 'none';
+        ridesList.style.display = 'block';
     });
 }
 

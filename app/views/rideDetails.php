@@ -13,8 +13,8 @@
                 <p><?= $pseudo[0]->pseudo ?></p>
             </div>
             <div>
-                <p>Date : <span class="bold"><?= $ride->date ?></span></p>
-                <p>Départ à : <span class="bold"><?= $ride->time ?></span></p>
+                <p>Date : <span class="bold"><?= date("d/m/Y", strtotime($ride->date)) ?></span></p>
+                <p>Départ à : <span class="bold"><?= substr($ride->time, 0, 5) ?></span></p>
             </div>
         </div>
         <p id="startEnd"><?= $ride->startPoint ?> --> <?= $ride->arrival ?></p>
@@ -37,16 +37,18 @@
         <p>Inscrits : <?= $partQuantity ?>/<?= $ride->partNumber ?></p>
         <div id="preciGPS">
             <p><?= $ride->precisions ?></p>
-            <!-- !!!!!!!!!!!!!! a caché si non inscrit!!!!!!!!!!!!!!!! -->
+            <?php if (isset($participation) && $participation) { ?>
             <div id="gps"></div>
+            <?php } ?>
         </div>
     </div>
     <?php 
-        if (isset($_SESSION['user']) && !empty($_SESSION['user']['idUser']) && ($ride->idUser === $_SESSION['user']['idUser'])) { ?>
+        if (isset($_SESSION['user']) && !empty($_SESSION['user']['idUser']) && ($ride->idUser === $_SESSION['user']['idUser'])) : ?>
         <a class="button" href="balades/<?=$ride->idBalade?>/modifier">Modifier</a>
-    <?php } else {?>
+    <?php 
+        elseif (isset($_SESSION['user']) && !empty($_SESSION['user']['idUser']) && !$participation) :?>
     <a class="button" href="balades/<?=$ride->idBalade?>/participer">Je participe !</a>
-    <?php } ?>
+    <?php endif ?>
     <p class="isConnected"><?php if (isset($_SESSION['message']) && !empty($_SESSION['message'])) {echo $_SESSION['message']; unset($_SESSION['message']);}?></p>
 
 

@@ -24,6 +24,10 @@ class RideDetailsController extends RideModel{
         // get the id of all participants 
         $partList = $participants->getParticipantsList($ride->idBalade);
 
+        if(isset($_SESSION['user']) && !empty($_SESSION['user'])) {
+        $participation = $participants->getParticipation($ride->idBalade, $_SESSION['user']['idUser']);
+        }
+        
         $title= $ride->title.' - Ride Connect';
         include ROOT.'/app/views/rideDetails.php';
     }
@@ -48,5 +52,10 @@ class RideDetailsController extends RideModel{
                 include ROOT.'/app/views/rideDetails.php';
             }
         }
-    }    
+    }
+     public function verifyParticipation($idBalade, $idUser) {
+        $participantModel = new ParticipantModel;
+        $result = $participantModel->getParticipation($idBalade, $idUser);
+        return $result;
+     } 
 }

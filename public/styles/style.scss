@@ -487,6 +487,18 @@ header {
     }
 }
 
+/*============== Admin ================ */
+
+#adminPage {
+    #adminContent {
+        #usersList {
+            display: block;
+        }
+        #ridesList {
+            display: none;
+        }
+    }
+}
 /*============== footer ================ */
 
 footer {

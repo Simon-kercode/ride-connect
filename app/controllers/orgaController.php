@@ -87,8 +87,7 @@ class OrgaController extends RideModel {
                     if ($result) {
                         $title = 'Organiser ma balade - Ride Connect';
                         $_SESSION['message'] = "Ta balade a bien été enregistrée !";
-                        include ROOT.'/app/views/profile.php';
-                        unset($_SESSION['message']);
+                        header('Location: profil');
                     }
                     else {
                         $title = 'Organiser ma balade - Ride Connect';

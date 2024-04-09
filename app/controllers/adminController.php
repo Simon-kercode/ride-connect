@@ -1,10 +1,82 @@
 <?php
 namespace app\controllers;
 
-class AdminController {
+use app\models\model;
+use app\models\userModel;
+use app\models\rideModel;
+use app\models\participantModel;
+
+class AdminController extends RideModel{
     
     public function index() {
+        $users = $this->findAllUsers();
+        $rides = $this->findAllRides();
+
+        foreach($rides as $ride) {
+            $params = ['balade.idUser' => $ride->idUser];
+            $pseudo = $this->getCreatorPseudo($ride, $params);
+        }
+
         $title = 'Administration - Ride Connect';
         include ROOT.'/app/views/admin.php';
+    }
+
+    public function findAllUsers() {
+        $user = new UserModel;
+        return $user->findAll();
+    }
+
+    public function findAllRides() {
+        $ride = new RideModel;
+        $columns = ['idUser', 'idBalade', 'title', 'department', 'date', 'length', 'duration', 'difficulty', 'meetingPoint'];
+        $rides = $ride->findAndOrder($columns, $params = [], "", 'date', 'ASC');
+        return $rides;
+    }
+
+    public function rideDelete() {
+        $rideModel = new RideModel;
+        $ride = $rideModel->getRide('supprimer', 5);
+
+        $participantModel = new ParticipantModel;
+        $participants = $participantModel->deleteAllParticipants($ride->idBalade);
+
+        $result = $rideModel->delete('idBalade', $ride->idBalade);
+        
+        if (isset($result)) {
+            if($result) {
+                $_SESSION['message'] = "La balade a bien été supprimée.";
+                $title = 'Profil - Ride Connect';
+                header('Location: /ride-connect/administration');
+                exit;
+            }
+        }
+        else {
+            $_SESSION['message'] = "Une erreur est survenue. Veuillez réessayer plus tard.";
+            $title = 'Profil - Ride Connect';
+            include ROOT.'/app/views/admin.php';
+            exit;
+        }
+    }
+
+    public function userDelete() {
+        $userModel = new UserModel;
+        $user = $userModel->findOneByURL(5);
+
+        $result = $userModel->delete('idUser', $user->idUser);
+
+        if (isset($result)) {
+            if($result) {
+                $_SESSION['message'] = "L'utilisateur a bien été supprimée.";
+                $title = 'Profil - Ride Connect';
+                header('Location: /ride-connect/administration');
+                exit;
+            }
+        }
+        else {
+            $_SESSION['message'] = "Une erreur est survenue. Veuillez réessayer plus tard.";
+            $title = 'Profil - Ride Connect';
+            include ROOT.'/app/views/admin.php';
+            exit;
+        }
     }
 }

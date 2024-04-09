@@ -34,8 +34,8 @@ class Model extends DbConnector {
     }
 
     public function findAll() {
-        $query= $this->query("SELECT * FROM ".$this->table);
-        return $query->fetchAll();
+        $result = $this->request("SELECT * FROM ".$this->table);
+        return $result->fetchAll();
     }
 
     // method to find one or more parameters of one or more items by none or some criterias
@@ -276,7 +276,7 @@ class Model extends DbConnector {
     }
 
     // method to delete an item
-    public function delete(string $idColumn, int $id) {
+    public function delete(string $idColumn = '', int $id) {
         $result = $this->request ('DELETE FROM '.$this->table.' WHERE '.$idColumn.' = ?', [$id]);
         return $result;
     }
