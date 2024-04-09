@@ -5,12 +5,14 @@ use app\models\model;
 use app\models\userModel;
 use app\models\rideModel;
 use app\models\participantModel;
+use app\models\messageModel;
 
 class AdminController extends RideModel{
     
     public function index() {
         $users = $this->findAllUsers();
         $rides = $this->findAllRides();
+        $messages = $this->findAllMessages();
 
         foreach($rides as $ride) {
             $params = ['balade.idUser' => $ride->idUser];
@@ -32,6 +34,13 @@ class AdminController extends RideModel{
         $rides = $ride->findAndOrder($columns, $params = [], "", 'date', 'ASC');
         return $rides;
     }
+
+    public function findAllMessages() {
+        $message = new MessageModel;
+        return $message->findAll();
+    }
+
+    
 
     public function rideDelete() {
         $rideModel = new RideModel;

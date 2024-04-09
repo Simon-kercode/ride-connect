@@ -15,12 +15,15 @@
     <!-- leaflet draw js -->
     <script src="https://unpkg.com/leaflet-draw/dist/leaflet.draw.js"></script>
     <?php if ($_SERVER['REQUEST_URI'] === '/ride-connect/organiser') { ?>
-    <script type="text/javascript" src="public/scripts/mapOrga.js" defer></script>
+    <!-- script to draw an itinerary in organisation page -->
+        <script type="text/javascript" src="public/scripts/mapOrga.js" defer></script>
     <?php } 
     elseif (isset($ride->idBalade) && ($_SERVER['REQUEST_URI'] === '/ride-connect/balades/'.$ride->idBalade || $_SERVER['REQUEST_URI'] === '/ride-connect/balades/'.$ride->idBalade.'/participer')) {?>
-    <script type="text/javascript" src="public/scripts/mapDetails.js" defer></script>
+    <!-- script to display th ride's itinerary (non modifiable) -->
+        <script type="text/javascript" src="public/scripts/mapDetails.js" defer></script>
     <?php } 
     elseif (isset($ride->idBalade) && $_SERVER['REQUEST_URI'] === '/ride-connect/balades/'.$ride->idBalade.'/modifier') {?>
+    <!-- script to display th ride's itinerary (modifiable) -->
         <script type="text/javascript" src="public/scripts/mapModify.js" defer></script>
     <?php } ?>
     <title><?= $title ?></title>

@@ -3,14 +3,14 @@
         <div id="leftFooter">
             <a href="accueil"><img class="logo" src="public/images/logo-white.webp" alt="logo Ride Connect"></a>
             <div id="ntw">
-                <a href="#"><img src="public/images/icons/facebook.svg" alt="logo facebook"></a>
-                <a href="#"><img src="public/images/icons/instagram.svg" alt="logo instagram"></a>
+                <a href="https://www.facebook.com/" target="blank"><img src="public/images/icons/facebook.svg" alt="logo facebook"></a>
+                <a href="https://www.instagram.com/" target="blank"><img src="public/images/icons/instagram.svg" alt="logo instagram"></a>
             </div>
         </div>
         <div id="rightFooter">
-            <img src="public/images/icons/arrow-up.svg" alt="fleche de remontée d'écran">
+            <a id="scrollTopBtn" href="#"><img src="public/images/icons/arrow-up.svg" alt="fleche de remontée d'écran"></a>
             <ul>
-                <li><a href="#">Contact</a></li>
+                <li><a href="contact">Contact</a></li>
                 <li><a href="#">Confidentialité</a></li>
                 <li><a href="#">Mentions légales</a></li>
             </ul>

@@ -32,13 +32,9 @@ use app\controllers\contactController;
             switch($params[0]) {
                 case '':
                 case '/': 
-                    $route = new HomeController;
-                    $route->index();
-                    break;
-
                 case 'accueil': 
                     $route = new HomeController;
-                    $route->index();
+                    $route->index();    
                     break;
 
                 case 'inscription': 
@@ -180,6 +176,7 @@ use app\controllers\contactController;
                         else {
                             $route->index();
                         }
+                        break;
 
                     case 'administration': 
                         if(isset($_SESSION['user']) && !empty($_SESSION['user']) && $_SESSION['user']['isAdmin'] === 1) {

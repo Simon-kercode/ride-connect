@@ -5,17 +5,31 @@ let menuLinks = document.querySelector('#menuLinks');
 
 closeBurger.style.display = 'none';
 
-burger.addEventListener('click', function() {
+burger.addEventListener('click', function () {
     menuLinks.classList.add('navOn');
     burger.style.display = 'none';
     closeBurger.style.display = 'block';
 })
 
-closeBurger.addEventListener('click', function() {
+closeBurger.addEventListener('click', function () {
     menuLinks.classList.remove('navOn');
     burger.style.display = 'block';
     closeBurger.style.display = 'none';
 })
+
+
+let scrollTopBtn = document.getElementById('scrollTopBtn');
+scrollTopBtn.addEventListener('click', function (e) {
+    e.preventDefault();
+    // scrolling to the top of the page
+    window.scrollTo({
+        top: 0,
+        // scrolling smooth way
+        behavior: 'smooth' 
+    });
+});
+
+
 
 // ============ Script for register Page ===============
 if (paramIndex('inscription') !== -1) {
@@ -41,7 +55,7 @@ if (paramIndex('administration') !== -1) {
 function formVerification() {
     // lock the submit button if checkbox is not checked
     let checkbox = document.querySelector('.checkbox');
-    checkbox.addEventListener('change', function() {
+    checkbox.addEventListener('change', function () {
         let formBtn = document.querySelector('.formBtn');
         if (checkbox.checked) {
             formBtn.disabled = false;
@@ -53,7 +67,7 @@ function formVerification() {
 
     let form = document.querySelector("#registerForm");
     let errorElement = null;
-    form.addEventListener("submit", function(event) {
+    form.addEventListener("submit", function (event) {
 
 
         let emailInput = document.getElementsByName("email")[0];
@@ -65,7 +79,7 @@ function formVerification() {
 
         // clear all errors fields
         let errorElements = document.querySelectorAll(".error");
-        errorElements.forEach(function(element) {
+        errorElements.forEach(function (element) {
             element.remove();
         });
 
@@ -110,7 +124,7 @@ function formVerification() {
 
 // display actual date in the date field
 function dateFormat() {
-    document.addEventListener('DOMContentLoaded', function() {
+    document.addEventListener('DOMContentLoaded', function () {
 
         let dateInput = document.querySelector('#dateInput');
         // get the current Date
@@ -120,7 +134,7 @@ function dateFormat() {
 
         dateInput.value = formattedDate;
     });
-} 
+}
 
 // display the selected profile part
 function displayProfilePart() {
@@ -132,17 +146,17 @@ function displayProfilePart() {
     let myRidesBtn = document.querySelector('#myRidesBtn');
     let mySubscribedRidesBtn = document.querySelector('#mySubscribedRidesBtn');
 
-    myInfoBtn.addEventListener('click', function(){
+    myInfoBtn.addEventListener('click', function () {
         myInfo.style.display = 'block';
         myRides.style.display = 'none';
         mySubscribedRides.style.display = 'none';
     });
-    myRidesBtn.addEventListener('click', function(){
+    myRidesBtn.addEventListener('click', function () {
         myInfo.style.display = 'none';
         myRides.style.display = 'block';
         mySubscribedRides.style.display = 'none';
     });
-    mySubscribedRidesBtn.addEventListener('click', function(){
+    mySubscribedRidesBtn.addEventListener('click', function () {
         myInfo.style.display = 'none';
         myRides.style.display = 'none';
         mySubscribedRides.style.display = 'block';
@@ -151,24 +165,24 @@ function displayProfilePart() {
 
 function displayInput() {
     let inputs = [
-    document.querySelector('#newEmail'),
-    document.querySelector('#newPseudo'),
-    document.querySelector('#newName'),
-    document.querySelector('#newFirstname'),
-    document.querySelector('#inputPasswordUpdate')
+        document.querySelector('#newEmail'),
+        document.querySelector('#newPseudo'),
+        document.querySelector('#newName'),
+        document.querySelector('#newFirstname'),
+        document.querySelector('#inputPasswordUpdate')
     ];
-    
+
     let btns = [
-    document.querySelector('#emailUpdateBtn'),
-    document.querySelector('#pseudoUpdateBtn'),
-    document.querySelector('#nameUpdateBtn'),
-    document.querySelector('#firstnameUpdateBtn'),
-    document.querySelector('#passwordUpdateBtn')
+        document.querySelector('#emailUpdateBtn'),
+        document.querySelector('#pseudoUpdateBtn'),
+        document.querySelector('#nameUpdateBtn'),
+        document.querySelector('#firstnameUpdateBtn'),
+        document.querySelector('#passwordUpdateBtn')
     ];
-    
+
     // display corresponding input and hide the btn
-    for (let i = 0; i < btns.length; i++) {   
-        btns[i].addEventListener('click', function(event) {
+    for (let i = 0; i < btns.length; i++) {
+        btns[i].addEventListener('click', function (event) {
             event.preventDefault();
             if (inputs[i].classList.contains('hiddenInput')) {
                 inputs[i].classList.remove('hiddenInput');
@@ -179,7 +193,7 @@ function displayInput() {
 
     let resetBtn = document.querySelector('#resetBtn');
     // on reset button, display all buttons, delete inputs values and hid it
-    resetBtn.addEventListener('click', function() {
+    resetBtn.addEventListener('click', function () {
         inputs.forEach(input => {
             if (input.value !== "") {
                 input.value = "";
@@ -199,17 +213,26 @@ function displayInput() {
 function displayAdminPart() {
     let usersList = document.querySelector('#usersList');
     let ridesList = document.querySelector('#ridesList');
+    let messagesList = document.querySelector('#messagesList');
 
     let usersBtn = document.querySelector('#usersBtn');
     let ridesBtn = document.querySelector('#ridesBtn');
+    let messagesBtn = document.querySelector('#messagesBtn');
 
-    usersBtn.addEventListener('click', function(){
+    usersBtn.addEventListener('click', function () {
         usersList.style.display = 'block';
         ridesList.style.display = 'none';
+        messagesList.style.display = 'none';
     });
-    ridesBtn.addEventListener('click', function(){
+    ridesBtn.addEventListener('click', function () {
         usersList.style.display = 'none';
         ridesList.style.display = 'block';
+        messagesList.style.display = 'none';
+    });
+    messagesBtn.addEventListener('click', function () {
+        usersList.style.display = 'none';
+        ridesList.style.display = 'none';
+        messagesList.style.display = 'block';
     });
 }
 

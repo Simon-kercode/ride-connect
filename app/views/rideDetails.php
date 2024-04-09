@@ -13,7 +13,9 @@
                 <p><?= $pseudo[0]->pseudo ?></p>
             </div>
             <div>
+                <!-- display date to format dd/mm/yyyy. strtotime transform string into timestamp (int required)-->
                 <p>Date : <span class="bold"><?= date("d/m/Y", strtotime($ride->date)) ?></span></p>
+                <!-- display time without seconds (hh:mm) -->
                 <p>Départ à : <span class="bold"><?= substr($ride->time, 0, 5) ?></span></p>
             </div>
         </div>

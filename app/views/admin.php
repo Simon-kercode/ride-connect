@@ -6,6 +6,7 @@
         <div id="profileBtn">
             <button id="usersBtn">Utilisateurs</button>
             <button id="ridesBtn">Balades</button>
+            <button id="messagesBtn">Messages</button>
             <!-- <button id="mySubscribedRidesBtn">Balades prévues</button> -->
         </div>
     </aside>
@@ -29,7 +30,7 @@
         </section>
         <!-- ================ rides list section ===============-->
         <section id="ridesList">
-            <?php if (isset($rides) && !empty($rides)) { foreach($rides as $index => $ride) : ?>
+            <?php if (isset($rides) && !empty($rides)) : foreach($rides as $index => $ride) : ?>
                 <article>
                     <a href="balades/<?= $ride->idBalade ?>"><h3>
                         <?= $ride->title?>
@@ -62,8 +63,22 @@
                     <div>
                         <a href='administration/supprimer/balade/<?=$ride->idBalade?>'>Supprimer</a>
                     </div>
-            <?php  endforeach; } ?>
+            <?php  endforeach ?>
+            <?php endif ?>
         </section>
+        <!--=================== messages section ============== -->
+        <section id="messagesList">
+         <?php if (isset($messages) && !empty($messages)) : foreach($messages as $message) : ?>
+            <div>
+                <p>Date d'envoi : <?= date('d/m/Y', strtotime($message->sendDate))?></p>
+                <p>Expéditeur : <?= $message->email ?></p>
+                <p>Objet : <?= $message->object ?></p>
+                <p><?= $message->message ?></p>
+                <?php endforeach ?>
+                <?php endif ?>
+            </div>
+        </section>
+    </section>
 </main>
 
 <?php include ROOT.'/app/views/footer.php'; ?>

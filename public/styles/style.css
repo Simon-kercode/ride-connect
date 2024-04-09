@@ -66,6 +66,7 @@ a {
 
 .logo {
   width: 200px;
+  height: -moz-fit-content;
   height: fit-content;
 }
 
@@ -488,6 +489,9 @@ header #menuLinks #profileLink img {
   display: block;
 }
 #adminPage #adminContent #ridesList {
+  display: none;
+}
+#adminPage #adminContent #messagesList {
   display: none;
 }
 
