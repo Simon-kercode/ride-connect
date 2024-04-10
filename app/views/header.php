@@ -14,7 +14,7 @@
     <script type="text/javascript" src="api/scripts/leaflet.js"></script>
     <!-- leaflet draw js -->
     <script src="https://unpkg.com/leaflet-draw/dist/leaflet.draw.js"></script>
-    <?php if ($_SERVER['REQUEST_URI'] === '/ride-connect/organiser') { ?>
+    <?php if ($_SERVER['REQUEST_URI'] === '/ride-connect/balades/organiser') { ?>
     <!-- script to draw an itinerary in organisation page -->
         <script type="text/javascript" src="public/scripts/mapOrga.js" defer></script>
     <?php } 

@@ -7,14 +7,20 @@
             <input type="search" name="rideSearch" placeholder="Recherche par département ou région">
             <input type="submit" value="Rechercher">
         </form>
-        <a id="orgaButton" class="button" href="organiser">Créer ma balade</a>
+        <a id="orgaButton" class="button" href="balades/organiser">Créer ma balade</a>
     </section>
     <p class="isConnected"><?php if (isset($_SESSION['message']) && !empty($_SESSION['message'])) {echo $_SESSION['message']; unset($_SESSION['message']);}?></p>
 
     <section id="rideList">
-        <p>Nous t'avons trouvé <?= count($rides) ?> balades</p>
+        <?php if (isset($rides)) : ?>
+            <p> 
+                <?php if (isset($_POST["rideSearch"]) && !empty($_POST["rideSearch"])) {
+                    echo "Nous t'avons trouvé ".count($rides)." balade".(count($rides) != 1 ? "s" :'');
+                } 
+                ?>
+            </p>
         <div>
-            <?php foreach ($rides as $index => $ride) {?>
+            <?php foreach ($rides as $index => $ride) :?>
             <article>
                 <a href="balades/<?= $ride->idBalade ?>"><h3>
                     <?= $ride->title?>
@@ -44,7 +50,8 @@
                     <p><?= ucfirst($ride->difficulty) ?></p>
                 </div>
             </article> 
-            <?php } ?>
+            <?php endforeach ?>
+            <?php endif ?>
         </div>
     </section>
 </main>

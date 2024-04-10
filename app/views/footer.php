@@ -3,8 +3,8 @@
         <div id="leftFooter">
             <a href="accueil"><img class="logo" src="public/images/logo-white.webp" alt="logo Ride Connect"></a>
             <div id="ntw">
-                <a href="https://www.facebook.com/" target="blank"><img src="public/images/icons/facebook.svg" alt="logo facebook"></a>
-                <a href="https://www.instagram.com/" target="blank"><img src="public/images/icons/instagram.svg" alt="logo instagram"></a>
+                <a href="https://www.facebook.com/" target="blank" rel="nofollow"><img src="public/images/icons/facebook.svg" alt="logo facebook"></a>
+                <a href="https://www.instagram.com/" target="blank" rel="nofollow"><img src="public/images/icons/instagram.svg" alt="logo instagram"></a>
             </div>
         </div>
         <div id="rightFooter">

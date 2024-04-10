@@ -65,8 +65,8 @@ use app\controllers\contactController;
                 case 'profil':
                     if (isset($_SESSION['user']) && !empty($_SESSION['user'])) {
                         $route = new ProfileController;
-                        if(isset($params[1]) && $params[1] === 'supprimer') {
-                            if(isset($params[2]) && ctype_digit($params[2])) {
+                        if (isset($params[1]) && $params[1] === 'supprimer') {
+                            if (isset($params[2]) && ctype_digit($params[2])) {
                                 $route->rideDelete();
                             }
                             else {
@@ -88,61 +88,84 @@ use app\controllers\contactController;
                     break;
 
                 case 'balades':
-                    if(isset($params[1]) && ctype_digit($params[1])) {
-                        $route = new RidesController;
-                        if(!$route->getRide('', 3)) {
-                            $_SESSION['message'] = "Cette balade n'existe pas.";
-                            $route->index();
-                            exit;
-                        }
-                        if(isset($params[2]) && !empty($params[2])){
-                            if($params[2] === 'modifier') {
-                                if (isset($_SESSION['user']) && !empty($_SESSION['user'])) {
-                                    $route = new ModifyController;
-                                    if($_SERVER['REQUEST_METHOD'] == 'POST') {
-                                        $route->updateRide();
+                    if (isset($params[1])) {
+                        if (ctype_digit($params[1])) {
+                            $route = new RidesController;
+                            if(!$route->getRide('', 3)) {
+                                $_SESSION['message'] = "Cette balade n'existe pas.";
+                                $route->index();
+                                exit;
+                            }
+                            if (isset($params[2]) && !empty($params[2])){
+                                if ($params[2] === 'modifier') {
+                                    if (isset($_SESSION['user']) && !empty($_SESSION['user'])) {
+                                        $route = new ModifyController;
+                                        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+                                            $route->updateRide();
+                                        }
+                                        elseif ($route->getRide('modifier', 3)->idUser == $_SESSION['user']['idUser']) {
+                                            $route->index();
+                                        }  
+                                        else {
+                                            $route = new RidesController;
+                                            $_SESSION['message'] = "Vous n'avez pas l'autorisation de modifier cette balade.";
+                                            $route->index();
+                                        }
                                     }
-                                    elseif ($route->getRide('modifier', 3)->idUser == $_SESSION['user']['idUser']) {
-                                        $route->index();
-                                    }  
                                     else {
                                         $route = new RidesController;
-                                        $_SESSION['message'] = "Vous n'avez pas l'autorisation de modifier cette balade.";
+                                        $_SESSION['message'] = "Vous devez vous connecter pour modifier une balade.";
                                         $route->index();
                                     }
                                 }
-                                else {
-                                    $route = new RidesController;
-                                    $_SESSION['message'] = "Vous devez vous connecter pour modifier une balade.";
-                                    $route->index();
-                                }
-                            }
-                            elseif ($params[2] ==='participer') {
-                                if(isset($_SESSION['user']) && !empty($_SESSION['user'])) {
-                                    $route = new RideDetailsController;
-                                    if (!$route->verifyParticipation($params[1], $_SESSION['user']['idUser'])) {
-                                        
-                                        $route->addParticipant();
+                                elseif ($params[2] ==='participer') {
+                                    if(isset($_SESSION['user']) && !empty($_SESSION['user'])) {
+                                        $route = new RideDetailsController;
+                                        if (!$route->verifyParticipation($params[1], $_SESSION['user']['idUser'])) {
+                                            
+                                            $route->addParticipant();
+                                        }
+                                        else {
+                                            $_SESSION['message'] = "Vous êtes déjà inscrit à cette balade !";
+                                            $route = new RideDetailsController;
+                                            $route->index();
+                                        }
                                     }
                                     else {
-                                        $_SESSION['message'] = "Vous êtes déjà inscrit à cette balade !";
                                         $route = new RideDetailsController;
+                                        $_SESSION['message'] = "Vous devez être connecté pour participer à une balade.";
                                         $route->index();
                                     }
                                 }
                                 else {
-                                    $route = new RideDetailsController;
-                                    $_SESSION['message'] = "Vous devez être connecté pour participer à une balade.";
-                                    $route->index();
+                                    //  page 404!!!!!!!!!!!!!!!!
                                 }
                             }
                             else {
-                                //  page 404!!!!!!!!!!!!!!!!
+                                $route = new RideDetailsController;
+                                $route->index();
+                            }
+                        }
+                        elseif($params[1] === 'organiser') {
+                            if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+                                $route = new OrgaController;
+                                $route->createRide();
+                            }
+                            else {
+                                if(isset($_SESSION['user']) && !empty($_SESSION['user'])) {
+                                    $route = new OrgaController;
+                                    $route->index();
+                                }
+                                else {
+                                    $_SESSION['message'] = "Vous devez être connecté pour organiser une balade.";
+                                    $route = new RidesController;
+                                    $route->index();
+                                    
+                                }
                             }
                         }
                         else {
-                            $route = new RideDetailsController;
-                            $route->index();
+                            // page 404 !!!!!!!!!!!!!!!!!!
                         }
                     }
                     else {
@@ -152,21 +175,22 @@ use app\controllers\contactController;
                     break;
 
                     case 'organiser':
-                        $route = new OrgaController;
-                    if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-                        $route->createRide();
-                    }
-                    else {
-                        if(isset($_SESSION['user']) && !empty($_SESSION['user'])) {
-                        $route->index();
+                        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+                            $route = new OrgaController;
+                            $route->createRide();
                         }
                         else {
-                            $_SESSION['message'] = "Vous devez être connecté pour organiser une balade.";
-                            $route = new RidesController;
-                            $route->index();
+                            if(isset($_SESSION['user']) && !empty($_SESSION['user'])) {
+                                $route = new OrgaController;
+                                $route->index();
+                            }
+                            else {
+                                $_SESSION['message'] = "Vous devez être connecté pour organiser une balade.";
+                                $route = new RidesController;
+                                $route->index();
+                            }
                         }
-                    }
-                    break;
+                        break;
 
                     case 'contact':
                         $route = new ContactController;

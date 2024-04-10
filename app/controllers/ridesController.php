@@ -27,6 +27,10 @@ class RidesController extends RideModel {
             if (isset($_POST['rideSearch']) && !empty($_POST['rideSearch'])) {
                 $rides = $this->findAndOrder($columns, ['region' => $_POST['rideSearch'], 'department' => $_POST['rideSearch']], 'OR', 'date', 'ASC');
             }
+            elseif (isset($_POST['rideSearch']) && empty($_POST['rideSearch'])) {
+                $_SESSION['message'] = "Veuillez renseigner un département ou une région.";
+                $rides = $this->findAndOrder($columns, $params = [], "", 'date', 'ASC');
+            }
         }
         // DEFAULT
         else {
