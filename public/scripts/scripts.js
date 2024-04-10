@@ -46,6 +46,7 @@ if (paramIndex('profil') !== -1) {
     displayProfilePart();
     displayInput();
 }
+
 // ============ script for admin page ==============
 if (paramIndex('administration') !== -1) {
     displayAdminPart();

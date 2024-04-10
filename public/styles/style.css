@@ -47,16 +47,16 @@ body {
 }
 
 header {
-  min-height: 10vh;
+  height: 80px;
 }
 
 main {
-  min-height: 70vh;
-  padding-top: 10vh;
+  min-height: 80vh;
+  padding-top: 80px;
 }
 
 footer {
-  min-height: 20vh;
+  height: 200px;
 }
 
 h1 {
@@ -83,14 +83,54 @@ a {
   margin: 0 auto;
 }
 
+.reductContainer {
+  max-width: 992px;
+  margin: 0 auto;
+}
+
 .button {
   background-color: #009BDB;
+  border: solid 1px #009BDB;
   color: white;
   font-family: "Work Sans";
   font-weight: 800;
+  font-size: 1.1rem;
+  text-align: center;
   padding: 16px;
   border-radius: 10px;
   box-shadow: none;
+  width: 140px;
+  cursor: pointer;
+}
+.button:hover {
+  background-color: white;
+  color: black;
+  transition: 0.3s;
+}
+
+.formBtn {
+  background-color: #009BDB;
+  border: solid 1px #009BDB;
+  color: white;
+  font-family: "Work Sans";
+  font-weight: 800;
+  font-size: 1.1rem;
+  text-align: center;
+  padding: 16px;
+  border-radius: 10px;
+  box-shadow: none;
+  width: 140px;
+  cursor: pointer;
+  display: block;
+  font-size: 1.2rem;
+  margin: auto;
+  margin-top: 20px;
+  width: 280px;
+}
+.formBtn:hover {
+  background-color: white;
+  color: black;
+  transition: 0.3s;
 }
 
 .particle {
@@ -176,6 +216,7 @@ input {
 .isConnected {
   text-align: center;
   height: 15px;
+  color: red;
 }
 
 /*======================= header =====================*/
@@ -234,7 +275,7 @@ header #menuLinks #profileLink img {
   background-image: url("../images/photo-accueil-sombre.webp");
   background-size: cover;
   background-position: top center;
-  height: 90vh;
+  height: 94vh;
 }
 #homePage #welcome h1 {
   position: absolute;
@@ -274,6 +315,10 @@ header #menuLinks #profileLink img {
 }
 
 /*============== Register ==============*/
+#registerPage {
+  padding-top: 120px;
+  margin-bottom: 100px;
+}
 #registerPage h1 {
   text-align: center;
 }
@@ -300,19 +345,6 @@ header #menuLinks #profileLink img {
 }
 #registerPage #rgpd input {
   margin-right: 8px;
-}
-#registerPage .formBtn {
-  background-color: #009BDB;
-  color: white;
-  font-family: "Work Sans";
-  font-weight: 800;
-  padding: 16px;
-  border-radius: 10px;
-  box-shadow: none;
-  display: block;
-  font-size: 1.2rem;
-  margin: auto;
-  margin-top: 20px;
 }
 #registerPage .formBtn[disabled] {
   opacity: 0.6;
@@ -350,12 +382,17 @@ header #menuLinks #profileLink img {
 }
 #loginPage #login form input[type=submit] {
   background-color: #009BDB;
+  border: solid 1px #009BDB;
   color: white;
   font-family: "Work Sans";
   font-weight: 800;
+  font-size: 1.1rem;
+  text-align: center;
   padding: 16px;
   border-radius: 10px;
   box-shadow: none;
+  width: 140px;
+  cursor: pointer;
   display: block;
   font-size: 1.2rem;
   margin: auto;
@@ -367,19 +404,42 @@ header #menuLinks #profileLink img {
   color: black;
   transition: 0.3s;
 }
+#loginPage #login form input[type=submit]:hover {
+  background-color: white;
+  color: black;
+  transition: 0.3s;
+}
 
 /*============== rides ================= */
 #ridesPage {
+  padding-top: 120px;
   margin: 0 16px;
 }
 #ridesPage #searchCreate {
   display: flex;
-  justify-content: space-between;
-  align-items: center;
+  flex-direction: column;
+  align-items: flex-start;
   padding: 20px 0;
-}
-#ridesPage #rideList {
   margin-top: 20px;
+}
+#ridesPage #searchCreate form {
+  margin-bottom: 30px;
+}
+#ridesPage #searchCreate form input {
+  width: 100%;
+  padding: 16px 5px;
+  border: solid 1px #009BDB;
+  border-radius: 10px;
+}
+#ridesPage #searchCreate form input:focus {
+  outline: none;
+}
+#ridesPage #searchCreate form .formBtn {
+  width: 172px;
+  margin-top: 20px;
+}
+#ridesPage #searchCreate #orgaBtn {
+  font-size: 1rem;
 }
 
 /*============== rideDetails =========== */
@@ -391,24 +451,32 @@ header #menuLinks #profileLink img {
 #rideDetailsPage h2 {
   margin: 20px 16px;
 }
+#rideDetailsPage .reductContainer {
+  margin: 50px 16px 50px 16px;
+}
 #rideDetailsPage div .flex {
-  display: flex;
   align-items: center;
 }
 #rideDetailsPage .bold {
   font-weight: 800;
 }
-#rideDetailsPage .particle {
+#rideDetailsPage #creator .particle {
   margin-right: 16px;
+  width: 40px;
+  height: 40px;
+  line-height: 37px;
 }
-#rideDetailsPage div .flexBetween {
+#rideDetailsPage #creator #creatorPseudo {
+  font-size: 1.2rem;
+}
+#rideDetailsPage div .flexSpace {
   display: flex;
   justify-content: space-between;
   margin-bottom: 16px;
 }
 #rideDetailsPage #startEnd {
   text-align: center;
-  margin-bottom: 16px;
+  margin: 30px 0;
 }
 #rideDetailsPage #rideInfos p:nth-of-type(2) {
   border-left: solid 2px #009BDB;
@@ -416,16 +484,24 @@ header #menuLinks #profileLink img {
   text-align: center;
   width: 40%;
 }
+#rideDetailsPage #participants {
+  margin: 30px 0;
+}
 #rideDetailsPage #preciGPS {
   display: flex;
   margin: 16px 0;
 }
 #rideDetailsPage #gps {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+#rideDetailsPage #gpsContainer {
   width: 500px;
+  display: none;
 }
 #rideDetailsPage .accordion {
   background-color: #CACACA;
-  color: #444;
   cursor: pointer;
   padding: 18px;
   width: 100%;
@@ -441,10 +517,9 @@ header #menuLinks #profileLink img {
   color: white;
 }
 #rideDetailsPage .accordion:after {
-  content: "➕";
   /* Unicode character for "plus" sign (+) */
+  content: "➕";
   font-size: 0.6rem;
-  color: #009BDB;
   float: right;
   margin-left: 5px;
 }
@@ -456,25 +531,36 @@ header #menuLinks #profileLink img {
   transition: max-height 0.3s ease-out;
 }
 #rideDetailsPage .active:after {
-  content: "➖";
   /* Unicode character for "minus" sign (-) */
+  content: "➖";
+}
+#rideDetailsPage #displayGpsBtn,
+#rideDetailsPage #hideGpsBtn {
+  padding: 8px;
+}
+#rideDetailsPage #hideGpsBtn {
+  display: none;
+}
+#rideDetailsPage #actionLinks {
+  padding: 50px 0;
+  text-align: center;
 }
 
 /*============== orga =============== */
 #orgaPage {
-  padding-left: 20px;
-  padding-right: 20px;
+  padding-top: 120px;
+  margin: 0 16px;
 }
 #orgaPage #map {
   height: 400px;
   z-index: 900;
 }
 #orgaPage form {
-  width: 90%;
+  width: 100%;
 }
 #orgaPage form input {
   width: 100%;
-  padding: 10px 5px;
+  padding: 10px 0;
   margin: 10px 0;
   border: solid 1px #009BDB;
   border-radius: 10px;
@@ -488,7 +574,29 @@ header #menuLinks #profileLink img {
   width: 100%;
 }
 #orgaPage form #dateTime input {
-  width: 46%;
+  width: 45%;
+}
+#orgaPage form select {
+  width: 100%;
+  padding: 10px 0;
+  margin: 10px 0;
+  font-family: "Work sans";
+  background-color: white;
+  border: solid 1px #009BDB;
+  border-radius: 10px;
+}
+#orgaPage form #precisionsContainer {
+  display: flex;
+  flex-direction: column;
+}
+#orgaPage form #precisionsContainer textarea {
+  height: 100px;
+  border: solid 1px #009BDB;
+  border-radius: 10px;
+}
+#orgaPage form .formBtn {
+  margin: auto;
+  width: 280px;
 }
 
 /*============== modify ================ */
@@ -510,17 +618,27 @@ header #menuLinks #profileLink img {
 }
 #profilePage aside button {
   background-color: #009BDB;
+  border: solid 1px #009BDB;
   color: white;
   font-family: "Work Sans";
   font-weight: 800;
+  font-size: 1.1rem;
+  text-align: center;
   padding: 16px;
   border-radius: 10px;
   box-shadow: none;
+  width: 140px;
+  cursor: pointer;
   width: 180px;
   cursor: pointer;
   border: none;
   margin: 8px 30px 8px 0;
   font-size: 16px;
+}
+#profilePage aside button:hover {
+  background-color: white;
+  color: black;
+  transition: 0.3s;
 }
 #profilePage aside button:hover {
   transition: 0.3s ease-out;
@@ -627,15 +745,20 @@ footer #copyright {
     justify-content: space-around;
   }
   #loginPage #login img {
+    margin-top: 50px;
+    margin-bottom: 50px;
     display: block;
-    width: 30%;
+    width: 35%;
   }
   #loginPage #login form {
-    width: 30%;
+    width: 35%;
   }
 }
 @media screen and (min-width: 768px) {
   /*===============register=================*/
+  #registerPage {
+    margin-bottom: 0;
+  }
   #registerPage #gridContainer {
     display: grid;
     width: 100%;
@@ -653,22 +776,31 @@ footer #copyright {
     grid-row: 1;
   }
   #registerPage #gridContainer div:nth-of-type(3) {
-    grid-column: 1/5;
+    grid-column: 1/3;
     grid-row: 2;
   }
-  #registerPage #gridContainer div:nth-of-type(3) input {
-    width: 98%;
-  }
   #registerPage #gridContainer div:nth-of-type(4) {
+    grid-column: 3/5;
+    grid-row: 2;
+  }
+  #registerPage #gridContainer div:nth-of-type(5) {
     grid-column: 1/3;
     grid-row: 3;
   }
-  #registerPage #gridContainer div:nth-of-type(5) {
+  #registerPage #gridContainer div:nth-of-type(6) {
     grid-column: 3/5;
     grid-row: 3;
   }
   #registerPage #rgpd {
     justify-content: left;
+  }
+  /*============= rides ====================*/
+  #ridesPage {
+    margin: 0 auto;
+  }
+  #ridesPage #searchCreate {
+    flex-direction: row;
+    justify-content: space-between;
   }
 }
 @media screen and (min-width: 992px) {
@@ -691,6 +823,10 @@ footer #copyright {
   }
   #welcome #welcomeSearch {
     height: 7vh;
+  }
+  /*============= ride's details ==========*/
+  #rideDetailsPage .reductContainer {
+    margin: 50px auto;
   }
   /*============= profile =================*/
   #profilePage {

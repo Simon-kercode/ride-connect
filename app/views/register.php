@@ -9,12 +9,15 @@
                 <p class="error"><?php if(isset($mailError) && !empty($mailError)) echo $mailError ?></p>
             </div>
             <div>
+                <input type="text" name="pseudo" placeholder="Choisissez un Pseudo" value="<?= (isset($pseudoError) && !empty($pseudoError))? '' : (isset($_POST['pseudo']) ? $_POST['pseudo'] : '')?>">
+                <p class="error"><?php if(isset($pseudoError) && !empty($pseudoError)) echo $pseudoError ?></p>
+            </div>
+            <div>
                 <input type="password" name="password" placeholder="Mot de passe">
                 <p class="error"><?php if(isset($passwordError) && !empty($passwordError)) echo $passwordError ?></p>
             </div>
             <div>
-                <input type="text" name="pseudo" placeholder="Choisissez un Pseudo" value="<?= (isset($pseudoError) && !empty($pseudoError))? '' : (isset($_POST['pseudo']) ? $_POST['pseudo'] : '')?>">
-                <p class="error"><?php if(isset($pseudoError) && !empty($pseudoError)) echo $pseudoError ?></p>
+                <input type="password" name="passwordConfirm" placeholder="Confirmez votre Mot de passe">
             </div>
             <div>
                 <input type="text" name="name" placeholder="Votre nom" value="<?= isset($_POST['name']) ? $_POST['name'] : ''?>">

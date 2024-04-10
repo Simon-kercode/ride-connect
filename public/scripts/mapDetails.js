@@ -38,7 +38,9 @@ function createRoute(waypoints) {
 }
 
 function displayGPS(route) {
-    let gps = document.querySelector('#gps');
+    let gps = document.querySelector('#gpsContainer');
+    let displayGpsBtn = document.querySelector('#displayGpsBtn');
+    let hideGpsBtn = document.querySelector('#hideGpsBtn');
 
     let waypointsList = route.way_points;
     let instructionsList = route.segments;
@@ -81,5 +83,17 @@ function displayGPS(route) {
                   }
             });
         }
+        displayGpsBtn.addEventListener('click', function() {
+            gps.style.display = 'block';
+            displayGpsBtn.style.display = 'none';
+            hideGpsBtn.style.display = 'block';
+        });
+
+        hideGpsBtn.addEventListener('click', function() {
+            gps.style.display = 'none';
+            displayGpsBtn.style.display = 'block';
+            hideGpsBtn.style.display = 'none';
+        
+        })
     }
 }

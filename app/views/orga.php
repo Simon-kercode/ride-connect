@@ -9,10 +9,10 @@
         </div>
         <div id="dateTime">
             <label for="dateInput">Indique la date et l'heure de ta balade *</label>
-            <div>
-            <input type="date" name="date" id="dateInput" value="">
-            <!-- <label for="time">Et l'heure précise du départ *</label> -->
-            <input type="time" name="time" value="14:00">
+            <div id="dateTimeFields" class="flexSpace">
+                <input type="date" name="date" id="dateInput" value="">
+                <!-- <label for="time">Et l'heure précise du départ *</label> -->
+                <input type="time" name="time" value="14:00">
             </div>
         </div>
         <div>
@@ -40,7 +40,7 @@
                 <option value="confirme">Confirmé</option>
             </select>
         </div>
-        <div>
+        <div id="precisionsContainer">
             <label for="precisions">Pour finir, inscris les précisions que tu souhaites apporter aux participants :</label>
             <textarea name="precisions" id="precisions" placeholder="Exemple : Sortie en petit groupe de 10. Allure tranquille. Pause café au lac de Guerlédan avant de reprendre la route jusque Lannion."></textarea>
         </div>
@@ -50,7 +50,7 @@
             <input type="text" name="waypoints" id="waypoints">
         </div>
         <p>* : Champs obligatoires</p>
-        <input type="submit" value="Enregistrer">
+        <input class="formBtn" type="submit" value="Enregistrer">
     </form>
     <p><?php if(isset($error) && !empty($error)) echo $error ?></p>
 </main>

@@ -14,14 +14,31 @@ $detailsBlue: #009BDB;
 
 @mixin button {
     background-color: $detailsBlue;
+    border: solid 1px $detailsBlue;
     color: white;
     font-family: 'Work Sans';
     font-weight: 800;
+    font-size: 1.1rem;
+    text-align: center;
     padding: 16px;
     border-radius: 10px;
     box-shadow: none;
+    width: 140px;
+    cursor: pointer;
+    &:hover {
+        background-color: white;
+        color: black;
+        transition: 0.3s;
+    }
 }
-
+@mixin formBtn {
+    @include button;
+        display: block;
+        font-size: 1.2rem;
+        margin: auto;
+        margin-top: 20px;
+        width: 280px;
+}
 @mixin particle {
     background-color: $detailsBlue;
     color: white;
@@ -30,6 +47,10 @@ $detailsBlue: #009BDB;
     width: 30px;
     height: 30px;
     text-align: center;
+}
+
+@mixin input {
+    
 }
 
 @mixin rideCards {
@@ -149,15 +170,15 @@ body {
 }
 
 header {
-    min-height: 10vh;
+    height: 80px;
 }
 
 main {
-    min-height: 70vh;
-    padding-top: 10vh;
+    min-height: 80vh;
+    padding-top: 80px;
 }
 footer {
-    min-height: 20vh;
+    height: 200px;
 }
 h1 {
     font-family: 'Anton';
@@ -181,11 +202,16 @@ a {
     max-width: 1400px;
     margin: 0 auto;
 }
-
+.reductContainer {
+    max-width: 992px;
+    margin: 0 auto;
+}
 .button {
     @include button;
 }
-
+.formBtn {
+    @include formBtn;
+}
 .particle {
     @include particle;
 }
@@ -207,12 +233,13 @@ a {
 
 input {
     font-family: 'Work Sans';
-    font-size: 1.1rem
+    font-size: 1.1rem;
 }
 
 .isConnected {
     text-align: center;
-    height: 15px
+    height: 15px;
+    color: red;
 }
 
 /*======================= header =====================*/
@@ -278,10 +305,9 @@ header {
     #welcome {
         position: relative;
         background-image: url("../images/photo-accueil-sombre.webp");
-        // background-repeat: no-repeat;
         background-size: cover;
         background-position: top center;
-        height: 90vh;
+        height: 94vh;
 
         h1 {
             position: absolute;
@@ -334,6 +360,8 @@ header {
 /*============== Register ==============*/
 
 #registerPage {
+    padding-top: 120px;
+    margin-bottom: 100px;
     h1 {
         text-align: center;
     }
@@ -369,12 +397,6 @@ header {
     }
 
     .formBtn {
-        @include button;
-        display: block;
-        font-size: 1.2rem;
-        margin: auto;
-        margin-top: 20px;
-
         &[disabled] {
             opacity: 0.6;
         }
@@ -437,17 +459,33 @@ header {
 
 /*============== rides ================= */
 #ridesPage {
+    padding-top: 120px;
     margin: 0 16px;
-
     #searchCreate {
         display: flex;
-        justify-content: space-between;
-        align-items: center;
+        flex-direction: column;
+        align-items: flex-start;
         padding: 20px 0;
-    }
-
-    #rideList {
         margin-top: 20px;
+        form {
+            margin-bottom: 30px;
+            input {
+                width: 100%;
+                padding: 16px 5px;
+                border: solid 1px $detailsBlue;
+                border-radius: 10px;
+                    &:focus {
+                        outline: none;
+                    }
+            }
+            .formBtn {
+                width: 172px;
+                margin-top: 20px;
+            }  
+        }
+        #orgaBtn {
+            font-size: 1rem;
+        }
     }
 }
 
@@ -462,9 +500,10 @@ header {
     h2 {
         margin: 20px 16px;
     }
-
+    .reductContainer {
+        margin: 50px 16px 50px 16px;
+    }
     div .flex {
-        display: flex;
         align-items: center;
     }
 
@@ -472,40 +511,49 @@ header {
         font-weight: 800;
     }
 
-    .particle {
-        margin-right: 16px
+    #creator {
+        .particle {
+            margin-right: 16px;
+            width: 40px;
+            height: 40px;
+            line-height: 37px;
+        }
+        #creatorPseudo {
+            font-size: 1.2rem
+        }
     }
-
-    div .flexBetween {
+    div .flexSpace {
         @include flexSpace;
         margin-bottom: 16px;
     }
-
     #startEnd {
         text-align: center;
-        margin-bottom: 16px;
+        margin: 30px 0;
     }
-
     #rideInfos p:nth-of-type(2) {
         border-left: solid 2px $detailsBlue;
         border-right: solid 2px $detailsBlue;
         text-align: center;
         width: 40%;
-        //     padding: 0 12%;
     }
-
+    #participants {
+        margin: 30px 0;
+    }
     #preciGPS {
         display: flex;
         margin: 16px 0;
     }
-
     #gps {
-        width: 500px;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
     }
-
+    #gpsContainer {
+        width: 500px;
+        display: none;
+    }
     .accordion {
         background-color: $backgroundLightGrey;
-        color: #444;
         cursor: pointer;
         padding: 18px;
         width: 100%;
@@ -515,23 +563,19 @@ header {
         border: none;
         outline: none;
         transition: 0.4s;
-
         &.active,
         &:hover {
             background-color: $detailsBlue;
             color: white
         }
-
         &:after {
-            content: '\02795';
             /* Unicode character for "plus" sign (+) */
+            content: '\02795';
             font-size: 0.6rem;
-            color: $detailsBlue;
             float: right;
             margin-left: 5px;
         }
     }
-
     .panel {
         padding: 0 18px;
         background-color: $backgroundBody;
@@ -539,29 +583,36 @@ header {
         max-height: 0;
         transition: max-height 0.3s ease-out;
     }
-
     .active:after {
-        content: "\2796";
         /* Unicode character for "minus" sign (-) */
+        content: "\2796";
+    }
+    #displayGpsBtn,
+    #hideGpsBtn {
+        padding: 8px;
+    }
+    #hideGpsBtn {
+        display: none;
+    }
+    #actionLinks {
+        padding: 50px 0;
+        text-align: center;
     }
 }
 
 /*============== orga =============== */
 #orgaPage {
-    padding-left: 20px;
-    padding-right: 20px;
-
+    padding-top: 120px;
+    margin: 0 16px;
     #map {
         height: 400px;
         z-index: 900;
     }
-
     form {
-        width: 90%;
-
+        width: 100%;
         input {
             width: 100%;
-            padding: 10px 5px;
+            padding: 10px 0;
             margin: 10px 0;
             border: solid 1px $detailsBlue;
             border-radius: 10px;
@@ -570,15 +621,35 @@ header {
                 outline: none;
             }
         }
-
         #dateTime {
             display: flex;
             flex-direction: column;
             width: 100%;
-
             input {
-                width: 46%;
+                width: 45%;
             }
+        }
+        select {
+            width: 100%;
+            padding: 10px 0;
+            margin: 10px 0;
+            font-family: 'Work sans';
+            background-color: white;
+            border: solid 1px $detailsBlue;
+            border-radius: 10px;
+        }
+        #precisionsContainer {
+            display: flex;
+            flex-direction: column;
+            textarea {
+                height: 100px;
+                border: solid 1px $detailsBlue;
+                border-radius: 10px;
+            }
+        }
+        .formBtn {
+            margin: auto;
+            width: 280px;
         }
     }
 }
@@ -751,12 +822,14 @@ footer {
             justify-content: space-around;
 
             img {
+                margin-top: 50px;
+                margin-bottom: 50px;
                 display: block;
-                width: 30%;
+                width: 35%;
             }
 
             form {
-                width: 30%;
+                width: 35%;
             }
         }
 
@@ -767,6 +840,7 @@ footer {
     /*===============register=================*/
 
     #registerPage {
+        margin-bottom: 0;
         #gridContainer {
             display: grid;
             width: 100%;
@@ -787,20 +861,20 @@ footer {
             }
 
             div:nth-of-type(3) {
-                grid-column: 1 / 5;
+                grid-column: 1 / 3;
                 grid-row: 2;
-
-                input {
-                    width: 98%;
-                }
             }
 
             div:nth-of-type(4) {
-                grid-column: 1 / 3;
-                grid-row: 3;
+                grid-column: 3 / 5;
+                grid-row: 2;
             }
 
             div:nth-of-type(5) {
+                grid-column: 1 / 3;
+                grid-row: 3;
+            }
+            div:nth-of-type(6) {
                 grid-column: 3 / 5;
                 grid-row: 3;
             }
@@ -808,6 +882,14 @@ footer {
 
         #rgpd {
             justify-content: left;
+        }
+    }
+    /*============= rides ====================*/
+    #ridesPage {
+        margin: 0 auto;
+        #searchCreate {
+            flex-direction: row;
+            justify-content: space-between;
         }
     }
 }
@@ -838,7 +920,12 @@ footer {
             height: 7vh;
         }
     }
-
+    /*============= ride's details ==========*/
+    #rideDetailsPage {
+        .reductContainer {
+            margin: 50px auto;
+        }
+    }
     /*============= profile =================*/
     #profilePage {
         display: flex;

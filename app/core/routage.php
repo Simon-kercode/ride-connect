@@ -158,9 +158,7 @@ use app\controllers\contactController;
                                 }
                                 else {
                                     $_SESSION['message'] = "Vous devez être connecté pour organiser une balade.";
-                                    $route = new RidesController;
-                                    $route->index();
-                                    
+                                    header('Location: /ride-connect/balades'); 
                                 }
                             }
                         }
