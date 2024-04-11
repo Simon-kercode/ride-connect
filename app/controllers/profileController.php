@@ -55,7 +55,7 @@ class ProfileController extends RideModel {
         $participantModel = new ParticipantModel;
         $participants = $participantModel->deleteAllParticipants($ride->idBalade);
 
-        $result = $rideModel->delete('idBalade', $ride->idBalade);
+        $result = $rideModel->delete($ride->idBalade, 'idBalade');
         
         if (isset($result)) {
             if($result) {
@@ -206,7 +206,7 @@ class ProfileController extends RideModel {
 
     public function accountDelete($idUser) {
         $userModel = new UserModel;
-        $result = $userModel->delete('idUser', $_SESSION['user']['idUser']);
+        $result = $userModel->delete($_SESSION['user']['idUser'], 'idUser');
         session_destroy();
         if(isset($result)) {
             if($result) {

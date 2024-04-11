@@ -11,7 +11,6 @@
             <label for="dateInput">Indique la date et l'heure de ta balade *</label>
             <div id="dateTimeFields" class="flexSpace">
                 <input type="date" name="date" id="dateInput" value="">
-                <!-- <label for="time">Et l'heure précise du départ *</label> -->
                 <input type="time" name="time" value="14:00">
             </div>
         </div>

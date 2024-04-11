@@ -61,6 +61,7 @@
                                         <img src="public/images/icons/level.svg" alt="Barres indiquant différents niveaux">
                                         <p><?= ucfirst($ride->difficulty) ?></p>
                                     </div>
+                                    
                                 </div>
                             </article>
                         </a> 

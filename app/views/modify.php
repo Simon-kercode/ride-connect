@@ -7,12 +7,11 @@
             <label for="title">Donne un petit titre sympa *</label>
             <input name="title" type="text" placeholder="ex: Visite aux anciens de Béganne" value="<?= $ride->title?>">
         </div>
-        <div id="dateTimeModify" class="flexSpace">
+        <div id="dateTimeModify" class="flexSpace dateTime">
             <label for="dateInput">Indique la date et l'heure de ta balade *</label>
-            <div>
-            <input type="date" name="date" id="dateInputModify" value="<?=$ride->date ?>">
-            <!-- <label for="time">Et l'heure précise du départ *</label> -->
-            <input type="time" name="time" value="<?= substr($ride->time, 0, 5)?>">
+            <div class="flexSpace">
+                <input type="date" name="date" id="dateInputModify" value="<?=$ride->date ?>">
+                <input type="time" name="time" value="<?= substr($ride->time, 0, 5)?>">
             </div>
         </div>
         <div>

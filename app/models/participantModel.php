@@ -24,7 +24,7 @@ class ParticipantModel extends Model {
     }
 
     public function deleteAllParticipants(int $idBalade) {
-        return $this->delete('idBalade', $idBalade);
+        return $this->delete($idBalade,'idBalade' );
     }
 
     public function getParticipantsNumber(int $idBalade) {

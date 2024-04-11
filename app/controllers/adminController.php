@@ -55,7 +55,7 @@ class AdminController extends RideModel{
         $participantModel = new ParticipantModel;
         $participants = $participantModel->deleteAllParticipants($ride->idBalade);
 
-        $result = $rideModel->delete('idBalade', $ride->idBalade);
+        $result = $rideModel->delete($ride->idBalade, 'idBalade');
         
         if (isset($result)) {
             if($result) {
@@ -83,7 +83,7 @@ class AdminController extends RideModel{
             exit;
         }
 
-        $result = $userModel->delete('idUser', $user->idUser);
+        $result = $userModel->delete($user->idUser, 'idUser');
 
         if (isset($result)) {
             if($result) {

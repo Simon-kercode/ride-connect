@@ -3,7 +3,7 @@
 <main id="profilePage">
     
     <aside>
-        <p><?php if (isset($_SESSION['message']) && !empty($_SESSION['message'])) echo $_SESSION['message']; unset($_SESSION['message']); ?></p>
+        <p class="userInfo"><?php if (isset($_SESSION['message']) && !empty($_SESSION['message'])) echo $_SESSION['message']; unset($_SESSION['message']); ?></p>
         <p class="particle"><?=substr($_SESSION['user']['pseudo'], 0, 1)?></p>
         <div id="profileBtn">
             <button class="button" id="myInfoBtn">Mes informations</button>
@@ -11,12 +11,12 @@
             <button class="button" id="mySubscribedRidesBtn">Balades prévues</button>
         </div>
     </aside>
-    <!-- ================ personnal informations section ===============-->
-    <section id="profileContent">
+    <section id="profileContent" class="Container">
+        <!-- ================ personnal informations section ===============-->
         <section id="myInfo">
             <form action="profil" method="POST">
                 <div>
-                    <label for="profileEmail">Mon Email</label>
+                    <label for="profileEmail">Mon Email :</label>
                     <div class="flex">
                         <p><?= $_SESSION['user']['email']?></p>
                         <p><?php if(isset($emailError) && !empty($emailError)) echo $emailError ?></p>
@@ -24,130 +24,175 @@
                     </div>
                     <input class="hiddenInput" type="email" id="newEmail" name="profileEmail">
                 </div>
+                <hr noshade>
                 <div>
-                    <label for="profilePseudo">Mon pseudo</label>
+                    <label for="profilePseudo">Mon pseudo :</label>
                     <div class="flex">
                         <p><?= $_SESSION['user']['pseudo']?></p>
-                        <?php if(isset($pseudoError) && !empty($pseudoError)) echo $pseudoError ?>
+                        <p><?php if(isset($pseudoError) && !empty($pseudoError)) echo $pseudoError ?></p>
                         <button class="button" id="pseudoUpdateBtn">Modifier</button>
                     </div>
                     <input class="hiddenInput" type="text" id="newPseudo" name="profilePseudo">
                 </div>
+                <hr noshade>
                 <div>
                     <div>
-                        <label for="profileName">Mon nom</label>
+                        <label for="profileName">Mon nom :</label>
                         <div class="flex">
                             <p><?= $_SESSION['user']['name']?></p>
-                            <?php if(isset($nameError) && !empty($nameError)) echo $nameError ?>
+                            <p><?php if(isset($nameError) && !empty($nameError)) echo $nameError ?></p>
                             <button class="button" id="nameUpdateBtn">Modifier</button>
                         </div>
                         <input class="hiddenInput" type="text" id="newName" name="profileName">
                     </div>
+                    <hr noshade>
                     <div>
-                        <label for="profileFirstname">Mon prénom</label>
+                        <label for="profileFirstname">Mon prénom :</label>
                         <div class="flex">
                             <p><?= $_SESSION['user']['firstname']?></p>
-                            <?php if(isset($firstnameError) && !empty($firstnameError)) echo $firstnameError ?>
+                            <p><?php if(isset($firstnameError) && !empty($firstnameError)) echo $firstnameError ?></p>
                             <button class="button" id="firstnameUpdateBtn">Modifier</button>
                         </div>
                         <input class="hiddenInput" type="text" id="newFirstname" name="profileFirstname">
                     </div>
+                    <hr noshade>
                 </div>
                 <div id="passwordUpdate">
-                    <button id="passwordUpdateBtn">Modifier mon mot de passe</button>
+                    <button class="button" id="passwordUpdateBtn">Modifier mon mot de passe</button>
                     <?php if(isset($passwordError) && !empty($passwordError)) echo $passwordError ?>
                         <div class="hiddenInput" id="inputPasswordUpdate">
                             <input type="password" id="oldPassword" name="oldPassword" placeholder="Mot de passe actuel">
                             <input type="password" id="newPassword" name="newPassword" placeholder="Nouveau mot de passe">
-                            <input type="password" id="newPasswordConfirm" name="newPasswordConfirm" placeholder="Retapez votre nouveau mot de passe">
+                            <input type="password" id="newPasswordConfirm" name="newPasswordConfirm" placeholder="Confirmez le nouveau mot de passe">
                         </div>
                 </div>
-                <div>
-                    <input type="submit" value="Enregistrer les modifications">
-                    <input type="reset" id="resetBtn" value="Annuler">
+                <div id="btnContainer" class="flex">
+                    <input class="formBtn" type="submit" id="saveBtn" value="Enregistrer les modifications">
+                    <input class="formBtn" type="reset" id="resetBtn" value="Annuler">
                 </div>
-                <div><a href="profil/supprimer">Supprimer mon compte</a></div>
+                <div ><a id="accountDeleteBtn" class="dangerButton" href="profil/supprimer">Supprimer mon compte</a></div>
             </form>
         </section>
         <!--================ user's rides ============ -->
         <section id="myRides">
-        <?php if(isset($rides) && !empty($rides)) {foreach ($rides as $index => $ride) {?>
-                <article>
-                    <a href="balades/<?= $ride->idBalade ?>"><h3>
-                        <?= $ride->title?>
-                    </h3></a>
-                    <div> 
-                        <p><?= substr($pseudo[$index]->pseudo, 0, 1) ?></p>
-                        <p><?= $pseudo[$index]->pseudo ?></p>
-                    </div>
-                    <div>
-                        <p><?= $ride->department ?></p>
-                    </div>
-                    <div>
-                        <p><?= date("d/m/Y", strtotime($ride->date)) ?></p>
-                        <p><?= $ride->length ?> km</p>
-                    </div>
-                    <div>
-                        <p>
-                            <?php 
-                            if((($ride->duration)/60) < 1) {
-                                echo (round(($ride->duration)%60).' min');
-                            }
-                            else {
-                                echo (floor(($ride->duration)/60).'h'.sprintf('%02d', (round($ride->duration)%60))) ;
-                            }
-                            ?>
-                        </p>
-                        <p>RDV : <?= $ride->meetingPoint ?></p>
-                        <p><?= ucfirst($ride->difficulty) ?></p>
-                    </div>
-                    <div>
-                        <a href="balades/<?= $ride->idBalade?>/modifier">Modifier</a>
-                        <a href="profil/<?=$ride->idBalade?>/supprimer/">Supprimer</a>
-                    </div>
-                </article> 
-                <?php }} else {?>
+            <div class="rides">
+                <div class="rideContainer">
+                    <?php if(isset($rides) && !empty($rides)) {foreach ($rides as $index => $ride) :?>
+                        <a class="rideItem" href="balades/<?= $ride->idBalade ?>">
+                            <article>
+                                <h3><?= $ride->title?></h3>
+                                <div class="flex"> 
+                                    <p class="particle"><?= substr($pseudo[$index]->pseudo, 0, 1) ?></p>
+                                    <p><?= $pseudo[$index]->pseudo ?></p>
+                                </div>
+                                <div class="flex location">
+                                    <img src="public/images/icons/location.svg" alt="Croix de localisation">
+                                    <p><?= $ride->department ?></p>
+                                </div>
+                                <div class="flexSpace">
+                                    <div class="flex">
+                                        <img src="public/images/icons/calendar.svg" alt="Calendrier">
+                                        <p><?= date("d/m/Y", strtotime($ride->date)) ?></p>
+                                    </div>
+                                    <div class="flex">
+                                        <img src="public/images/icons/road.svg" alt="Route">
+                                        <p><?= $ride->length ?> km</p>
+                                    </div>
+                                </div>
+                                <div class="flexSpace">
+                                    <div class="flex">
+                                        <img src="public/images/icons/clock.svg" alt="Horloge">
+                                        <p>
+                                            <?php 
+                                            if((($ride->duration)/60) < 1) {
+                                                echo (round(($ride->duration)%60).' min');
+                                            }
+                                            else {
+                                                echo (floor(($ride->duration)/60).'h'.sprintf('%02d', (round($ride->duration)%60))) ;
+                                            }
+                                            ?>
+                                        </p>
+                                    </div>    
+                                    <div class="flex">
+                                        <img src="public/images/icons/level.svg" alt="Barres indiquant différents niveaux">
+                                        <p><?= ucfirst($ride->difficulty) ?></p>
+                                    </div>
+                                </div>
+                                <div class="rdv">
+                                    <p>RDV : <?= $ride->meetingPoint ?></p>  
+                                </div>
+                               
+                            </article>
+                        </a>     
+                        <div id="rideProfilBtn">
+                            <a class="button" href="balades/<?= $ride->idBalade?>/modifier">Modifier</a>
+                            <a class="dangerButton" href="profil/<?=$ride->idBalade?>/supprimer/">Supprimer</a>
+                        </div>
+                    <?php endforeach ?>
+                </div> 
+            </div>    
+                <?php } else {?>
                     <p>Tu n'as pour l'instant organisé aucune balade. Tu peux aller sur la page des balades pour organiser ta propre aventure !</p>
                 <?php } ?>
         </section>
         <!-- =============== user's subscribed rides ==============-->
         <section id="mySubscribedRides">
-        <?php if (isset($subscribedRides) && !empty($subscribedRides)) {foreach ($subscribedRides as $index => $subscribedRide) {?>
-                <article>
-                    <a href="balades/<?= $subscribedRide->idBalade ?>"><h3>
-                        <?= $subscribedRide->title?>
-                    </h3></a>
-                    <div> 
-                        <p><?= substr($pseudo[$index]->pseudo, 0, 1) ?></p>
-                        <p><?= $pseudo[$index]->pseudo ?></p>
-                    </div>
-                    <div>
-                        <p><?= $subscribedRide->department ?></p>
-                    </div>
-                    <div>
-                        <p><?= date("d/m/Y", strtotime($subscribedRide->date)) ?></p>
-                        <p><?= $subscribedRide->length ?> km</p>
-                    </div>
-                    <div>
-                        <p>
-                            <?php 
-                            if((($subscribedRide->duration)/60) < 1) {
-                                echo (round(($subscribedRide->duration)%60).' min');
-                            }
-                            else {
-                                echo (floor(($subscribedRide->duration)/60).'h'.sprintf('%02d', (round($subscribedRide->duration)%60))) ;
-                            }
-                            ?>
-                        </p>
-                        <p>RDV : <?= $subscribedRide->meetingPoint ?></p>
-                        <p><?= ucfirst($subscribedRide->difficulty) ?></p>
-                    </div>
-                    <div>
-                    </div>
-                </article> 
-                <?php }} else { ?>   
-                    <p>Aucune balade de prévue ! Tu peux visiter la liste des balades pour trouver ton bonheur !</p></p>    
-                <?php } ?>  
+            <div class="rides">
+                <div class="rideContainer">
+                    <?php if (isset($subscribedRides) && !empty($subscribedRides)) {foreach ($subscribedRides as $index => $subscribedRide) {?>
+                        <a class="rideItem" href="balades/<?= $subscribedRide->idBalade ?>">
+                            <article>
+                                <h3><?= $subscribedRide->title?></h3>
+                                <div class="flex"> 
+                                    <p class="particle"><?= substr($pseudo[$index]->pseudo, 0, 1) ?></p>
+                                    <p><?= $pseudo[$index]->pseudo ?></p>
+                                </div>
+                                <div class="flex location">
+                                    <img src="public/images/icons/location.svg" alt="Croix de localisation">
+                                    <p><?= $subscribedRide->department ?></p>
+                                </div>
+                                <div class="flexSpace">
+                                    <div class="flex">
+                                        <img src="public/images/icons/calendar.svg" alt="Calendrier">
+                                        <p><?= date("d/m/Y", strtotime($subscribedRide->date)) ?></p>
+                                    </div>
+                                    <div class="flex">
+                                        <img src="public/images/icons/road.svg" alt="Route">
+                                        <p><?= $subscribedRide->length ?> km</p>
+                                    </div>
+                                </div>
+                                <div class="flexSpace">
+                                    <div class="flex">
+                                        <img src="public/images/icons/clock.svg" alt="Horloge">
+                                        <p>
+                                            <?php 
+                                            if((($subscribedRide->duration)/60) < 1) {
+                                                echo (round(($subscribedRide->duration)%60).' min');
+                                            }
+                                            else {
+                                                echo (floor(($subscribedRide->duration)/60).'h'.sprintf('%02d', (round($subscribedRide->duration)%60))) ;
+                                            }
+                                            ?>
+                                        </p>
+                                    </div>
+                                    <div class="flex">
+                                        <img src="public/images/icons/level.svg" alt="Barres indiquant différents niveaux">
+                                        <p><?= ucfirst($subscribedRide->difficulty) ?></p>
+                                    </div>
+                                </div>
+                                <div class="rdv">
+                                    <p>RDV : <?= $subscribedRide->meetingPoint ?></p>
+                                </div>
+                                <div>
+                            </div>
+                        </article>
+                        </a> 
+                    <?php }} else { ?>   
+                        <p>Aucune balade de prévue ! Tu peux visiter la liste des balades pour trouver ton bonheur !</p></p>    
+                    <?php } ?>  
+            
+                </div>
+            </div>
         </section>
     </section>
 </main>
