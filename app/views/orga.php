@@ -7,7 +7,7 @@
             <label for="title">Donne un petit titre sympa *</label>
             <input name="title" type="text" placeholder="ex: Visite aux anciens de Béganne">
         </div>
-        <div id="dateTime">
+        <div id="dateTime" class="dateTime">
             <label for="dateInput">Indique la date et l'heure de ta balade *</label>
             <div id="dateTimeFields" class="flexSpace">
                 <input type="date" name="date" id="dateInput" value="">
@@ -29,7 +29,7 @@
         </div>
         <figure>
             <figcaption>Construis maintenant ton itinéraire *:</figcaption>
-            <div id="map"></div>
+            <div id="map" class="map"></div>
         </figure>
         <div>
             <label for="difficulty">Estime la difficulté du parcours *</label>
@@ -40,7 +40,7 @@
                 <option value="confirme">Confirmé</option>
             </select>
         </div>
-        <div id="precisionsContainer">
+        <div class="precisionsContainer">
             <label for="precisions">Pour finir, inscris les précisions que tu souhaites apporter aux participants :</label>
             <textarea name="precisions" id="precisions" placeholder="Exemple : Sortie en petit groupe de 10. Allure tranquille. Pause café au lac de Guerlédan avant de reprendre la route jusque Lannion."></textarea>
         </div>

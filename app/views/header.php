@@ -14,15 +14,20 @@
     <script type="text/javascript" src="api/scripts/leaflet.js"></script>
     <!-- leaflet draw js -->
     <script src="https://unpkg.com/leaflet-draw/dist/leaflet.draw.js"></script>
-    <?php if ($_SERVER['REQUEST_URI'] === '/ride-connect/balades/organiser') { ?>
+    <?php
+    $url = $_SERVER['REQUEST_URI'];
+    $startIndex = strpos($url, '/ride-connect');
+    $newUrl = substr($url, $startIndex);
+    ?>
+    <?php if ($newUrl === '/ride-connect/balades/organiser') { ?>
     <!-- script to draw an itinerary in organisation page -->
         <script type="text/javascript" src="public/scripts/mapOrga.js" defer></script>
     <?php } 
-    elseif (isset($ride->idBalade) && ($_SERVER['REQUEST_URI'] === '/ride-connect/balades/'.$ride->idBalade || $_SERVER['REQUEST_URI'] === '/ride-connect/balades/'.$ride->idBalade.'/participer')) {?>
+    elseif (isset($ride->idBalade) && ($newUrl === '/ride-connect/balades/'.$ride->idBalade || $newUrl === '/ride-connect/balades/'.$ride->idBalade.'/participer')) {?>
     <!-- script to display th ride's itinerary (non modifiable) -->
         <script type="text/javascript" src="public/scripts/mapDetails.js" defer></script>
     <?php } 
-    elseif (isset($ride->idBalade) && $_SERVER['REQUEST_URI'] === '/ride-connect/balades/'.$ride->idBalade.'/modifier') {?>
+    elseif (isset($ride->idBalade) && $newUrl === '/ride-connect/balades/'.$ride->idBalade.'/modifier') {?>
     <!-- script to display th ride's itinerary (modifiable) -->
         <script type="text/javascript" src="public/scripts/mapModify.js" defer></script>
     <?php } ?>
@@ -38,7 +43,6 @@
             </div>
             <ul id="menuLinks">
                 <li><a href="balades">Balades</a></li>   
-                <li><a href="#">A propos</a></li>
                 <li><a href="contact">Contact</a></li>
                 <?php if (isset($_SESSION['user']) && !empty($_SESSION['user']['idUser'])) : ?>
                     <li><a href="profil" id="profileLink">

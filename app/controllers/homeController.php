@@ -2,6 +2,8 @@
 
 namespace app\controllers;
 
+use app\controllers\ridesController;
+
 class HomeController extends RidesController {
     public function index() {
         $ridesController = new RidesController;

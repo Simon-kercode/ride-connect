@@ -10,6 +10,7 @@ class Model extends DbConnector {
     // db's instance
     private $db;
 
+    
     public function request(string $sql, array $params = null) {
         // getting DbConnector instance
         $this->db = DbConnector::getInstance();

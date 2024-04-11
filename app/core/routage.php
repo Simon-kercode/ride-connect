@@ -17,8 +17,9 @@ use app\controllers\contactController;
             // !!!!!!!!!!!!!!!!!!! A DEBUGUER !!!!!!!!!!!!!!!!!!!!!
             // deleting the trailing slash at the end of the url
             // $uri = $_SERVER['REQUEST_URI'];
+
             // var_dump($uri);
-            // if(!empty($uri) && $uri != '/' && $uri[-1] === '/'){
+            // if(!empty($uri) && $uri !== '/' && $uri[-1] === '/'){
             //     $uri = substr($uri, 0, -1);
 
             //     // prevent duplicate content by redirect permanently
@@ -27,6 +28,7 @@ use app\controllers\contactController;
             //     header('Location: '.$uri);
             //     exit;
             // }
+
             $params = explode('/', $_GET['p']);
     
             switch($params[0]) {
@@ -91,12 +93,13 @@ use app\controllers\contactController;
                     if (isset($params[1])) {
                         if (ctype_digit($params[1])) {
                             $route = new RidesController;
-                            if(!$route->getRide('', 3)) {
+                            if(!$route->getRideById($params[1])) {
                                 $_SESSION['message'] = "Cette balade n'existe pas.";
                                 $route->index();
                                 exit;
-                            }
+                            } 
                             if (isset($params[2]) && !empty($params[2])){
+                                // if(!$route->getRide($params[2], 3)) {
                                 if ($params[2] === 'modifier') {
                                     if (isset($_SESSION['user']) && !empty($_SESSION['user'])) {
                                         $route = new ModifyController;
@@ -121,8 +124,7 @@ use app\controllers\contactController;
                                 elseif ($params[2] ==='participer') {
                                     if(isset($_SESSION['user']) && !empty($_SESSION['user'])) {
                                         $route = new RideDetailsController;
-                                        if (!$route->verifyParticipation($params[1], $_SESSION['user']['idUser'])) {
-                                            
+                                        if (!$route->verifyParticipation($params[1], $_SESSION['user']['idUser'])) {           
                                             $route->addParticipant();
                                         }
                                         else {
@@ -141,6 +143,7 @@ use app\controllers\contactController;
                                     //  page 404!!!!!!!!!!!!!!!!
                                 }
                             }
+                            
                             else {
                                 $route = new RideDetailsController;
                                 $route->index();

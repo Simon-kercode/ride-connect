@@ -46,6 +46,12 @@ class AdminController extends RideModel{
         $rideModel = new RideModel;
         $ride = $rideModel->getRide('supprimer', 5);
 
+        if(!$ride) {
+            $_SESSION['message'] = "Cette balade n'existe pas.";
+            $title = 'Profil - Ride Connect';
+            header('Location: /ride-connect/administration');
+            exit;
+        }
         $participantModel = new ParticipantModel;
         $participants = $participantModel->deleteAllParticipants($ride->idBalade);
 
@@ -70,6 +76,12 @@ class AdminController extends RideModel{
     public function userDelete() {
         $userModel = new UserModel;
         $user = $userModel->findOneByURL(5);
+        if (!$user) {
+            $_SESSION['message'] = "Cet utilisateur n'existe pas.";
+            $title = 'Profil - Ride Connect';
+            header('Location: /ride-connect/administration');
+            exit;
+        }
 
         $result = $userModel->delete('idUser', $user->idUser);
 
@@ -80,6 +92,7 @@ class AdminController extends RideModel{
                 header('Location: /ride-connect/administration');
                 exit;
             }
+            
         }
         else {
             $_SESSION['message'] = "Une erreur est survenue. Veuillez réessayer plus tard.";

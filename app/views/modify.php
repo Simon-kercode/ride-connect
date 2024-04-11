@@ -7,7 +7,7 @@
             <label for="title">Donne un petit titre sympa *</label>
             <input name="title" type="text" placeholder="ex: Visite aux anciens de Béganne" value="<?= $ride->title?>">
         </div>
-        <div id="dateTimeModify">
+        <div id="dateTimeModify" class="flexSpace">
             <label for="dateInput">Indique la date et l'heure de ta balade *</label>
             <div>
             <input type="date" name="date" id="dateInputModify" value="<?=$ride->date ?>">
@@ -29,7 +29,7 @@
         </div>
         <figure>
             <figcaption>Construis maintenant ton itinéraire *:</figcaption>
-            <div id="mapModify"></div>
+            <div id="mapModify" class="map"></div>
         </figure>
         <div>
             <label for="difficulty">Estime la difficulté du parcours *</label>
@@ -40,7 +40,7 @@
                 <option value="confirmé" <?php if ($ride->difficulty === 'confirmé') echo 'selected'; ?>>Confirmé</option>
             </select>
         </div>
-        <div>
+        <div class="precisionsContainer">
             <label for="precisions">Pour finir, inscris les précisions que tu souhaites apporter aux participants :</label>
             <textarea name="precisions" id="precisionsModify" placeholder="Exemple : Sortie en petit groupe de 10. Allure tranquille. Pause café au lac de Guerlédan avant de reprendre la route jusque Lannion."><?= $ride->precisions ?></textarea>
         </div>
@@ -50,7 +50,7 @@
             <input type="text" name="waypoints" id="waypointsModify" value="<?= $ride->waypoints ?>">
         </div>
         <p>* : Champs obligatoires</p>
-        <input type="submit" value="Enregistrer">
+        <input type="submit"class="formBtn" value="Enregistrer">
     </form>
     <p><?php if(isset($error) && !empty($error)) echo $error ?></p>
 

@@ -59,16 +59,24 @@ class RideModel extends Model {
     */
     public function getRide(string $action, int $pos) {
         $url = $_SERVER['REQUEST_URI'];
-        $explodeURL = explode('/', $url);
-        $id = end($explodeURL);
- 
-        if(strpos($url, $action) !== false) {
-            $id = $explodeURL[$pos];
-        }
+        $startIndex = strpos($url, '/ride-connect');
+        $newUrl = substr($url, $startIndex);
 
+        $explodeURL = explode('/', $newUrl);
+        
+        $id = end($explodeURL);
+        
+        if ($action !== '') {
+            if(strpos($newUrl, $action) !== false) {
+                $id = $explodeURL[$pos];
+            }
+        }
         if (isset($id) && !empty($id) && ctype_digit($id)) {
             return($this->findOneByOneParam('idBalade', $id));
         }
+    }
+    public function getRideById(int $id) {
+        return $this->findOneByOneParam('idBalade', $id);
     }
 
     /**

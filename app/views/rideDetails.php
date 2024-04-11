@@ -28,7 +28,7 @@
                             echo (round(($ride->duration)%60).' min');
                         }
                         else {
-                            echo (floor(($ride->duration)/60).'h'.sprintf('%02d', (round(($ride->duration)%60)))) ;
+                            echo (floor(($ride->duration)/60).'h'.sprintf('%02d', (round($ride->duration)%60))) ;
                         }
                     ?>
                 </span>

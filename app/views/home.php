@@ -45,7 +45,7 @@
                                     echo (round(($rides[$i]->duration)%60).' min');
                                 }
                                 else {
-                                    echo (floor(($rides[$i]->duration)/60).'h'.sprintf('%02d', (round(($rides[$i]->duration)%60)))) ;
+                                    echo (floor(($rides[$i]->duration)/60).'h'.sprintf('%02d', (round($rides[$i]->duration)%60))) ;
                                 }
                                 ?>
                             </p>

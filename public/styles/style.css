@@ -74,7 +74,6 @@ a {
 
 .logo {
   width: 200px;
-  height: -moz-fit-content;
   height: fit-content;
 }
 
@@ -547,36 +546,38 @@ header #menuLinks #profileLink img {
 }
 
 /*============== orga =============== */
-#orgaPage {
+#orgaPage, #modifyPage {
   padding-top: 120px;
   margin: 0 16px;
 }
-#orgaPage #map {
+#orgaPage .map, #modifyPage .map {
   height: 400px;
   z-index: 900;
+  margin: 10px 0;
 }
-#orgaPage form {
+#orgaPage form, #modifyPage form {
+  margin-top: 20px;
   width: 100%;
 }
-#orgaPage form input {
+#orgaPage form input, #modifyPage form input {
   width: 100%;
   padding: 10px 0;
   margin: 10px 0;
   border: solid 1px #009BDB;
   border-radius: 10px;
 }
-#orgaPage form input:focus {
+#orgaPage form input:focus, #modifyPage form input:focus {
   outline: none;
 }
-#orgaPage form #dateTime {
+#orgaPage form .dateTime, #modifyPage form .dateTime {
   display: flex;
   flex-direction: column;
   width: 100%;
 }
-#orgaPage form #dateTime input {
+#orgaPage form .dateTime input, #modifyPage form .dateTime input {
   width: 45%;
 }
-#orgaPage form select {
+#orgaPage form select, #modifyPage form select {
   width: 100%;
   padding: 10px 0;
   margin: 10px 0;
@@ -585,23 +586,22 @@ header #menuLinks #profileLink img {
   border: solid 1px #009BDB;
   border-radius: 10px;
 }
-#orgaPage form #precisionsContainer {
+#orgaPage form .precisionsContainer, #modifyPage form .precisionsContainer {
   display: flex;
   flex-direction: column;
 }
-#orgaPage form #precisionsContainer textarea {
+#orgaPage form .precisionsContainer textarea, #modifyPage form .precisionsContainer textarea {
   height: 100px;
   border: solid 1px #009BDB;
   border-radius: 10px;
 }
-#orgaPage form .formBtn {
-  margin: auto;
-  width: 280px;
+#orgaPage form textarea, #modifyPage form textarea {
+  margin: 10px 0;
+  font-size: 1rem;
 }
-
-/*============== modify ================ */
-#modifyPage #mapModify {
-  height: 400px;
+#orgaPage form .formBtn, #modifyPage form .formBtn {
+  margin: 20px auto;
+  width: 280px;
 }
 
 /*============== profile =============== */
@@ -616,34 +616,10 @@ header #menuLinks #profileLink img {
   flex-direction: column;
   align-items: center;
 }
-#profilePage aside button {
-  background-color: #009BDB;
-  border: solid 1px #009BDB;
-  color: white;
-  font-family: "Work Sans";
-  font-weight: 800;
-  font-size: 1.1rem;
-  text-align: center;
-  padding: 16px;
-  border-radius: 10px;
-  box-shadow: none;
-  width: 140px;
-  cursor: pointer;
+#profilePage aside #profileBtn button {
   width: 180px;
-  cursor: pointer;
-  border: none;
   margin: 8px 30px 8px 0;
   font-size: 16px;
-}
-#profilePage aside button:hover {
-  background-color: white;
-  color: black;
-  transition: 0.3s;
-}
-#profilePage aside button:hover {
-  transition: 0.3s ease-out;
-  background-color: white;
-  color: black;
 }
 #profilePage aside .particle {
   margin: auto;
@@ -652,9 +628,13 @@ header #menuLinks #profileLink img {
   height: 100px;
   line-height: 87px;
 }
+#profilePage .flex {
+  justify-content: space-between;
+  align-items: center;
+}
 #profilePage #profileContent {
   margin: 0 30px;
-  width: 100%;
+  width: 90%;
 }
 #profilePage #profileContent #myInfo {
   display: block;
@@ -664,6 +644,9 @@ header #menuLinks #profileLink img {
 #profilePage #profileContent #myInfo form {
   display: flex;
   flex-direction: column;
+}
+#profilePage #profileContent #myInfo form .button {
+  padding: 3px;
 }
 #profilePage #profileContent #myInfo form input {
   width: 50%;
@@ -802,6 +785,7 @@ footer #copyright {
     flex-direction: row;
     justify-content: space-between;
   }
+  /*============ orga ==================*/
 }
 @media screen and (min-width: 992px) {
   /*============== Header ==================*/

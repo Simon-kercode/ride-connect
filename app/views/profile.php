@@ -6,9 +6,9 @@
         <p><?php if (isset($_SESSION['message']) && !empty($_SESSION['message'])) echo $_SESSION['message']; unset($_SESSION['message']); ?></p>
         <p class="particle"><?=substr($_SESSION['user']['pseudo'], 0, 1)?></p>
         <div id="profileBtn">
-            <button id="myInfoBtn">Mes informations</button>
-            <button id="myRidesBtn">Mes balades</button>
-            <button id="mySubscribedRidesBtn">Balades prévues</button>
+            <button class="button" id="myInfoBtn">Mes informations</button>
+            <button class="button" id="myRidesBtn">Mes balades</button>
+            <button class="button" id="mySubscribedRidesBtn">Balades prévues</button>
         </div>
     </aside>
     <!-- ================ personnal informations section ===============-->
@@ -17,38 +17,38 @@
             <form action="profil" method="POST">
                 <div>
                     <label for="profileEmail">Mon Email</label>
-                    <div>
+                    <div class="flex">
                         <p><?= $_SESSION['user']['email']?></p>
                         <p><?php if(isset($emailError) && !empty($emailError)) echo $emailError ?></p>
-                        <button id="emailUpdateBtn">Modifier</button>
+                        <button class="button" id="emailUpdateBtn">Modifier</button>
                     </div>
                     <input class="hiddenInput" type="email" id="newEmail" name="profileEmail">
                 </div>
                 <div>
                     <label for="profilePseudo">Mon pseudo</label>
-                    <div>
+                    <div class="flex">
                         <p><?= $_SESSION['user']['pseudo']?></p>
                         <?php if(isset($pseudoError) && !empty($pseudoError)) echo $pseudoError ?>
-                        <button id="pseudoUpdateBtn">Modifier</button>
+                        <button class="button" id="pseudoUpdateBtn">Modifier</button>
                     </div>
                     <input class="hiddenInput" type="text" id="newPseudo" name="profilePseudo">
                 </div>
                 <div>
                     <div>
                         <label for="profileName">Mon nom</label>
-                        <div>
+                        <div class="flex">
                             <p><?= $_SESSION['user']['name']?></p>
                             <?php if(isset($nameError) && !empty($nameError)) echo $nameError ?>
-                            <button id="nameUpdateBtn">Modifier</button>
+                            <button class="button" id="nameUpdateBtn">Modifier</button>
                         </div>
                         <input class="hiddenInput" type="text" id="newName" name="profileName">
                     </div>
                     <div>
                         <label for="profileFirstname">Mon prénom</label>
-                        <div>
+                        <div class="flex">
                             <p><?= $_SESSION['user']['firstname']?></p>
                             <?php if(isset($firstnameError) && !empty($firstnameError)) echo $firstnameError ?>
-                            <button id="firstnameUpdateBtn">Modifier</button>
+                            <button class="button" id="firstnameUpdateBtn">Modifier</button>
                         </div>
                         <input class="hiddenInput" type="text" id="newFirstname" name="profileFirstname">
                     </div>
@@ -94,7 +94,7 @@
                                 echo (round(($ride->duration)%60).' min');
                             }
                             else {
-                                echo (floor(($ride->duration)/60).'h'.sprintf('%02d', (round(($ride->duration)%60)))) ;
+                                echo (floor(($ride->duration)/60).'h'.sprintf('%02d', (round($ride->duration)%60))) ;
                             }
                             ?>
                         </p>
@@ -103,7 +103,7 @@
                     </div>
                     <div>
                         <a href="balades/<?= $ride->idBalade?>/modifier">Modifier</a>
-                        <a href="profil/supprimer/<?=$ride->idBalade?>">Supprimer</a>
+                        <a href="profil/<?=$ride->idBalade?>/supprimer/">Supprimer</a>
                     </div>
                 </article> 
                 <?php }} else {?>
@@ -135,7 +135,7 @@
                                 echo (round(($subscribedRide->duration)%60).' min');
                             }
                             else {
-                                echo (floor(($subscribedRide->duration)/60).'h'.sprintf('%02d', (round(($subscribedRide->duration)%60)))) ;
+                                echo (floor(($subscribedRide->duration)/60).'h'.sprintf('%02d', (round($subscribedRide->duration)%60))) ;
                             }
                             ?>
                         </p>

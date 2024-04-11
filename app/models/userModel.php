@@ -2,6 +2,8 @@
 
 namespace app\models;
 
+use app\models\model;
+
 class UserModel extends Model {
 
     protected int $idUser;

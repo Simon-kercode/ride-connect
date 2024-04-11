@@ -25,13 +25,13 @@
                 </div>
                 <p><?= $user->email ?></p>
                 <a href='administration/supprimer/utilisateur/<?=$user->idUser ?>'>Supprimer</a>
-                <a href=''>Bannir</a>
             <?php endforeach ?>
         </section>
         <!-- ================ rides list section ===============-->
         <section id="ridesList">
             <?php if (isset($rides) && !empty($rides)) : foreach($rides as $index => $ride) : ?>
                 <article>
+                    <p> Balade n° <?= $ride->idBalade ?></p>
                     <a href="balades/<?= $ride->idBalade ?>"><h3>
                         <?= $ride->title?>
                     </h3></a>
@@ -53,7 +53,7 @@
                                 echo (round(($ride->duration)%60).' min');
                             }
                             else {
-                                echo (floor(($ride->duration)/60).'h'.sprintf('%02d', (round(($ride->duration)%60)))) ;
+                                echo (floor(($ride->duration)/60).'h'.sprintf('%02d', (round($ride->duration)%60))) ;
                             }
                             ?>
                         </p>
