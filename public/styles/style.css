@@ -74,7 +74,6 @@ a {
 
 .logo {
   width: 200px;
-  height: -moz-fit-content;
   height: fit-content;
 }
 
@@ -178,7 +177,8 @@ a {
   font-size: 0.9rem;
 }
 .rides .rideContainer .rideItem {
-  width: 300px;
+  width: 320px;
+  min-height: 250px;
   background-color: white;
   box-shadow: rgba(0, 0, 0, 0.15) 0px 2px 8px 0px;
   margin-top: 16px;
@@ -806,6 +806,24 @@ footer #copyright {
   padding: 3px 0;
 }
 
+/*============== 404 page =================*/
+#page404 {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 0 16px;
+}
+#page404 img {
+  width: 300px;
+  margin-bottom: 150px;
+}
+#page404 p {
+  border: solid 1px #009BDB;
+  border-radius: 10px;
+  padding: 15px;
+}
+
 /*============== Responsive ==============*/
 @media screen and (min-width: 576px) {
   /*===============login====================*/
@@ -872,6 +890,10 @@ footer #copyright {
   #ridesPage #searchCreate {
     flex-direction: row;
     justify-content: space-between;
+  }
+  /*=========== 404 page =================*/
+  #page404 img {
+    width: 500px;
   }
 }
 @media screen and (min-width: 992px) {

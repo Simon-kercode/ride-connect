@@ -53,7 +53,9 @@ document.querySelector('#modifyForm').addEventListener('submit', async function(
     routeInfosInput.value = JSON.stringify(routeInfos);
     waypointsInput.value = JSON.stringify(waypoints);
     
-    document.getElementById('modifyForm').submit();
+    if ($errorsModify.length === 0) {
+        document.getElementById('modifyForm').submit();
+    }
 })
 let waypoints = [];
 let routeLayer = null;
@@ -209,4 +211,78 @@ async function getPointsInfos(waypoints) {
     }
 
     return pointsInfos;
+}
+
+let modifyForm = document.querySelector('#modifyForm');
+let errorsModify = [];
+modifyForm.addEventListener("submit", function (event) {
+
+    let titleInput = document.getElementsByName("title")[0];
+    let dateInput = document.getElementsByName("date")[0];
+    let timeInput = document.getElementsByName("time")[0];
+    let startPointInput = document.getElementsByName("startPoint")[0];
+    let meetingPointInput = document.getElementsByName("meetingPoint")[0];
+    let partNumberInput = document.getElementsByName("partNumber")[0];
+    let mapModifyInput = document.getElementById("mapModify");
+    let difficultyInput = document.getElementsByName("difficulty")[0];
+
+    // clear all errors fields
+    let errorElements = document.querySelectorAll(".error");
+    errorElements.forEach(function (element) {
+        element.remove();
+    });
+
+    if (titleInput.value.trim() === "") {
+        displayOrgaError(titleInput, "Veuillez saisir un titre.");
+        errorsModify.push("Veuillez saisir un titre.");
+    }
+
+    if (dateInput.value.trim() === "") {
+        displayOrgaError(dateInput, "Veuillez saisir une date.");
+        errorsModify.push("Veuillez saisir une date.");
+    }
+
+    if (timeInput.value.trim() === "") {
+        displayOrgaError(timeInput, "Veuillez choisir une heure.");
+        errorsModify.push("Veuillez choisir une heure.");
+    }
+
+    if (startPointInput.value.trim() === "") {
+        displayOrgaError(startPointInput, "Veuillez saisir un point de départ.");
+        errorsModify.push("Veuillez saisir un point de départ.");
+    }
+
+    if (meetingPointInput.value.trim() === "") {
+        displayOrgaError(meetingPointInput, "Veuillez saisir un point de rendez-vous.");
+        errorsModify.push("Veuillez saisir un point de rendez-vous.");
+    }
+
+    if (partNumberInput.value.trim() === "") {
+        displayOrgaError(partNumberInput, "Veuillez saisir le nombre de participants.");
+        errorsModify.push("Veuillez saisir le nombre de participants.");
+    }
+
+    if (waypoints.length < 2) {
+        displayOrgaError(mapModifyInput, "Veuillez dessiner un itinéraire comprenant au moins 2 points.");
+        errorsModify.push("Veuillez dessiner un itinéraire comprenant au moins 2 points.");
+    }
+
+    if (difficultyInput.value.trim() === "") {
+        displayOrgaError(difficultyInput, "Veuillez saisir la difficulté du parcours.");
+        errorsModify.push("Veuillez saisir la difficulté du parcours.");
+    }
+
+    if (errorsModify.length > 0) {
+        // preventing form submission
+        event.preventDefault();
+    }
+});
+function displayOrgaError(inputElement, errorMessage) {
+    // Create p element to display the error message
+    errorElement = document.createElement("p");
+    errorElement.className = "error";
+    errorElement.textContent = errorMessage;
+
+    // insert error element after the corresponding input
+    inputElement.parentNode.insertBefore(errorElement, inputElement.nextSibling);
 }

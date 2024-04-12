@@ -10,7 +10,7 @@ class RideModel extends Model {
     protected string $title;
     protected $date;
     protected $time;
-    protected int $length;
+    protected float $length;
     protected float $duration;
     protected string $difficulty;
     protected int $partNumber;

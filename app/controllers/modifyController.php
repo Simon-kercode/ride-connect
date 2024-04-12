@@ -91,8 +91,7 @@ class ModifyController extends RideModel {
                         if ($result) {
                             $title = 'Profil - Ride Connect';
                             $_SESSION['message'] = "Ta balade a bien été modifiée !";
-                            header('Location: /ride-connect/profil');
-                            
+                            header("Location: ".$_SERVER['HTTP_ORIGIN']."/ride-connect/profil");
                             exit;
                         }
                         else {

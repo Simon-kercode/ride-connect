@@ -34,17 +34,23 @@ class RideDetailsController extends RideModel{
 
     public function addParticipant() {
         $rideModel = new RideModel;
-        $ride = $this->getRide('', 3);
+        $ride = $this->getRide('participer', 3);
 
-        $participantModel = new ParticipantModel;
-        
-        $result = $participantModel->createParticipant(['idUser'=>$_SESSION['user']['idUser'], 'idBalade'=>$ride->idBalade]);
+        if (!$ride) {
+            $_SESSION['error'] = "Cette balade n'existe pas !";
+            $title = 'Profil - Ride Connect';
+            include ROOT .'/app/views/profile.php';
+        }
+
+        $participant = new ParticipantModel;
+
+        $result = $participant->createParticipant(['idUser'=>$_SESSION['user']['idUser'], 'idBalade'=>$ride->idBalade]);
         
         if (isset($result)) {
             if($result) {
-                $_SESSION['message'] = "Vous êtes bien inscrit à cette balade ! Retrouvez y les détails sur votre profil.";
+                $_SESSION['message'] = "Vous êtes bien inscrit à cette balade !";
                 $title = $ride->title.' - Ride Connect';
-                header('Location: /ride-connect/balades/'.$ride->idBalade);
+                header('Location: '.$_SERVER['HTTP_ORIGIN'].'/ride-connect/profil');
             }
             else {
                 $_SESSION['message'] = "Une erreur est survenue. Veuillez réessayer plus tard.";

@@ -49,7 +49,7 @@ class AdminController extends RideModel{
         if(!$ride) {
             $_SESSION['message'] = "Cette balade n'existe pas.";
             $title = 'Profil - Ride Connect';
-            header('Location: /ride-connect/administration');
+            header('Location: '.$_SERVER['HTTP_ORIGIN'].'/ride-connect/administration');
             exit;
         }
         $participantModel = new ParticipantModel;
@@ -61,7 +61,7 @@ class AdminController extends RideModel{
             if($result) {
                 $_SESSION['message'] = "La balade a bien été supprimée.";
                 $title = 'Profil - Ride Connect';
-                header('Location: /ride-connect/administration');
+                header('Location: '.$_SERVER['HTTP_ORIGIN'].'/ride-connect/administration');
                 exit;
             }
         }
@@ -79,7 +79,7 @@ class AdminController extends RideModel{
         if (!$user) {
             $_SESSION['message'] = "Cet utilisateur n'existe pas.";
             $title = 'Profil - Ride Connect';
-            header('Location: /ride-connect/administration');
+            header('Location: '.$_SERVER['HTTP_ORIGIN'].'/ride-connect/administration');
             exit;
         }
 
@@ -89,7 +89,7 @@ class AdminController extends RideModel{
             if($result) {
                 $_SESSION['message'] = "L'utilisateur a bien été supprimée.";
                 $title = 'Profil - Ride Connect';
-                header('Location: /ride-connect/administration');
+                header('Location: '.$_SERVER['HTTP_ORIGIN'].'/ride-connect/administration');
                 exit;
             }
             

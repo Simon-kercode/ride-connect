@@ -73,7 +73,8 @@ $detailsBlue: #009BDB;
         font-size: 0.9rem;
 
         .rideItem {
-            width: 300px;
+            width: 320px;
+            min-height: 250px;
             background-color: white;
             box-shadow: rgba(0, 0, 0, 0.15) 0px 2px 8px 0px;
             margin-top: 16px;
@@ -914,6 +915,25 @@ footer {
     }
 }
 
+/*============== 404 page =================*/
+
+#page404 {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 0 16px;
+    img {
+        width: 300px;
+        margin-bottom: 150px;
+    }
+    p {
+        border: solid 1px $detailsBlue;
+        border-radius: 10px;
+        padding: 15px;
+    }
+}
+
 /*============== Responsive ==============*/
 @media screen and (min-width: 576px) {
     /*===============login====================*/
@@ -1003,6 +1023,14 @@ footer {
         #searchCreate {
             flex-direction: row;
             justify-content: space-between;
+        }
+    }
+
+    /*=========== 404 page =================*/
+
+    #page404 {
+        img {
+            width: 500px;
         }
     }
 }

@@ -42,42 +42,42 @@ class OrgaController extends RideModel {
                 $waypoints = $_POST['waypoints'];
                 $idUser = $_SESSION['user']['idUser'];
 
-                $params = [
-                    'title' => $title,
-                    'date' => $date,
-                    'time' => $time,
-                    'length' => $length,
-                    'duration' => $duration,
-                    'difficulty' => $difficulty,
-                    'partNumber' => $partNumber,
-                    'startPoint' => $startPoint,
-                    'arrival' => $arrival,
-                    'department' => $department,
-                    'region' => $region,
-                    'meetingPoint' => $meetingPoint,
-                    'precisions' => $precisions,
-                    'waypoints' => $waypoints,
-                    'idUser' => $idUser
-                ];
-                // $ride->setTitle($title)
-                //     ->setDate($date)
-                //     ->setTime($time)
-                //     ->setLength($length)
-                //     ->setDuration($duration)
-                //     ->setDifficulty($difficulty)
-                //     ->setPartNumber($partNumber)
-                //     ->setStartPoint($startPoint)
-                //     ->setArrival($arrival)
-                //     ->setDepartment($department)
-                //     ->setRegion($region)
-                //     ->setMeetingPoint($meetingPoint)
-                //     ->setPrecisions($precisions)
-                //     // ->setMap($map)
-                //     ->setWaypoints($waypoints)
-                //     ->setIdUser($idUser);
-                // $result = $ride->create();
+                // $params = [
+                //     'title' => $title,
+                //     'date' => $date,
+                //     'time' => $time,
+                //     'length' => $length,
+                //     'duration' => $duration,
+                //     'difficulty' => $difficulty,
+                //     'partNumber' => $partNumber,
+                //     'startPoint' => $startPoint,
+                //     'arrival' => $arrival,
+                //     'department' => $department,
+                //     'region' => $region,
+                //     'meetingPoint' => $meetingPoint,
+                //     'precisions' => $precisions,
+                //     'waypoints' => $waypoints,
+                //     'idUser' => $idUser
+                // ];
+                $ride->setTitle($title)
+                    ->setDate($date)
+                    ->setTime($time)
+                    ->setLength($length)
+                    ->setDuration($duration)
+                    ->setDifficulty($difficulty)
+                    ->setPartNumber($partNumber)
+                    ->setStartPoint($startPoint)
+                    ->setArrival($arrival)
+                    ->setDepartment($department)
+                    ->setRegion($region)
+                    ->setMeetingPoint($meetingPoint)
+                    ->setPrecisions($precisions)
+                    // ->setMap($map)
+                    ->setWaypoints($waypoints)
+                    ->setIdUser($idUser);
+                $result = $ride->create();
 
-                $result = $ride->addBalade($params);
+                // $result = $ride->addBalade($params);
                 $idBalade = $this->getLastId();
                 $participant = new ParticipantModel($_SESSION['user']['idUser'], $idBalade);
                 $storedParticipant = $participant->createParticipant(['idUser' => $_SESSION['user']['idUser'], 'idBalade' => $idBalade]);
@@ -93,26 +93,22 @@ class OrgaController extends RideModel {
                         $title = 'Organiser ma balade - Ride Connect';
                         $error = "Une erreur est survenue";
                         include ROOT.'/app/views/orga.php';
+                        exit;
                     }
                 }
                 else {
                     $error = "Une erreur est survenue";
                     $title = 'Organiser ma balade - Ride Connect';
                     include ROOT.'/app/views/orga.php';
+                    exit;
                 }
             }
             else {
-            $error = "Veuillez remplir tous les champs requis";
-            $title = 'Organiser ma balade - Ride Connect';
-            include ROOT.'/app/views/orga.php';
+                $error = "Veuillez remplir tous les champs requis";
+                $title = 'Organiser ma balade - Ride Connect';
+                include ROOT.'/app/views/orga.php';
+                exit;
             }
         }
     }
-
-    /* Récupération des données : 
-    * title, date, time, departure, meetingPoint, partNumber, difficulty, precisions : via formulaire
-    * arrival, department, region : nominatim
-    * length, duration, waypoints : ORS
-    * map : ??? 
-    */
 }

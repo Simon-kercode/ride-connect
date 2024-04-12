@@ -25,7 +25,7 @@
                 <span class="bold"> 
                     <?php 
                         if((($ride->duration)/60) < 1) {
-                            echo (round(($ride->duration)%60).' min');
+                            echo ((round($ride->duration)%60).' min');
                         }
                         else {
                             echo (floor(($ride->duration)/60).'h'.sprintf('%02d', (round($ride->duration)%60))) ;

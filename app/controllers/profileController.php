@@ -61,7 +61,7 @@ class ProfileController extends RideModel {
             if($result) {
                 $_SESSION['message'] = "La balade a bien été supprimée.";
                 $title = 'Profil - Ride Connect';
-                header('Location: /ride-connect/profil');
+                header('Location: '.$_SERVER['HTTP_ORIGIN'].'/ride-connect/profil');
                 exit;
             }
         }
@@ -212,7 +212,7 @@ class ProfileController extends RideModel {
             if($result) {
                 $_SESSION['message'] = "Compte supprimé avec succès ! Au revoir.";
                 $title = 'Ride Connect';
-                header('Location: /ride-connect/accueil');
+                header('Location: '.$_SERVER['HTTP_ORIGIN'].'/ride-connect/accueil');
                 exit;
             }
             else {

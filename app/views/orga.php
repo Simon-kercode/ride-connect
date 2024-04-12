@@ -2,7 +2,7 @@
 
 <main id="orgaPage" class="container">
     <h1>Organiser ma balade</h1>
-    <form action="organiser" method="POST" id="orgaForm">
+    <form action="balades/organiser" method="POST" id="orgaForm">
         <div>
             <label for="title">Donne un petit titre sympa *</label>
             <input name="title" type="text" placeholder="ex: Visite aux anciens de Béganne">
@@ -23,7 +23,7 @@
             <input type="text" name="meetingPoint" id="meetingPoint" placeholder="ex: Station essence Leclerc Vannes">
         </div>
         <div>
-            <label for="partNumber">Nombre maximum de participants (laisse ce champ vide si tu n'a pas de limite de nombre)</label>
+            <label for="partNumber">Nombre maximum de participants *</label>
             <input name="partNumber" id="partNumber" type="number" min="2">
         </div>
         <figure>
@@ -49,9 +49,10 @@
             <input type="text" name="waypoints" id="waypoints">
         </div>
         <p>* : Champs obligatoires</p>
+        <p class="error"><?php if(isset($error) && !empty($error)) echo $error ?></p>
         <input class="formBtn" type="submit" value="Enregistrer">
     </form>
-    <p><?php if(isset($error) && !empty($error)) echo $error ?></p>
+    
 </main>
 
 <?php include ROOT . "/app/views/footer.php"; ?>

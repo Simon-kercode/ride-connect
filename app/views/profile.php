@@ -4,6 +4,8 @@
     
     <aside>
         <p class="userInfo"><?php if (isset($_SESSION['message']) && !empty($_SESSION['message'])) echo $_SESSION['message']; unset($_SESSION['message']); ?></p>
+        <p class="error"><?php if (isset($_SESSION['error']) && !empty($_SESSION['error'])) echo $_SESSION['error']; unset($_SESSION['error']); ?></p>
+
         <p class="particle"><?=substr($_SESSION['user']['pseudo'], 0, 1)?></p>
         <div id="profileBtn">
             <button class="button" id="myInfoBtn">Mes informations</button>
@@ -105,7 +107,7 @@
                                         <p>
                                             <?php 
                                             if((($ride->duration)/60) < 1) {
-                                                echo (round(($ride->duration)%60).' min');
+                                                echo ((round($ride->duration)%60).' min');
                                             }
                                             else {
                                                 echo (floor(($ride->duration)/60).'h'.sprintf('%02d', (round($ride->duration)%60))) ;
@@ -126,7 +128,7 @@
                         </a>     
                         <div id="rideProfilBtn">
                             <a class="button" href="balades/<?= $ride->idBalade?>/modifier">Modifier</a>
-                            <a class="dangerButton" href="profil/<?=$ride->idBalade?>/supprimer/">Supprimer</a>
+                            <a class="dangerButton" href="profil/supprimer/<?=$ride->idBalade?>">Supprimer</a>
                         </div>
                     <?php endforeach ?>
                 </div> 
@@ -167,7 +169,7 @@
                                         <p>
                                             <?php 
                                             if((($subscribedRide->duration)/60) < 1) {
-                                                echo (round(($subscribedRide->duration)%60).' min');
+                                                echo ((round($subscribedRide->duration)%60).' min');
                                             }
                                             else {
                                                 echo (floor(($subscribedRide->duration)/60).'h'.sprintf('%02d', (round($subscribedRide->duration)%60))) ;

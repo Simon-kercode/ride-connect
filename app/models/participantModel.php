@@ -45,4 +45,28 @@ class ParticipantModel extends Model {
         $result = $this->findSomeBy(['idUser'], ['idBalade'=>$idBalade, 'idUser'=>$idUser]);
         return $result;
     }
+
+    /**
+     * Set the value of idUser
+     *
+     * @return  self
+     */ 
+    public function setIdUser($idUser)
+    {
+        $this->idUser = $idUser;
+
+        return $this;
+    }
+
+    /**
+     * Set the value of idBalade
+     *
+     * @return  self
+     */ 
+    public function setIdBalade($idBalade)
+    {
+        $this->idBalade = $idBalade;
+
+        return $this;
+    }
 }

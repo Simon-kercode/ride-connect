@@ -11,6 +11,7 @@ use app\controllers\rideDetailsController;
 use app\controllers\modifyController;
 use app\controllers\adminController;
 use app\controllers\contactController;
+use app\controllers\controller404;
 
     class Routage {
         public function start() {
@@ -140,7 +141,8 @@ use app\controllers\contactController;
                                     }
                                 }
                                 else {
-                                    //  page 404!!!!!!!!!!!!!!!!
+                                    $route = new controller404;
+                                    $route->index();
                                 }
                             }
                             
@@ -161,12 +163,13 @@ use app\controllers\contactController;
                                 }
                                 else {
                                     $_SESSION['message'] = "Vous devez être connecté pour organiser une balade.";
-                                    header('Location: /ride-connect/balades'); 
+                                    header('Location: '.$_SERVER['HTTP_ORIGIN'].'/ride-connect/balades'); 
                                 }
                             }
                         }
                         else {
-                            // page 404 !!!!!!!!!!!!!!!!!!
+                            $route = new controller404;
+                            $route->index();
                         }
                     }
                     else {
@@ -174,24 +177,6 @@ use app\controllers\contactController;
                         $route->index();
                     }
                     break;
-
-                    case 'organiser':
-                        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-                            $route = new OrgaController;
-                            $route->createRide();
-                        }
-                        else {
-                            if(isset($_SESSION['user']) && !empty($_SESSION['user'])) {
-                                $route = new OrgaController;
-                                $route->index();
-                            }
-                            else {
-                                $_SESSION['message'] = "Vous devez être connecté pour organiser une balade.";
-                                $route = new RidesController;
-                                $route->index();
-                            }
-                        }
-                        break;
 
                     case 'contact':
                         $route = new ContactController;
@@ -230,7 +215,8 @@ use app\controllers\contactController;
                                             }
                                         }
                                         else {
-                                            // page 404!!!!!!!!!!!!!!!!
+                                            $route = new controller404;
+                                            $route->index();
                                         }
                                     }
                                     else {
@@ -240,7 +226,8 @@ use app\controllers\contactController;
                                     }
                                 }
                                 else {
-                                    // page 404 !!!!!!!!!!!!!!!!!!!!!!!!!!
+                                    $route = new controller404;
+                                    $route->index();
                                 }
                                 
                             }
@@ -255,6 +242,10 @@ use app\controllers\contactController;
                             $route->index();
                         }
                         break;
+                    
+                    default:
+                        $route = new controller404;
+                        $route->index();
             }       
         }
     }

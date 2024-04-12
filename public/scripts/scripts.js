@@ -67,7 +67,6 @@ function formVerification() {
     // Client side registering verification
 
     let form = document.querySelector("#registerForm");
-    let errorElement = null;
     form.addEventListener("submit", function (event) {
 
 
@@ -254,8 +253,4 @@ function paramIndex($param) {
     let paramIndex = segments.indexOf($param);
     return paramIndex;
 }
-
-
-
-
 

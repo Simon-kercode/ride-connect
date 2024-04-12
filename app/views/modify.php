@@ -49,10 +49,10 @@
             <input type="text" name="waypoints" id="waypointsModify" value="<?= $ride->waypoints ?>">
         </div>
         <p>* : Champs obligatoires</p>
+        <p class="error"><?php if(isset($error) && !empty($error)) echo $error ?></p>
         <input type="submit"class="formBtn" value="Enregistrer">
     </form>
-    <p><?php if(isset($error) && !empty($error)) echo $error ?></p>
-
+    
     <script>document.addEventListener('DOMContentLoaded', function(event) {
         displayInitial(<?= $ride->waypoints?>)
     })</script>
