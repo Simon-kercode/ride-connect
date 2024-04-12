@@ -206,6 +206,7 @@ use app\controllers\controller404;
                                         }
                                         elseif(isset($params[2]) && $params[2] === 'balade') {
                                             if(isset($params[3]) && ctype_digit($params[3])) {
+                                                $route = new AdminController;
                                                 $route->rideDelete();
                                             }
                                             else {

@@ -4,7 +4,7 @@
     <section>
         <div id="welcome">
             <?php if (isset($_SESSION['message']) && !empty($_SESSION['message'])) {echo $_SESSION['message']; unset($_SESSION['message']);} ?>
-            <h1>Rouler,<br> ensemble</h1>
+            <h1>Les balades<br> collaboratives</h1>
             <form action="balades" method="POST">
                 <input id="welcomeSearch" type="search" name="rideSearch" placeholder="Recherche par département, région...">
                 <input type="submit" id="go" class="particle" value="GO !">
@@ -14,7 +14,7 @@
     <section class="rides container">
         <h2>Prochaines balades</h2>
         <div class="rideContainer">
-            <?php for ($i=0; $i < 3; $i++) : if (isset($rides[$i]) && !empty($rides[$i])) :?>
+            <?php for ($i=0; $i <= 3; $i++) : if (isset($rides[$i]) && !empty($rides[$i])) :?>
                 <a class="rideItem" href="balades/<?= $rides[$i]->idBalade ?>">
                 <article >
                     <h3><?= $rides[$i]->title?></h3>

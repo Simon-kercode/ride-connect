@@ -74,6 +74,7 @@ a {
 
 .logo {
   width: 200px;
+  height: -moz-fit-content;
   height: fit-content;
 }
 
@@ -88,8 +89,8 @@ a {
 }
 
 .button {
-  background-color: #009BDB;
-  border: solid 1px #009BDB;
+  background-color: #007db3;
+  border: solid 1px #007db3;
   color: white;
   font-family: "Work Sans";
   font-weight: 800;
@@ -108,8 +109,8 @@ a {
 }
 
 .dangerButton {
-  background-color: #009BDB;
-  border: solid 1px #009BDB;
+  background-color: #007db3;
+  border: solid 1px #007db3;
   color: white;
   font-family: "Work Sans";
   font-weight: 800;
@@ -134,8 +135,8 @@ a {
 }
 
 .formBtn {
-  background-color: #009BDB;
-  border: solid 1px #009BDB;
+  background-color: #007db3;
+  border: solid 1px #007db3;
   color: white;
   font-family: "Work Sans";
   font-weight: 800;
@@ -159,7 +160,7 @@ a {
 }
 
 .particle {
-  background-color: #009BDB;
+  background-color: #007db3;
   color: white;
   font-family: "Anton";
   border-radius: 50%;
@@ -218,6 +219,57 @@ a {
   }
   .rides .rideContainer .rideItem {
     width: 230px;
+  }
+}
+
+.aside {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  background-color: #202022;
+}
+.aside .asideBtn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.aside .asideBtn button {
+  width: 180px;
+  margin: 8px 30px 8px 0;
+  font-size: 16px;
+}
+.aside .particle {
+  margin: auto;
+  font-size: 50px;
+  width: 100px;
+  height: 100px;
+  line-height: 87px;
+}
+@media screen and (min-width: 992px) {
+  .aside {
+    padding-top: 30px;
+    width: 20%;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+  }
+  .aside .particle {
+    margin: 30px auto;
+    width: 160px;
+    height: 160px;
+    line-height: 144px;
+    font-size: 62px;
+  }
+  .aside .asideBtn {
+    width: 100%;
+    margin-top: 30px;
+    align-items: flex-end;
+  }
+  .aside .asideBtn button {
+    width: 80%;
+    text-align: left;
+    margin-right: 0;
+    border-radius: 10px 0 0 10px;
   }
 }
 
@@ -289,13 +341,13 @@ header #menuLinks li a:not(.button) {
   color: black;
 }
 header #menuLinks #profileLink {
-  border: solid 2px #009BDB;
+  border: solid 2px #007db3;
   font-weight: 800;
   border-radius: 10px;
   padding: 16px;
 }
 header #menuLinks #profileLink:hover {
-  background-color: #009BDB;
+  background-color: #007db3;
   color: white;
   transition: 0.3s;
 }
@@ -367,7 +419,7 @@ header #menuLinks #profileLink img {
   width: 100%;
   padding: 16px 5px;
   margin-top: 20px;
-  border: solid 1px #009BDB;
+  border: solid 1px #007db3;
   border-radius: 10px;
 }
 #registerPage #gridContainer div input:focus {
@@ -408,15 +460,15 @@ header #menuLinks #profileLink img {
   width: 100%;
   padding: 16px 5px;
   margin-top: 20px;
-  border: solid 1px #009BDB;
+  border: solid 1px #007db3;
   border-radius: 10px;
 }
 #loginPage #login form div input:focus {
   outline: none;
 }
 #loginPage #login form input[type=submit] {
-  background-color: #009BDB;
-  border: solid 1px #009BDB;
+  background-color: #007db3;
+  border: solid 1px #007db3;
   color: white;
   font-family: "Work Sans";
   font-weight: 800;
@@ -462,7 +514,7 @@ header #menuLinks #profileLink img {
 #ridesPage #searchCreate form input {
   width: 100%;
   padding: 16px 5px;
-  border: solid 1px #009BDB;
+  border: solid 1px #007db3;
   border-radius: 10px;
 }
 #ridesPage #searchCreate form input:focus {
@@ -513,8 +565,8 @@ header #menuLinks #profileLink img {
   margin: 30px 0;
 }
 #rideDetailsPage #rideInfos p:nth-of-type(2) {
-  border-left: solid 2px #009BDB;
-  border-right: solid 2px #009BDB;
+  border-left: solid 2px #007db3;
+  border-right: solid 2px #007db3;
   text-align: center;
   width: 40%;
 }
@@ -547,7 +599,7 @@ header #menuLinks #profileLink img {
   transition: 0.4s;
 }
 #rideDetailsPage .accordion.active, #rideDetailsPage .accordion:hover {
-  background-color: #009BDB;
+  background-color: #007db3;
   color: white;
 }
 #rideDetailsPage .accordion:after {
@@ -602,7 +654,7 @@ header #menuLinks #profileLink img {
   width: 100%;
   padding: 10px 0;
   margin: 10px 0;
-  border: solid 1px #009BDB;
+  border: solid 1px #007db3;
   border-radius: 10px;
 }
 #orgaPage form input:focus,
@@ -626,7 +678,7 @@ header #menuLinks #profileLink img {
   margin: 10px 0;
   font-family: "Work sans";
   background-color: white;
-  border: solid 1px #009BDB;
+  border: solid 1px #007db3;
   border-radius: 10px;
 }
 #orgaPage form .precisionsContainer,
@@ -637,7 +689,7 @@ header #menuLinks #profileLink img {
 #orgaPage form .precisionsContainer textarea,
 #modifyPage form .precisionsContainer textarea {
   height: 100px;
-  border: solid 1px #009BDB;
+  border: solid 1px #007db3;
   border-radius: 10px;
 }
 #orgaPage form textarea,
@@ -655,29 +707,6 @@ header #menuLinks #profileLink img {
 #profilePage hr {
   color: #878787;
   margin: 20px 0;
-}
-#profilePage aside {
-  display: flex;
-  justify-content: space-between;
-  width: 100%;
-  background-color: #202022;
-}
-#profilePage aside #profileBtn {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-#profilePage aside #profileBtn button {
-  width: 180px;
-  margin: 8px 30px 8px 0;
-  font-size: 16px;
-}
-#profilePage aside .particle {
-  margin: auto;
-  font-size: 50px;
-  width: 100px;
-  height: 100px;
-  line-height: 87px;
 }
 #profilePage #profileContent {
   margin: 30px 30px;
@@ -701,7 +730,7 @@ header #menuLinks #profileLink img {
 }
 #profilePage #profileContent #myInfo form input {
   width: 50%;
-  border: solid 1px #009BDB;
+  border: solid 1px #007db3;
   border-radius: 10px;
   padding: 10px 0;
 }
@@ -737,15 +766,17 @@ header #menuLinks #profileLink img {
 #profilePage #profileContent #myRides {
   display: none;
 }
-#profilePage #profileContent #myRides .rideContainer {
-  display: flex;
-  flex-direction: column;
-}
 #profilePage #profileContent #myRides .rideContainer a {
   margin-bottom: 20px;
 }
-#profilePage #profileContent #myRides .rideContainer #rideProfilBtn {
-  margin: 20px 0 30px 0;
+#profilePage #profileContent #myRides .rideContainer .btnRow {
+  display: flex;
+  justify-content: center;
+  padding-top: 30px;
+}
+#profilePage #profileContent #myRides .rideContainer .btnRow a {
+  padding: 3px;
+  margin-bottom: 0;
 }
 #profilePage #profileContent .rdv {
   margin-top: 20px;
@@ -755,11 +786,53 @@ header #menuLinks #profileLink img {
 }
 
 /*============== Admin ================ */
-#adminPage #adminContent #usersList {
-  display: block;
+#adminPage h2 {
+  margin-bottom: 16px;
+}
+#adminPage #adminContent {
+  margin: 8px 16px;
+}
+#adminPage #adminContent section {
+  margin-left: 16px;
+}
+#adminPage #adminContent section .dangerButton {
+  padding: 3px;
+}
+#adminPage #adminContent #usersGrid {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+#adminPage #adminContent #usersGrid .btnRow {
+  display: flex;
+  justify-content: center;
+  padding-top: 30px;
+}
+#adminPage #adminContent #usersGrid .btnRow a {
+  padding: 3px;
+  width: 250px;
+}
+#adminPage #adminContent #usersGrid #userContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  border: solid 1px #878787;
+  border-radius: 10px;
+  margin-bottom: 16px;
+  padding: 8px;
+  max-width: 300px;
+}
+#adminPage #adminContent #usersGrid #userContainer .particle {
+  margin-right: 16px;
+}
+#adminPage #adminContent #usersGrid #userContainer .flex {
+  align-items: center;
 }
 #adminPage #adminContent #ridesList {
   display: none;
+}
+#adminPage #adminContent #ridesList .rdv {
+  margin: 20px 0;
 }
 #adminPage #adminContent #messagesList {
   display: none;
@@ -802,7 +875,7 @@ footer #upFooter #rightFooter ul li a {
 }
 footer #copyright {
   text-align: center;
-  background-color: #009BDB;
+  background-color: #007db3;
   padding: 3px 0;
 }
 
@@ -819,7 +892,7 @@ footer #copyright {
   margin-bottom: 150px;
 }
 #page404 p {
-  border: solid 1px #009BDB;
+  border: solid 1px #007db3;
   border-radius: 10px;
   padding: 15px;
 }
@@ -895,6 +968,11 @@ footer #copyright {
   #page404 img {
     width: 500px;
   }
+  #adminPage #adminContent #usersGrid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: 20px;
+  }
 }
 @media screen and (min-width: 992px) {
   /*============== Header ==================*/
@@ -925,33 +1003,23 @@ footer #copyright {
   #profilePage {
     display: flex;
   }
-  #profilePage aside {
-    padding-top: 30px;
-    width: 20%;
-    flex-direction: column;
-    justify-content: flex-start;
-    align-items: center;
+  #profilePage h1 {
+    color: white;
   }
-  #profilePage aside .particle {
-    margin: 30px auto;
-    width: 160px;
-    height: 160px;
-    line-height: 144px;
-    font-size: 62px;
-  }
-  #profilePage aside #profileBtn {
-    width: 100%;
-    margin-top: 30px;
-    align-items: flex-end;
-  }
-  #profilePage aside #profileBtn button {
-    width: 80%;
-    text-align: left;
-    margin-right: 0;
-    border-radius: 10px 0 0 10px;
+  #profilePage h2 {
+    margin: 15px 0;
   }
   #profilePage #profileContent #myInfo form #btnContainer {
     flex-direction: row;
+  }
+  #adminPage {
+    display: flex;
+  }
+  #adminPage h1 {
+    color: white;
+  }
+  #adminPage h2 {
+    margin: 15px 0;
   }
 }
 @media screen and (min-width: 1400px) {
@@ -959,5 +1027,10 @@ footer #copyright {
   #orgaPage,
   #modifyPage {
     margin: 0 auto;
+  }
+  #adminPage #adminContent #usersGrid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 20px;
   }
 }/*# sourceMappingURL=style.css.map */

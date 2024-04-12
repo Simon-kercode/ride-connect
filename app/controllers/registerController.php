@@ -70,7 +70,7 @@ class RegisterController {
                             if ($result) {
                                 // account created successfully
                                 $_SESSION['message'] = "Votre compte a bien été créé. Vous pouvez maintenant vous connecter";
-                                header('Location: connexion');
+                                header('Location: '.$_SERVER['HTTP_ORIGIN'].'/ride-connect/connexion');
                                 exit;
 
                             } 

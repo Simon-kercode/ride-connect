@@ -53,7 +53,7 @@ document.querySelector('#modifyForm').addEventListener('submit', async function(
     routeInfosInput.value = JSON.stringify(routeInfos);
     waypointsInput.value = JSON.stringify(waypoints);
     
-    if ($errorsModify.length === 0) {
+    if (errorsModify.length === 0) {
         document.getElementById('modifyForm').submit();
     }
 })

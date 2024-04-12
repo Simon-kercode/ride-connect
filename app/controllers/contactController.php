@@ -36,7 +36,7 @@ class ContactController {
                         if ($result) {
                             // message sent successfully
                             $_SESSION['message'] = "Votre message a bien été envoyé. Nous vous répondrons le plus rapidement possible.";
-                            header('Location: contact');
+                            header('Location: '.$_SERVER['HTTP_ORIGIN'].'/ride-connect/contact');
                             exit;
     
                         } else {

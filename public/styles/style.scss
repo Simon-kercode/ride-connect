@@ -3,7 +3,7 @@ $backgroundBody: #F2F2F2;
 $backgroundFooter: #202022;
 $backgroundLightGrey: #CACACA;
 $backgroundDarkGrey: #878787;
-$detailsBlue: #009BDB;
+$detailsBlue: #007db3;
 
 // ================= mixins ====================
 
@@ -32,11 +32,13 @@ $detailsBlue: #009BDB;
         transition: 0.3s;
     }
 }
+
 @mixin dangerButton {
     @include button;
     background-color: darkred;
     border: solid 1px white;
     color: white;
+
     &:hover {
         border-color: black;
     }
@@ -79,7 +81,7 @@ $detailsBlue: #009BDB;
             box-shadow: rgba(0, 0, 0, 0.15) 0px 2px 8px 0px;
             margin-top: 16px;
             padding: 20px;
-            
+
             &:hover {
                 opacity: 0.7;
             }
@@ -126,6 +128,66 @@ $detailsBlue: #009BDB;
             }
         }
 
+    }
+}
+
+@mixin aside {
+
+        display: flex;
+        justify-content: space-between;
+        width: 100%;
+        background-color: $backgroundFooter;
+
+        .asideBtn {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+
+            button {
+                width: 180px;
+                margin: 8px 30px 8px 0;
+                font-size: 16px;
+            }
+        }
+
+        .particle {
+            margin: auto;
+            font-size: 50px;
+            width: 100px;
+            height: 100px;
+            line-height: 87px;
+        }
+    
+
+    @media screen and (min-width: 992px) {
+
+            padding-top: 30px;
+            width: 20%;
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: center;
+
+            .particle {
+                margin: 30px auto;
+                width: 160px;
+                height: 160px;
+                line-height: 144px;
+                font-size: 62px;
+            }
+
+            .asideBtn {
+                width: 100%;
+                margin-top: 30px;
+                align-items: flex-end;
+
+                button {
+                    width: 80%;
+                    text-align: left;
+                    margin-right: 0;
+                    border-radius: 10px 0 0 10px;
+                }
+            }
+        
     }
 }
 
@@ -228,9 +290,11 @@ a {
 .button {
     @include button;
 }
+
 .dangerButton {
     @include dangerButton;
 }
+
 .formBtn {
     @include formBtn;
 }
@@ -242,7 +306,9 @@ a {
 .rides {
     @include rideCards;
 }
-
+.aside {
+    @include aside;
+}
 .error {
     margin-top: 8px;
     color: red;
@@ -738,32 +804,6 @@ header {
         margin: 20px 0;
     }
 
-    aside {
-        display: flex;
-        justify-content: space-between;
-        width: 100%;
-        background-color: $backgroundFooter;
-
-        #profileBtn {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-
-            button {
-                width: 180px;
-                margin: 8px 30px 8px 0;
-                font-size: 16px;
-            }
-        }
-
-        .particle {
-            margin: auto;
-            font-size: 50px;
-            width: 100px;
-            height: 100px;
-            line-height: 87px;
-        }
-    }
     #profileContent {
         margin: 30px 30px;
         width: 90%;
@@ -772,17 +812,21 @@ header {
             display: block;
             width: 100%;
             margin: auto;
+
             .flex {
                 justify-content: space-between;
                 align-items: center;
             }
+
             form {
                 // margin: auto;
                 display: flex;
                 flex-direction: column;
+
                 .button {
                     padding: 3px;
                 }
+
                 input {
                     width: 50%;
                     border: solid 1px $detailsBlue;
@@ -793,9 +837,11 @@ header {
                         outline-style: none;
                     }
                 }
+
                 .hiddenInput {
                     display: none;
                 }
+
                 #passwordUpdate {
                     width: 50%;
                     display: flex;
@@ -810,6 +856,7 @@ header {
                         width: 100%;
                     }
                 }
+
                 #btnContainer {
                     flex-direction: column;
                     margin-bottom: 30px;
@@ -819,28 +866,39 @@ header {
                         width: 300px;
                     }
                 }
+
                 #accountDeleteBtn {
                     padding: 3px 8px;
                 }
             }
         }
+
         #myRides {
             display: none;
+
             .rideContainer {
-                display: flex;
-                flex-direction: column;
                 a {
                     margin-bottom: 20px;
                 }
-                #rideProfilBtn {
-                    margin: 20px 0 30px 0;
+
+                .btnRow {
+                    display: flex;
+                    justify-content: center;
+                    padding-top: 30px;
+
+                    a {
+                        padding: 3px;
+                        margin-bottom: 0
+                    }
                 }
             }
-            
+
         }
+
         .rdv {
             margin-top: 20px
         }
+
         #mySubscribedRides {
             display: none;
         }
@@ -850,13 +908,54 @@ header {
 /*============== Admin ================ */
 
 #adminPage {
+    h2 {
+        margin-bottom: 16px;
+    }
     #adminContent {
-        #usersList {
-            display: block;
+        margin: 8px 16px;
+        section {
+            margin-left: 16px;
+            .dangerButton {
+                padding: 3px;
+            }
+        }
+        #usersGrid {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            .btnRow {
+                display: flex;
+                justify-content: center;
+                padding-top: 30px;
+                a {
+                    padding: 3px;
+                    width: 250px;
+                }
+            }
+            #userContainer {
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                border: solid 1px $backgroundDarkGrey;
+                border-radius: 10px;
+                margin-bottom: 16px;
+                padding: 8px;
+                max-width: 300px;
+                .particle {
+                    margin-right: 16px;
+                }
+                .flex {
+                    align-items: center;
+                }
+            }
         }
 
         #ridesList {
             display: none;
+
+            .rdv {
+                margin: 20px 0;
+            }
         }
 
         #messagesList {
@@ -923,10 +1022,12 @@ footer {
     justify-content: center;
     align-items: center;
     margin: 0 16px;
+
     img {
         width: 300px;
         margin-bottom: 150px;
     }
+
     p {
         border: solid 1px $detailsBlue;
         border-radius: 10px;
@@ -954,14 +1055,15 @@ footer {
             }
         }
     }
+
     #profilePage #profileContent {
-    #myRides {
-        .rideContainer {
-            #rideProfilBtn {
-                margin-top: 0;
+        #myRides {
+            .rideContainer {
+                #rideProfilBtn {
+                    margin-top: 0;
+                }
             }
         }
-    }
     }
 }
 
@@ -1033,6 +1135,14 @@ footer {
             width: 500px;
         }
     }
+
+    #adminPage #adminContent{
+        #usersGrid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            grid-gap: 20px;
+        }
+    }
 }
 
 @media screen and (min-width: 992px) {
@@ -1074,34 +1184,11 @@ footer {
     /*============= profile =================*/
     #profilePage {
         display: flex;
-
-        aside {
-            padding-top: 30px;
-            width: 20%;
-            flex-direction: column;
-            justify-content: flex-start;
-            align-items: center;
-
-            .particle {
-                margin: 30px auto;
-                width: 160px;
-                height: 160px;
-                line-height: 144px;
-                font-size: 62px;
-            }
-
-            #profileBtn {
-                width: 100%;
-                margin-top: 30px;
-                align-items: flex-end;
-
-                button {
-                    width: 80%;
-                    text-align: left;
-                    margin-right: 0;
-                    border-radius: 10px 0 0 10px;
-                }
-            }
+        h1 {
+            color: white;
+        }
+        h2 {
+            margin: 15px 0;
         }
 
         #profileContent {
@@ -1114,6 +1201,15 @@ footer {
             }
         }
     }
+    #adminPage {
+        display: flex;
+        h1 {
+            color: white;
+        }
+        h2 {
+            margin: 15px 0;
+        }
+    }
 }
 
 @media screen and (min-width: 1400px) {
@@ -1122,5 +1218,13 @@ footer {
     #orgaPage,
     #modifyPage {
         margin: 0 auto;
+    }
+
+    #adminPage #adminContent{
+        #usersGrid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            grid-gap: 20px;
+        }
     }
 }

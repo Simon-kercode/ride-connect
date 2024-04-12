@@ -2,12 +2,12 @@
 
 <main id="profilePage">
     
-    <aside>
+    <aside class="aside">
         <p class="userInfo"><?php if (isset($_SESSION['message']) && !empty($_SESSION['message'])) echo $_SESSION['message']; unset($_SESSION['message']); ?></p>
         <p class="error"><?php if (isset($_SESSION['error']) && !empty($_SESSION['error'])) echo $_SESSION['error']; unset($_SESSION['error']); ?></p>
-
+        <h1>Mon profil</h1>
         <p class="particle"><?=substr($_SESSION['user']['pseudo'], 0, 1)?></p>
-        <div id="profileBtn">
+        <div class="asideBtn">
             <button class="button" id="myInfoBtn">Mes informations</button>
             <button class="button" id="myRidesBtn">Mes balades</button>
             <button class="button" id="mySubscribedRidesBtn">Balades prévues</button>
@@ -16,6 +16,7 @@
     <section id="profileContent" class="Container">
         <!-- ================ personnal informations section ===============-->
         <section id="myInfo">
+           <h2>Mes informations</h2> 
             <form action="profil" method="POST">
                 <div>
                     <label for="profileEmail">Mon Email :</label>
@@ -77,10 +78,12 @@
         </section>
         <!--================ user's rides ============ -->
         <section id="myRides">
+            <h2>Mes balades</h2>
             <div class="rides">
                 <div class="rideContainer">
                     <?php if(isset($rides) && !empty($rides)) {foreach ($rides as $index => $ride) :?>
-                        <a class="rideItem" href="balades/<?= $ride->idBalade ?>">
+                        <div class="rideItem">
+                        <a href="balades/<?= $ride->idBalade ?>">
                             <article>
                                 <h3><?= $ride->title?></h3>
                                 <div class="flex"> 
@@ -126,9 +129,10 @@
                                
                             </article>
                         </a>     
-                        <div id="rideProfilBtn">
+                        <div class="btnRow">
                             <a class="button" href="balades/<?= $ride->idBalade?>/modifier">Modifier</a>
                             <a class="dangerButton" href="profil/supprimer/<?=$ride->idBalade?>">Supprimer</a>
+                        </div>
                         </div>
                     <?php endforeach ?>
                 </div> 
@@ -139,6 +143,7 @@
         </section>
         <!-- =============== user's subscribed rides ==============-->
         <section id="mySubscribedRides">
+            <h2>Mes balades prévues</h2>
             <div class="rides">
                 <div class="rideContainer">
                     <?php if (isset($subscribedRides) && !empty($subscribedRides)) {foreach ($subscribedRides as $index => $subscribedRide) {?>
@@ -185,9 +190,7 @@
                                 <div class="rdv">
                                     <p>RDV : <?= $subscribedRide->meetingPoint ?></p>
                                 </div>
-                                <div>
-                            </div>
-                        </article>
+                            </article>
                         </a> 
                     <?php }} else { ?>   
                         <p>Aucune balade de prévue ! Tu peux visiter la liste des balades pour trouver ton bonheur !</p></p>    

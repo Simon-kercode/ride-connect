@@ -26,7 +26,7 @@ class UserController {
                     $result = $user->login($email, $password);
                     
                     if ($result == true) {
-                        header('Location: profil');
+                        header('Location: '.$_SERVER['HTTP_ORIGIN'].'/ride-connect/profil');
                         exit;
                     }
                     elseif ($result == false) {
