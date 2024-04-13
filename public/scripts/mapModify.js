@@ -115,7 +115,6 @@ function createRoute(waypoints) {
 }
 
 function displayInitial(initialWaypoints) {
-    
     initialWaypoints.forEach(waypoint => {
         if (initialWaypoints.indexOf() === 0) {
             startPointMarker = L.marker(initialWaypoints[0].lat, initialWaypoints[0].lng);

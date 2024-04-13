@@ -47,6 +47,7 @@
             <input type="text" name="pointsInfos" id="pointsInfosModify">
             <input type="text" name="routeInfos" id="routeInfosModify">
             <input type="text" name="waypoints" id="waypointsModify" value="<?= $ride->waypoints ?>">
+           
         </div>
         <p>* : Champs obligatoires</p>
         <p class="error"><?php if(isset($error) && !empty($error)) echo $error ?></p>
