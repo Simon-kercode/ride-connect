@@ -7,6 +7,6 @@ class confidentialityController {
     public function index() {
 
         $title = 'Politique de confidentialité';
-        include ROOT.'/app/views/confidentialite.php';
+        include ROOT.'/app/views/confidentiality.php';
     }
 }
