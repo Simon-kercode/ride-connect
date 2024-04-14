@@ -838,6 +838,17 @@ header #menuLinks #profileLink img {
   display: none;
 }
 
+/*============= legal notices / confidentiality========== */
+#mentionsLegalesPage,
+#confidentialityPage {
+  margin: 0 16px;
+  padding-top: 120px;
+}
+#mentionsLegalesPage p,
+#confidentialityPage p {
+  margin: 10px 0 20px 0;
+}
+
 /*============== footer ================ */
 footer {
   background-color: #202022;
@@ -1025,7 +1036,9 @@ footer #copyright {
 @media screen and (min-width: 1400px) {
   /*============= orga/modify =============*/
   #orgaPage,
-  #modifyPage {
+  #modifyPage,
+  #mentionsLegalesPage,
+  #confidentialityPage {
     margin: 0 auto;
   }
   #adminPage #adminContent #usersGrid {

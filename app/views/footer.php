@@ -11,8 +11,8 @@
             <a id="scrollTopBtn" href="#"><img src="public/images/icons/arrow-up.svg" alt="fleche de remontée d'écran"></a>
             <ul>
                 <li><a href="contact" title="Laissez nous un message">Contact</a></li>
-                <li><a href="#">Confidentialité</a></li>
-                <li><a href="#">Mentions légales</a></li>
+                <li><a href="confidentialite">Confidentialité</a></li>
+                <li><a href="mentions-legales">Mentions légales</a></li>
             </ul>
         </div>
     </div>

@@ -11,6 +11,8 @@ use app\controllers\rideDetailsController;
 use app\controllers\modifyController;
 use app\controllers\adminController;
 use app\controllers\contactController;
+use app\controllers\legalNoticesController;
+use app\controllers\confidentialityController;
 use app\controllers\controller404;
 
     class Routage {
@@ -243,6 +245,16 @@ use app\controllers\controller404;
                             $route->index();
                         }
                         break;
+
+                        case 'mentions-legales':
+                            $route = new LegalNoticesController;
+                            $route->index();
+                            break;
+                        
+                        case 'confidentialite' :
+                            $route = new ConfidentialityController;
+                            $route->index();
+                            break;
                     
                     default:
                         $route = new controller404;

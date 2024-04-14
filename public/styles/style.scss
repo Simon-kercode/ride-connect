@@ -964,6 +964,17 @@ header {
     }
 }
 
+/*============= legal notices / confidentiality========== */
+
+#mentionsLegalesPage, 
+#confidentialityPage {
+    margin: 0 16px;
+    padding-top: 120px;
+    p {
+        margin: 10px 0 20px 0;
+    }
+}
+
 /*============== footer ================ */
 
 footer {
@@ -1216,7 +1227,9 @@ footer {
 
     /*============= orga/modify =============*/
     #orgaPage,
-    #modifyPage {
+    #modifyPage,
+    #mentionsLegalesPage,
+    #confidentialityPage {
         margin: 0 auto;
     }
 
