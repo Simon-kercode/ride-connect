@@ -4,7 +4,7 @@ Bienvenue dans l'application "Ride Connect" !
 
 ## Installation
 
-1. Clonez ce dépôt sur votre machine locale en utilisant la commande suivante : git clone `https://github.com/Simon-kercore/ride-connect.git`
+1. Clonez ce dépôt sur votre machine locale en utilisant la commande suivante : git clone `https://github.com/Simon-kercode/ride-connect.git`
 
 2. Renommez le fichier `.env.exemple` en `.env` et modifiez les variables d'environnement selon vos besoins.
 
