@@ -1,7 +1,8 @@
 # Guide d'utilisation
 
 Bienvenue sur "Ride Connect" !
-Cette application a pour objectif de rassembler des motards de tout niveaux dans le but d'organiser des balades en moto entre particuliers, et ce, dans toute la France. Un utilisateur peut organiser sa propre balade en y construisant son itinéraire précis.
+Cette application a pour objectif de rassembler des motards de tout niveaux dans le but d'organiser des balades en moto entre particuliers, et ce, dans toute la France. 
+Un utilisateur peut organiser sa propre balade en y construisant son itinéraire précis.
 Il peut aussi simplement consulter toute les balades disponibles et s'inscrire à celles de son choix.
 Une fonctionnalité de recherche par région ou département est intégrée afin de faciliter la recherche.
 
