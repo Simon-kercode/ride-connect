@@ -171,7 +171,7 @@ $detailsBlue: #007db3;
     @media screen and (min-width: 992px) {
 
             padding-top: 30px;
-            width: 20%;
+            width: 25%;
             flex-direction: column;
             justify-content: flex-start;
             align-items: center;
@@ -319,7 +319,7 @@ a {
     @include aside;
 }
 .error {
-    margin-top: 8px;
+    margin: 8px 0 5px 0;
     color: red;
 }
 
@@ -347,6 +347,9 @@ input {
     text-align: center;
     height: 15px;
     color: red;
+}
+.bold {
+    font-weight: 800;
 }
 
 /*======================= header =====================*/
@@ -636,11 +639,6 @@ header {
     div .flex {
         align-items: center;
     }
-
-    .bold {
-        font-weight: 800;
-    }
-
     #creator {
         .particle {
             margin-right: 16px;
@@ -902,8 +900,9 @@ header {
 /*============== Admin ================ */
 
 #adminPage {
-    h2 {
-        margin-bottom: 16px;
+    h1 {
+        margin: 16px auto;
+        color: white;
     }
     #adminContent {
         margin: 8px 16px;
@@ -911,6 +910,7 @@ header {
             margin-left: 16px;
             .dangerButton {
                 padding: 3px;
+                text-align: center;
             }
         }
         #usersGrid {
@@ -952,6 +952,13 @@ header {
         }
         #messagesList {
             display: none;
+            .message {
+                width: 90%;
+                margin-bottom: 30px;
+                p {
+                    margin-top: 16px;
+                }
+            }
         }
     }
 }
@@ -1148,6 +1155,8 @@ footer {
             width: 500px;
         }
     }
+
+    /*========== admin =================*/
     #adminPage #adminContent{
         #usersGrid {
             display: grid;
@@ -1210,6 +1219,8 @@ footer {
             }
         }
     }
+
+    /*===========admin===================*/
     #adminPage {
         display: flex;
         h1 {
@@ -1217,6 +1228,12 @@ footer {
         }
         h2 {
             margin: 15px 0;
+        }
+        #messagesList {
+            width: 75%;
+        }
+        .aside {
+            width: 300px;
         }
     }
 }

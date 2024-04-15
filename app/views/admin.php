@@ -117,14 +117,15 @@
         <section id="messagesList">
             <h2>Messages Reçus</h2>
             <?php if (isset($messages) && !empty($messages)) : foreach($messages as $message) : ?>
-            <div>
-                <p>Date d'envoi : <?= date('d/m/Y', strtotime($message->sendDate))?></p>
-                <p>Expéditeur : <?= $message->email ?></p>
-                <p>Objet : <?= $message->object ?></p>
-                <p><?= $message->message ?></p>
-                <?php endforeach ?>
-                <?php endif ?>
-            </div>
+                <div class="message">
+                    <p><span class="bold">Date d'envoi</span> : <?= date('d/m/Y', strtotime($message->sendDate))?></p>
+                    <p><span class="bold">Expéditeur</span> : <?= $message->email ?></p>
+                    <p><span class="bold">Objet</span> : <?= $message->object ?></p>
+                    <p><?= $message->message ?></p>   
+                </div>
+                <hr>
+            <?php endforeach ?>
+            <?php endif ?>
         </section>
     </section>
 </main>

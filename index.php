@@ -1,8 +1,8 @@
 <?php
 session_start();
 
-error_reporting(E_ALL);
-ini_set('display_errors', 1);
+// error_reporting(E_ALL);
+// ini_set('display_errors', 1);
 
 define("ROOT", dirname(__FILE__));
 
@@ -17,9 +17,9 @@ $dotenv->load();
 
 $current_page = $_SERVER['REQUEST_URI'];
 
-use app\core\routage;
+use app\core\routing;
 
-$routage = new routage;
+$routage = new Routing;
 $routage->start();
 
 ?>

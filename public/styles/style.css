@@ -74,6 +74,7 @@ a {
 
 .logo {
   width: 200px;
+  height: -moz-fit-content;
   height: fit-content;
 }
 
@@ -247,7 +248,7 @@ a {
 @media screen and (min-width: 992px) {
   .aside {
     padding-top: 30px;
-    width: 20%;
+    width: 25%;
     flex-direction: column;
     justify-content: flex-start;
     align-items: center;
@@ -273,7 +274,7 @@ a {
 }
 
 .error {
-  margin-top: 8px;
+  margin: 8px 0 5px 0;
   color: red;
 }
 
@@ -302,6 +303,10 @@ input {
   text-align: center;
   height: 15px;
   color: red;
+}
+
+.bold {
+  font-weight: 800;
 }
 
 /*======================= header =====================*/
@@ -571,9 +576,6 @@ header #menuLinks #profileLink img {
 #rideDetailsPage div .flex {
   align-items: center;
 }
-#rideDetailsPage .bold {
-  font-weight: 800;
-}
 #rideDetailsPage #creator .particle {
   margin-right: 16px;
   width: 40px;
@@ -819,8 +821,9 @@ header #menuLinks #profileLink img {
 }
 
 /*============== Admin ================ */
-#adminPage h2 {
-  margin-bottom: 16px;
+#adminPage h1 {
+  margin: 16px auto;
+  color: white;
 }
 #adminPage #adminContent {
   margin: 8px 16px;
@@ -830,6 +833,7 @@ header #menuLinks #profileLink img {
 }
 #adminPage #adminContent section .dangerButton {
   padding: 3px;
+  text-align: center;
 }
 #adminPage #adminContent #usersGrid {
   display: flex;
@@ -869,6 +873,13 @@ header #menuLinks #profileLink img {
 }
 #adminPage #adminContent #messagesList {
   display: none;
+}
+#adminPage #adminContent #messagesList .message {
+  width: 90%;
+  margin-bottom: 30px;
+}
+#adminPage #adminContent #messagesList .message p {
+  margin-top: 16px;
 }
 
 /*============= contact =============== */
@@ -1050,6 +1061,7 @@ footer #copyright {
   #page404 img {
     width: 500px;
   }
+  /*========== admin =================*/
   #adminPage #adminContent #usersGrid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
@@ -1094,6 +1106,7 @@ footer #copyright {
   #profilePage #profileContent #myInfo form #btnContainer {
     flex-direction: row;
   }
+  /*===========admin===================*/
   #adminPage {
     display: flex;
   }
@@ -1102,6 +1115,12 @@ footer #copyright {
   }
   #adminPage h2 {
     margin: 15px 0;
+  }
+  #adminPage #messagesList {
+    width: 75%;
+  }
+  #adminPage .aside {
+    width: 300px;
   }
 }
 @media screen and (min-width: 1400px) {
