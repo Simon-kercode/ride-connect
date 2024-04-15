@@ -3,6 +3,7 @@
 namespace app\models;
 
 use app\models\model;
+use app\models\userModel;
 
 class RideModel extends Model {
 
@@ -30,27 +31,18 @@ class RideModel extends Model {
 
      // get the pseudo of a ride's creator
     protected function getCreatorPseudo($ride, $params) {
+        $userModel = new UserModel;
+
         $columns = ['_user.pseudo'];
-        $joinParams = [
-            [
-            'table' => '_user',
-            'condition' => 'balade.idUser = _user.idUser'
-            ]
-        ];
-        // $params = ['balade.idUser' => $ride->idUser];
-        return $this->findSomeWithJoin($columns, $joinParams, $params);
-    }
-
-    protected function getpartQuantity($idBalade) {
-        $request = $this->findOneByOneParam('idBalade', $idBalade);
-        var_dump($request);
-        exit;
-
-        if($request) {
-            $partQuantity = $request->rowCount();
-            return $partQuantity;
-        }
-        else return 0;
+        return $userModel->findSomeBy($columns, $params);
+        // $columns = ['_user.pseudo'];
+        // $joinParams = [
+        //     [
+        //     'table' => '_user',
+        //     'condition' => 'balade.idUser = _user.idUser'
+        //     ]
+        // ];
+        // return $this->findSomeWithJoin($columns, $joinParams, $params);
     }
 
     /* Get the actual url, explode it
@@ -75,6 +67,8 @@ class RideModel extends Model {
             return($this->findOneByOneParam('idBalade', $id));
         }
     }
+
+    // get a ride by its id
     public function getRideById(int $id) {
         return $this->findOneByOneParam('idBalade', $id);
     }

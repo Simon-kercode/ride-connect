@@ -7,11 +7,12 @@ class RidesController extends RideModel {
     
     public function index() {
         $title = 'Balades - Ride Connect';
-        $rides = $this->makeRidesList();
-        
+        $rides = $this->makeRidesList();    
+        $pseudos = [];
         foreach($rides as $ride) {
-            $params = ['balade.idUser' => $ride->idUser];
+            $params = ['_user.idUser' => $ride->idUser];
             $pseudo = $this->getCreatorPseudo($ride, $params);
+            $pseudos[] = $pseudo;
         }
         include ROOT.'/app/views/rides.php';
     }

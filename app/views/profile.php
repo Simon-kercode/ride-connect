@@ -87,8 +87,8 @@
                             <article>
                                 <h3><?= $ride->title?></h3>
                                 <div class="flex"> 
-                                    <p class="particle"><?= substr($pseudo[$index]->pseudo, 0, 1) ?></p>
-                                    <p><?= $pseudo[$index]->pseudo ?></p>
+                                    <p class="particle"><?= substr($ridesPseudos[$index][0]->pseudo, 0, 1) ?></p>
+                                    <p><?= $ridesPseudos[$index][0]->pseudo ?></p>
                                 </div>
                                 <div class="flex location">
                                     <img src="public/images/icons/location.svg" alt="Croix de localisation">
@@ -151,8 +151,8 @@
                             <article>
                                 <h3><?= $subscribedRide->title?></h3>
                                 <div class="flex"> 
-                                    <p class="particle"><?= substr($pseudo[$index]->pseudo, 0, 1) ?></p>
-                                    <p><?= $pseudo[$index]->pseudo ?></p>
+                                    <p class="particle"><?= substr($subscribedRidesPseudos[$index][0]->pseudo, 0, 1) ?></p>
+                                    <p><?= $subscribedRidesPseudos[$index][0]->pseudo ?></p>
                                 </div>
                                 <div class="flex location">
                                     <img src="public/images/icons/location.svg" alt="Croix de localisation">

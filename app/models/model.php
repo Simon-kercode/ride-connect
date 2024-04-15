@@ -61,7 +61,6 @@ class Model extends DbConnector {
             }
             $where .= implode(' '.$operator.' ', $fields);
         }
-
         $result = $this->request('SELECT '.$columnsList.' FROM '.$this->table.$where, $values)->fetchAll();
         return $result;
     }
@@ -153,7 +152,8 @@ class Model extends DbConnector {
             $where .= implode(' AND ', $fields);
         }
         $query .= $where;
-
+        var_dump($query);
+        var_dump($values);
         $result = $this->request($query, $values)->fetchAll();
         return $result;
     }

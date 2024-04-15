@@ -14,7 +14,7 @@ class RideDetailsController extends RideModel{
         $ride = $this->getRide('', 3);
 
         // get ride's creator
-        $params = ['idBalade' => $ride->idBalade];
+        $params = ['idUser' => $ride->idUser];
         $pseudo = $this->getCreatorPseudo($ride, $params);
         
         $participants = new ParticipantModel;

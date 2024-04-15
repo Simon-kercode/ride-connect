@@ -19,8 +19,8 @@
                 <article >
                     <h3><?= $rides[$i]->title?></h3>
                     <div class="flex"> 
-                        <p class="particle"><?= substr($pseudo[$i]->pseudo, 0, 1) ?></p>
-                        <p><?= $pseudo[$i]->pseudo?></p>
+                        <p class="particle"><?= substr($pseudos[$i][0]->pseudo, 0, 1) ?></p>
+                        <p><?= $pseudos[$i][0]->pseudo?></p>
                     </div>
                     <div class="flex location">
                         <img src="public/images/icons/location.svg" alt="Croix de localisation">

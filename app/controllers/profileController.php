@@ -12,22 +12,25 @@ class ProfileController extends RideModel {
 
         $title = 'Profil - Ride Connect';
         $rides = $this->getMyRides();
-
+        $ridesPseudos = [];
         foreach($rides as $ride) {
-            $params = ['balade.idUser' => $ride->idUser];
+            $params = ['_user.idUser' => $ride->idUser];
             $pseudo = $this->getCreatorPseudo($ride, $params);
+            $ridesPseudos[] = $pseudo;
         }
 
         $subscribedRides = $this->getMySubscribedRides();
-
+        $subscribedRidesPseudos = [];
         foreach($subscribedRides as $subscribedRide) {
-            $params = ['balade.idUser' => $subscribedRide->idUser];
+            $params = ['_user.idUser' => $subscribedRide->idUser];
             $pseudo = $this->getCreatorPseudo($subscribedRide, $params);
+            $subscribedRidesPseudos[] = $pseudo;
         }
 
         include 'app/views/profile.php';
     }
     
+    // get rides created by the user
     private function getMyRides() {
         $rideModel = new RideModel;
         $columns = ['idUser', 'idBalade', 'title', 'department', 'date', 'length', 'duration', 'difficulty', 'meetingPoint'];
@@ -35,6 +38,7 @@ class ProfileController extends RideModel {
         return $rides;
     }
 
+    // get user's subscribed rides
     private function getMySubscribedRides() {
         $rideModel = new RideModel;
         // SELECT title FROM balade JOIN participate on balade.idBalade = participate.idBalade WHERE participate.iduser=13 ORDER BY date DESC;
@@ -48,6 +52,7 @@ class ProfileController extends RideModel {
         return $subscribedRides;
     }
 
+    // deleting a ride
     public function rideDelete() {
         $rideModel = new RideModel;
         $ride = $rideModel->getRide('supprimer', 4);
@@ -73,12 +78,14 @@ class ProfileController extends RideModel {
         }
     }
 
+    // update user's personnal informations
     public function updateInfos() {
 
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $userModel = new UserModel;
             $user = $userModel->findOneByMail($_SESSION['user']['email']);
             if (isset($_POST['profileEmail']) && !empty($_POST['profileEmail']))  {
+                // verifying email conformity
                 if(preg_match('/^[\p{L}\p{N}.!#$%&\'*+\/=?^_`{|}~-]+@[\p{L}\p{N}-]+(\.[\p{L}\p{N}-]+)*(\.[\p{L}]{2,})$/u', $_POST['profileEmail'])) {
                     $newEmail = htmlspecialchars($_POST['profileEmail']);
                     if ($userModel->verifyExistingMail($newEmail) === false) {
