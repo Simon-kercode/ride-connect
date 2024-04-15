@@ -12,6 +12,7 @@ class ContactController {
         include ROOT.'/app/views/contact.php';
     }
 
+    // verify the message's conformity and submit it
     public function submitMessage() {
 
         if($_SERVER['REQUEST_METHOD'] == 'POST') {
@@ -36,7 +37,7 @@ class ContactController {
                         if ($result) {
                             // message sent successfully
                             $_SESSION['message'] = "Votre message a bien été envoyé. Nous vous répondrons le plus rapidement possible.";
-                            header('Location: '.$_SERVER['HTTP_ORIGIN'].'/ride-connect/contact');
+                            header('Location: '.BASE_URL.'/ride-connect/contact');
                             exit;
     
                         } else {
@@ -53,6 +54,7 @@ class ContactController {
                     include ROOT.'/app/views/contact.php';
                     exit;
                 }
+                // invalid email format
                 else {
                     $mailError = "Cette adresse email n'est pas valide.";
                     $title = 'Inscription - Ride Connect';
@@ -60,6 +62,7 @@ class ContactController {
                     exit;
                 }
             }
+            // at least one empty field
             else {
                 $error = "Merci de remplir tous les champs";
                 $title = 'Inscription - Ride Connect';

@@ -55,7 +55,10 @@
             <a class="button" href="balades/<?=$ride->idBalade?>/modifier">Modifier</a>
         <?php 
             elseif (isset($_SESSION['user']) && !empty($_SESSION['user']['idUser']) && !$participation) :?>
-        <a class="button" href="balades/<?=$ride->idBalade?>/participer">Je participe !</a>
+            <a class="button" href="balades/<?=$ride->idBalade?>/participer">Je participe !</a>
+        <?php
+            elseif (isset($_SESSION['user']) && !empty($_SESSION['user']['idUser']) && $participation) :?>
+            <a class="button" href="balades/<?=$ride->idBalade?>/desinscrire">Me désinscrire</a>
         <?php endif ?>
         <p class="isConnected"><?php if (isset($_SESSION['message']) && !empty($_SESSION['message'])) {echo $_SESSION['message']; unset($_SESSION['message']);}?></p>
     </div>

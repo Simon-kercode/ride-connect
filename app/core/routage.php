@@ -17,20 +17,6 @@ use app\controllers\controller404;
 
     class Routage {
         public function start() {
-            // !!!!!!!!!!!!!!!!!!! A DEBUGUER !!!!!!!!!!!!!!!!!!!!!
-            // deleting the trailing slash at the end of the url
-            // $uri = $_SERVER['REQUEST_URI'];
-
-            // var_dump($uri);
-            // if(!empty($uri) && $uri !== '/' && $uri[-1] === '/'){
-            //     $uri = substr($uri, 0, -1);
-
-            //     // prevent duplicate content by redirect permanently
-            //     http_response_code(301);
-
-            //     header('Location: '.$uri);
-            //     exit;
-            // }
 
             $params = explode('/', $_GET['p']);
     
@@ -142,6 +128,24 @@ use app\controllers\controller404;
                                         $route->index();
                                     }
                                 }
+                                elseif ($params[2] ==='desinscrire') {
+                                    if(isset($_SESSION['user']) && !empty($_SESSION['user'])) {
+                                        $route = new RideDetailsController;
+                                        if ($route->verifyParticipation($params[1], $_SESSION['user']['idUser'])) {
+                                            $route->removeParticipant();
+                                        }
+                                        else {
+                                            $_SESSION['message'] = "Vous n'êtes pas inscrit à cette balade !";
+                                            $route = new RideDetailsController;
+                                            $route->index();
+                                        }
+                                    }
+                                    else {
+                                        $route = new RideDetailsController;
+                                        $_SESSION['message'] = "Vous devez être connecté pour participer à une balade.";
+                                        $route->index();
+                                    }
+                                }
                                 else {
                                     $route = new controller404;
                                     $route->index();
@@ -165,7 +169,7 @@ use app\controllers\controller404;
                                 }
                                 else {
                                     $_SESSION['message'] = "Vous devez être connecté pour organiser une balade.";
-                                    header('Location: '.$_SERVER['HTTP_ORIGIN'].'/ride-connect/balades'); 
+                                    header('Location: '.BASE_URL.'/ride-connect/balades'); 
                                 }
                             }
                         }
@@ -191,7 +195,7 @@ use app\controllers\controller404;
                         break;
 
                     case 'administration': 
-                        if(isset($_SESSION['user']) && !empty($_SESSION['user']) && $_SESSION['user']['isAdmin'] === 1) {
+                        if(isset($_SESSION['user']) && !empty($_SESSION['user']) && $_SESSION['user']['isAdmin'] == 1) {
                             if(isset($params[1]) && !empty($params[1])) {
                                 if ($params[1] === 'supprimer') {
                                     if(isset($params[2]) && !empty($params[2])) {
@@ -206,7 +210,7 @@ use app\controllers\controller404;
                                                 $route->index();
                                             }
                                         }
-                                        elseif(isset($params[2]) && $params[2] === 'balade') {
+                                        elseif($params[2] === 'balade') {
                                             if(isset($params[3]) && ctype_digit($params[3])) {
                                                 $route = new AdminController;
                                                 $route->rideDelete();
@@ -228,11 +232,58 @@ use app\controllers\controller404;
                                         $route->index();
                                     }
                                 }
+                                elseif($params[1] === 'setAdmin') {
+                                    if(isset($params[2]) && !empty($params[2])) {
+                                        if($params[2] === 'utilisateur') {
+                                            if(isset($params[3]) && ctype_digit($params[3])) {
+                                                $route = new AdminController;
+                                                $route->setAdmin();
+                                            }
+                                            else {
+                                                $route = new AdminController;
+                                                $_SESSION['message'] = "Veuillez sélectionner un utilisateur à mettre à jour.";
+                                                $route->index();
+                                            }
+                                        }
+                                        else {
+                                            $route = new controller404;
+                                            $route->index();
+                                        }
+                                    }
+                                    else {
+                                        $route = new AdminController;
+                                        $_SESSION['message'] = "Veuillez sélectionner un élément.";
+                                        $route->index();
+                                    }
+                                }
+                                elseif($params[1] === 'revokeAdmin') {
+                                    if(isset($params[2]) && !empty($params[2])) {
+                                        if($params[2] === 'utilisateur') {
+                                            if(isset($params[3]) && ctype_digit($params[3])) {
+                                                $route = new AdminController;
+                                                $route->revokeAdmin();
+                                            }
+                                            else {
+                                                $route = new AdminController;
+                                                $_SESSION['message'] = "Veuillez sélectionner un utilisateur à mettre à jour.";
+                                                $route->index();
+                                            }
+                                        }
+                                        else {
+                                            $route = new controller404;
+                                            $route->index();
+                                        }
+                                    }
+                                    else {
+                                        $route = new AdminController;
+                                        $_SESSION['message'] = "Veuillez sélectionner un élément.";
+                                        $route->index();
+                                    }
+                                }
                                 else {
                                     $route = new controller404;
                                     $route->index();
                                 }
-                                
                             }
                             else {
                                 $route = new AdminController;

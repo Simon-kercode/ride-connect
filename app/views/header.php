@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-    <base href="http://localhost/ride-connect/">
+    <!-- <base href="http://localhost/ride-connect/"> -->
+    <base href="https://www.greta-bretagne-sud.fr/stagiaires-kercode/simon-malry/ride-connect/">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Organisez et participez à de nombreuses balades moto entre particuliers. Rejoignez une communauté de milliers de motards dans toute la France !">
@@ -51,7 +52,7 @@
                         <img src="public/images/icons/user.svg" alt="icone de profil">
                         <?= $_SESSION['user']['pseudo'] ?>
                     </a></li>
-                    <?php if ($_SESSION['user']['isAdmin'] === 1) : ?>
+                    <?php if ($_SESSION['user']['isAdmin'] == 1) : ?>
                         <li><a class="button" href="administration">Administration</a></li>
                     <?php endif; ?>
                     <li><a class="button" href="logout">Déconnexion</a></li>

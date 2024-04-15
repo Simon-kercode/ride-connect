@@ -38,27 +38,9 @@ class OrgaController extends RideModel {
                 $region = str_replace('-', ' ', $decodedPointsInfos[0]->region);
                 $meetingPoint = htmlspecialchars($_POST['meetingPoint']);
                 $precisions = htmlspecialchars($_POST['precisions']);
-                // $map = null;
                 $waypoints = $_POST['waypoints'];
                 $idUser = $_SESSION['user']['idUser'];
 
-                // $params = [
-                //     'title' => $title,
-                //     'date' => $date,
-                //     'time' => $time,
-                //     'length' => $length,
-                //     'duration' => $duration,
-                //     'difficulty' => $difficulty,
-                //     'partNumber' => $partNumber,
-                //     'startPoint' => $startPoint,
-                //     'arrival' => $arrival,
-                //     'department' => $department,
-                //     'region' => $region,
-                //     'meetingPoint' => $meetingPoint,
-                //     'precisions' => $precisions,
-                //     'waypoints' => $waypoints,
-                //     'idUser' => $idUser
-                // ];
                 $ride->setTitle($title)
                     ->setDate($date)
                     ->setTime($time)
@@ -72,13 +54,13 @@ class OrgaController extends RideModel {
                     ->setRegion($region)
                     ->setMeetingPoint($meetingPoint)
                     ->setPrecisions($precisions)
-                    // ->setMap($map)
                     ->setWaypoints($waypoints)
                     ->setIdUser($idUser);
                 $result = $ride->create();
 
-                // $result = $ride->addBalade($params);
+                // get the ride's id that has just been created
                 $idBalade = $this->getLastId();
+                // add a participant to this ride
                 $participant = new ParticipantModel($_SESSION['user']['idUser'], $idBalade);
                 $storedParticipant = $participant->createParticipant(['idUser' => $_SESSION['user']['idUser'], 'idBalade' => $idBalade]);
 
@@ -87,7 +69,7 @@ class OrgaController extends RideModel {
                     if ($result) {
                         $title = 'Organiser ma balade - Ride Connect';
                         $_SESSION['message'] = "Ta balade a bien été enregistrée !";
-                        header('Location: '.$_SERVER['HTTP_ORIGIN'].'/ride-connect/profil');
+                        header('Location: '.BASE_URL.'/ride-connect/profil');
                     }
                     else {
                         $title = 'Organiser ma balade - Ride Connect';

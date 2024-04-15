@@ -3,7 +3,7 @@
 <main id="homePage">
     <section>
         <div id="welcome">
-            <?php if (isset($_SESSION['message']) && !empty($_SESSION['message'])) {echo $_SESSION['message']; unset($_SESSION['message']);} ?>
+            <p class="error"><?php if (isset($_SESSION['message']) && !empty($_SESSION['message'])) {echo $_SESSION['message']; unset($_SESSION['message']);} ?></p>
             <h1>Les balades<br> collaboratives</h1>
             <form action="balades" method="POST">
                 <input id="welcomeSearch" type="search" name="rideSearch" placeholder="Recherche par département, région...">

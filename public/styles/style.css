@@ -394,6 +394,14 @@ header #menuLinks #profileLink img {
   height: 40px;
   cursor: pointer;
 }
+#homePage .error {
+  margin: 0 auto;
+  color: white;
+  text-align: center;
+  background-color: red;
+  border-radius: 10px;
+  width: 50%;
+}
 #homePage #presentation {
   background-color: #CACACA;
   padding: 30px 16px;
@@ -543,6 +551,9 @@ header #menuLinks #profileLink img {
 }
 #ridesPage #searchCreate #orgaBtn {
   font-size: 1rem;
+}
+#ridesPage .rides {
+  margin: 30px 0;
 }
 
 /*============== rideDetails =========== */

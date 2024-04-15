@@ -41,10 +41,13 @@ class ProfileController extends RideModel {
     // get user's subscribed rides
     private function getMySubscribedRides() {
         $rideModel = new RideModel;
-        // SELECT title FROM balade JOIN participate on balade.idBalade = participate.idBalade WHERE participate.iduser=13 ORDER BY date DESC;
+        // SELECT 'columns'
         $columns = ['balade.idUser', 'balade.idBalade', 'title', 'department', 'date', 'length', 'duration', 'difficulty', 'meetingPoint'];
+        // JOIN 'table' ON 'condition'
         $joinParams = [['table' => 'participate', 'condition' => 'balade.idBalade = participate.idBalade']];
+        // WHERE 'params'
         $params = ['participate.idUser' => $_SESSION['user']['idUser']];
+        // ORDER BY 'order'
         $order = 'date';
         $way = 'ASC';
         $subscribedRides = $this->findSomeWithJoinAndOrder($columns, $joinParams, $params, $order, $way);
@@ -55,18 +58,20 @@ class ProfileController extends RideModel {
     // deleting a ride
     public function rideDelete() {
         $rideModel = new RideModel;
+        // get ride's id in url
         $ride = $rideModel->getRide('supprimer', 4);
 
         $participantModel = new ParticipantModel;
+        // delete all participants for this ride
         $participants = $participantModel->deleteAllParticipants($ride->idBalade);
-
+        // delete the ride
         $result = $rideModel->delete($ride->idBalade, 'idBalade');
         
         if (isset($result)) {
             if($result) {
                 $_SESSION['message'] = "La balade a bien été supprimée.";
                 $title = 'Profil - Ride Connect';
-                header('Location: '.$_SERVER['HTTP_ORIGIN'].'/ride-connect/profil');
+                header('Location: '.BASE_URL.'/ride-connect/profil');
                 exit;
             }
         }
@@ -88,6 +93,7 @@ class ProfileController extends RideModel {
                 // verifying email conformity
                 if(preg_match('/^[\p{L}\p{N}.!#$%&\'*+\/=?^_`{|}~-]+@[\p{L}\p{N}-]+(\.[\p{L}\p{N}-]+)*(\.[\p{L}]{2,})$/u', $_POST['profileEmail'])) {
                     $newEmail = htmlspecialchars($_POST['profileEmail']);
+                    // verify if newEmail doesn't exist
                     if ($userModel->verifyExistingMail($newEmail) === false) {
                         $mailError = "Cette adresse email existe déjà.";
                         $title = 'Profil - Ride Connect';
@@ -99,6 +105,7 @@ class ProfileController extends RideModel {
                     }
                 }
                 else {
+                    // invalid email format
                     $mailError = "Cette adresse email n'est pas valide.";
                     $title = 'Profil - Ride Connect';
                     include ROOT.'/app/views/profile.php';
@@ -107,6 +114,7 @@ class ProfileController extends RideModel {
             }
             if (isset($_POST['profilePseudo']) && !empty($_POST['profilePseudo'])) {
                 $newPseudo = htmlspecialchars($_POST['profilePseudo']);
+                // verify if newPseudo doesn't exist
                 if($userModel->verifyExistingPseudo($newPseudo) === false) {
                     $pseudoError = "Ce pseudo est déjà utilisé. Veuillez en choisir un autre.";
                     $title = 'Profil - Ride Connect';
@@ -134,11 +142,14 @@ class ProfileController extends RideModel {
                     $oldPassword = $_POST['oldPassword'];
                     $newPassword = $_POST['newPassword'];
                     $newPasswordConfirm = $_POST['newPasswordConfirm'];
+                    // verify conformity of the new password
                     if (preg_match("/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^\w\s])\S{8,}$/", $oldPassword) &&
                     preg_match("/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^\w\s])\S{8,}$/", $newPassword) &&
                     preg_match("/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^\w\s])\S{8,}$/", $newPasswordConfirm)) {
                         $oldPasswordDb = $user->password;
+                        // verify the user's old password
                         if (password_verify(trim($oldPassword), trim($oldPasswordDb))) {
+                            // verify if the matching between the 2 new password fields
                             if ($newPassword === $newPasswordConfirm) {
                                $setNewPassword = $userModel->setPassword(password_hash($newPassword, PASSWORD_DEFAULT));
                             }
@@ -170,7 +181,7 @@ class ProfileController extends RideModel {
                     exit;
                 }
             }
-            
+            // if at least on modification has been done, update user's informations
             if (isset($setNewEmail) || isset($setNewPseudo) || isset($setNewName) || isset($setNewFirstname) || isset($setNewPassword)) {
                 $result = $userModel->update('idUser', $user->idUser);
             }
@@ -197,11 +208,10 @@ class ProfileController extends RideModel {
                     if (isset($newFirstname)) {
                         $_SESSION['user']['firstname'] = $newFirstname;
                     }
-                    header('Location: profil');
+                    header('Location: '.BASE_URL.'/ride-connect/profil');
                     exit;
                 }
                 else {
-                    // error in database connection
                     $_SESSION['message'] = "Une erreur s'est produite lors de la modification de vos informations. Veuillez réessayer plus tard.";
                     $title = 'Profil - Ride Connect';
                     include ROOT.'/app/views/profile.php';
@@ -211,6 +221,7 @@ class ProfileController extends RideModel {
         }
     }
 
+    // delete user's account
     public function accountDelete($idUser) {
         $userModel = new UserModel;
         $result = $userModel->delete($_SESSION['user']['idUser'], 'idUser');
@@ -219,7 +230,7 @@ class ProfileController extends RideModel {
             if($result) {
                 $_SESSION['message'] = "Compte supprimé avec succès ! Au revoir.";
                 $title = 'Ride Connect';
-                header('Location: '.$_SERVER['HTTP_ORIGIN'].'/ride-connect/accueil');
+                header('Location: '.BASE_URL.'/ride-connect/accueil');
                 exit;
             }
             else {

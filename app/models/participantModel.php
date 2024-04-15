@@ -16,7 +16,19 @@ class ParticipantModel extends Model {
 
         $values = [
             $params['idUser'],
-            $params['idBalade'],
+            $params['idBalade']
+        ];
+
+        $result = $this->request($sql, $values);
+        return $result;
+    }
+
+    public function deleteParticipant(array $params) {
+        $sql = "DELETE FROM `$this->table` WHERE `idUser`= ? AND `idBalade` = ?";
+
+        $values = [
+            $params['idUser'],
+            $params['idBalade']
         ];
 
         $result = $this->request($sql, $values);

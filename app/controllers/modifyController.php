@@ -18,6 +18,7 @@ class ModifyController extends RideModel {
             if (isset ($_POST['title'], $_POST['date'], $_POST['time'], $_POST['startPoint'], $_POST['meetingPoint'], $_POST['partNumber'], $_POST['difficulty'], $_POST['pointsInfos'], $_POST['routeInfos'], $_POST['waypoints'], $_POST['precisions']) &&
              !empty($_POST['title']) && !empty($_POST['date']) && !empty($_POST['time']) && !empty($_POST['startPoint']) && !empty($_POST['meetingPoint']) && !empty($_POST['difficulty']) && !empty($_POST['pointsInfos']) && !empty($_POST['routeInfos']) && !empty($_POST['waypoints'])) {
 
+                // get ride's id in url
                 $ride = new RideModel;
                 $initialRide = $ride->getRide('modifier', 3);
 
@@ -88,12 +89,14 @@ class ModifyController extends RideModel {
 
                     if (isset($result)) {
                         
+                        // ride modified successfully
                         if ($result) {
                             $title = 'Profil - Ride Connect';
                             $_SESSION['message'] = "Ta balade a bien été modifiée !";
-                            header("Location: ".$_SERVER['HTTP_ORIGIN']."/ride-connect/profil");
+                            header("Location: ".BASE_URL."/ride-connect/profil");
                             exit;
                         }
+
                         else {
                             $ride = $this->getRide('modifier', 3);
                             $title = $ride->title.' - Ride Connect';

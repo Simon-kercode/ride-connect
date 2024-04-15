@@ -88,7 +88,9 @@ class UserModel extends Model {
 
     public function findOneByURL($pos) {
         $url = $_SERVER['REQUEST_URI'];
-        $explodeURL = explode('/', $url);
+        $startIndex = strpos($url, '/ride-connect');
+        $newUrl = substr($url, $startIndex);
+        $explodeURL = explode('/', $newUrl);
         $id = $explodeURL[$pos];
 
         if (isset($id) && !empty($id) && ctype_digit($id)) {

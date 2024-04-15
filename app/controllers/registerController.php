@@ -70,12 +70,11 @@ class RegisterController {
                             if ($result) {
                                 // account created successfully
                                 $_SESSION['message'] = "Votre compte a bien été créé. Vous pouvez maintenant vous connecter";
-                                header('Location: '.$_SERVER['HTTP_ORIGIN'].'/ride-connect/connexion');
+                                header('Location: '.BASE_URL.'/ride-connect/connexion');
                                 exit;
 
                             } 
                             else {
-                                // error in database connection
                                 $error = "Une erreur s'est produite lors de la création de l'utilisateur. Veuillez réessayer plus tard.";
                                 $title = 'Inscription - Ride Connect';
                                 include ROOT.'/app/views/register.php';

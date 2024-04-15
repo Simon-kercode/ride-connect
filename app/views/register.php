@@ -28,7 +28,7 @@
         </div>
         <div id="rgpd">
             <input type="checkbox" name="rgpd" class="checkbox">
-            <label for="rgpd"> En m'inscrivant, j'accepte la <a href="#">politique de confidentialité</a> et les <a href="#">conditions d'utilisation</a> de Ride Connect</label>
+            <label for="rgpd"> En m'inscrivant, j'accepte la <a href="confidentialite">politique de confidentialité</a> de Ride Connect</label>
         </div>
         <p class="error"><?php if(isset($error) && !empty($error)) echo $error ?></p>
         <input type="submit" value="Commencer l'aventure" class="formBtn" disabled>

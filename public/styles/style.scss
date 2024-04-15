@@ -453,6 +453,14 @@ header {
             }
         }
     }
+    .error {
+        margin: 0 auto;
+        color: white;
+        text-align: center;
+        background-color: red;
+        border-radius: 10px;
+        width: 50%;
+    }
     #presentation {
         background-color: $backgroundLightGrey;
         padding: 30px 16px ;
@@ -605,6 +613,9 @@ header {
             font-size: 1rem;
         }
     }
+    .rides {
+        margin: 30px 0;
+    }
 }
 
 /*============== rideDetails =========== */
@@ -613,7 +624,6 @@ header {
         height: 400px;
         z-index: 900;
     }
-
     .container,
     h2 {
         margin: 20px 16px;

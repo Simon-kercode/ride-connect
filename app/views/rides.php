@@ -10,7 +10,6 @@
         <a id="orgaBtn" class="button" href="balades/organiser">Créer ma balade</a>
     </section>
     <p class="isConnected"><?php if (isset($_SESSION['message']) && !empty($_SESSION['message'])) {echo $_SESSION['message']; unset($_SESSION['message']);}?></p>
-
     <section id="rideList" class="container">
         <?php if (isset($rides)) : ?>
             <p> 
@@ -61,14 +60,12 @@
                                         <img src="public/images/icons/level.svg" alt="Barres indiquant différents niveaux">
                                         <p><?= ucfirst($ride->difficulty) ?></p>
                                     </div>
-                                    
                                 </div>
                             </article>
                         </a> 
                     <?php endforeach ?>  
                 </div>
-            </div>
-            
+            </div>  
         <?php endif ?>
         </div>
     </section>
