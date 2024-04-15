@@ -1,6 +1,6 @@
 RewriteEngine On
 RewriteRule ^([a-zA-Z0-9\-\_\/]*)$ index.php?p=$1
 
-<FilesMatch "^(\.htaccess|\.env|\.gitignore|composer\.json|composer\.lock|README\.md)$">
+<FilesMatch "^(\.htaccess|\.env)$">
     Require all denied
 </FilesMatch>

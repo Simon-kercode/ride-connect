@@ -11,6 +11,18 @@
             </form>
         </div>
     </section>
+    <section id="presentation">
+        <div class="container">
+            <h2>Organisez et participez à des balades épiques</h2>
+            <p>
+                Découvrez l'aventure qui vous attend avec Ride Connect ! Notre plateforme est votre compagnon idéal pour explorer de nouveau horizons à moto, 
+                rencontrer d'autres passionnées et partager des expériences inoubliables. Que vous soyez motard chevronné ou un amateur en quête de 
+                nouvelles routes, Ride Connect vous offre une communauté dynamique et des outils innovants pour organiser, participer et vivre des balades inoubliables.
+                Rejognez nous dès aujourd'hui et laissez vous inspirer par la passion du 2 roues !
+            </p>
+            <a class="button" href="inscription">Inscription</a>
+        </div>
+    </section>
     <section class="rides container">
         <h2>Prochaines balades</h2>
         <div class="rideContainer">
