@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-    <!-- <base href="http://localhost/ride-connect/"> -->
     <base href="https://www.greta-bretagne-sud.fr/stagiaires-kercode/simon-malry/ride-connect/">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
