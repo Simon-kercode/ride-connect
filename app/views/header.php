@@ -6,12 +6,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Organisez et participez à de nombreuses balades moto entre particuliers. Rejoignez une communauté de milliers de motards dans toute la France !">
     <link rel="icon" href="public/images/logo-main.ico" type="image/x-icon">
-    <link rel="stylesheet" href="public/styles/style.css">
+    <link rel="stylesheet" href="public/styles/style.min.css">
     <!-- leaflet css -->
     <link rel="stylesheet" href="api/style/leaflet.css">
     <!-- leaflet draw css -->
     <link rel="stylesheet" href="https://unpkg.com/leaflet-draw/dist/leaflet.draw.css" />
-    <script type="text/javascript" src="public/scripts/scripts.js" defer></script>
+    <script type="text/javascript" src="public/scripts/scripts.min.js" defer></script>
     <!-- leaflet js -->
     <script type="text/javascript" src="api/scripts/leaflet.js"></script>
     <!-- leaflet draw js -->
