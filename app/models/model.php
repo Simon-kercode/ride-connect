@@ -29,11 +29,13 @@ class Model extends DbConnector {
 
     }
 
+    // get last id inserted in db
     public function getLastId() {
         $this->db = DbConnector::getInstance();
         return $this->db->lastInsertId();
     }
 
+    // get all from a table
     public function findAll() {
         $result = $this->request("SELECT * FROM ".$this->table);
         return $result->fetchAll();
@@ -80,7 +82,8 @@ class Model extends DbConnector {
         $result = $this->request('SELECT * FROM '.$this->table.' WHERE '.$fieldsList, $values)->fetchAll();
         return $result;
     }
-    
+
+    // method to find some data by some criterias and order it in a specific way
     public function findAndOrder(array $columns, array $params, $operator, $order, $way) {
         $orberBy = '';
 
@@ -122,6 +125,7 @@ class Model extends DbConnector {
         return $result;
     }
 
+    // method to find data of by some criterias and by joining 2 tables
     public function findSomeWithJoin(array $columns = [], array $joinParams = [], array $params = []) {
         if (empty($columns)) {
             $columnsList = ' * ';
@@ -158,6 +162,7 @@ class Model extends DbConnector {
         return $result;
     }
 
+    // method to find data of by some criterias and by joining 2 tables and order it in a specific way
     public function findSomeWithJoinAndOrder(array $columns = [], array $joinParams = [], array $params = [], string $order ="", string $way = "") {
         if (empty($columns)) {
             $columnsList = ' * ';
@@ -197,30 +202,6 @@ class Model extends DbConnector {
         $query .= $orderBy;
 
         $result = $this->request($query, $values)->fetchAll();
-        return $result;
-    }
-
-    public function addBalade(array $params) {
-        $sql = "INSERT INTO `balade` (title, date, time, length, duration, difficulty, partNumber, startPoint, arrival, department, region, meetingPoint, precisions, waypoints, idUser) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-
-        $values = [
-            $params['title'],
-            $params['date'],
-            $params['time'],
-            $params['length'],
-            $params['duration'],
-            $params['difficulty'],
-            $params['partNumber'],
-            $params['startPoint'],
-            $params['arrival'],
-            $params['department'],
-            $params['region'],
-            $params['meetingPoint'],
-            $params['precisions'],
-            $params['waypoints'],
-            $params['idUser']
-        ];
-        $result = $this->request($sql, $values);
         return $result;
     }
     public function updateBalade(array $params) {
