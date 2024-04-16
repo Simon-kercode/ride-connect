@@ -65,22 +65,6 @@ class UserModel extends Model {
         session_destroy();
     }
 
-    public function isLoggedOn() {
-        
-        if (!isset($_SESSION)) {
-            session_start();
-            return false;
-        }
-        
-        if (isset($_SESSION['user'])) {
-            $user = $this->findBy([$email=>$_SESSION["email"]]);
-            if ($user["email"] === $_SESSION["email"] && $user["password"] === $_SESSION["password"])
-            {
-                return true;
-            }
-        }
-    }
-
     public function findOneByMail($email) {
 
         return $this->request('SELECT * FROM `_user` WHERE email = ?', [$email])->fetch();
