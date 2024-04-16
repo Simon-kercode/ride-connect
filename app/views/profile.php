@@ -73,8 +73,8 @@
                     <input class="formBtn" type="submit" id="saveBtn" value="Enregistrer les modifications">
                     <input class="formBtn" type="reset" id="resetBtn" value="Annuler">
                 </div>
-                <div ><a id="accountDeleteBtn" class="dangerButton" href="profil/supprimer">Supprimer mon compte</a></div>
             </form>
+            <button id="accountDelete" class="dangerButton deleteButton">Supprimer mon compte</button>
         </section>
         <!--================ user's rides ============ -->
         <section id="myRides">
@@ -117,7 +117,7 @@
                                             }
                                             ?>
                                         </p>
-                                    </div>    
+                                    </div>     
                                     <div class="flex">
                                         <img src="public/images/icons/level.svg" alt="Barres indiquant différents niveaux">
                                         <p><?= ucfirst($ride->difficulty) ?></p>
@@ -126,12 +126,12 @@
                                 <div class="rdv">
                                     <p>RDV : <?= $ride->meetingPoint ?></p>  
                                 </div>
-                               
                             </article>
                         </a>     
                         <div class="btnRow">
                             <a class="button" href="balades/<?= $ride->idBalade?>/modifier">Modifier</a>
-                            <a class="dangerButton" href="profil/supprimer/<?=$ride->idBalade?>">Supprimer</a>
+                            <button class="profileRideDeleteButton dangerButton" data-idBalade="<?=$ride->idBalade?>">Supprimer</button>
+                            <!-- <a id="accountDeleteButton" class="dangerButton deleteButton" href="profil/supprimer/<?=$ride->idBalade?>">Supprimer</a> -->
                         </div>
                         </div>
                     <?php endforeach ?>

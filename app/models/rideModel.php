@@ -35,6 +35,14 @@ class RideModel extends Model {
 
         $columns = ['_user.pseudo'];
         return $userModel->findSomeBy($columns, $params);
+        // $columns = ['_user.pseudo'];
+        // $joinParams = [
+        //     [
+        //     'table' => '_user',
+        //     'condition' => 'balade.idUser = _user.idUser'
+        //     ]
+        // ];
+        // return $this->findSomeWithJoin($columns, $joinParams, $params);
     }
 
     /* Get the actual url, explode it

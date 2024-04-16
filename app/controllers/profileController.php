@@ -27,7 +27,8 @@ class ProfileController extends RideModel {
             $subscribedRidesPseudos[] = $pseudo;
         }
 
-        include 'app/views/profile.php';
+        include ROOT.'/app/views/profile.php';
+        include ROOT.'/app/views/confirmationModal.php';
     }
     
     // get rides created by the user

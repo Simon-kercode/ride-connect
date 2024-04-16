@@ -45,13 +45,14 @@ if (paramIndex('organiser') !== -1) {
 if (paramIndex('profil') !== -1) {
     displayProfilePart();
     displayInput();
+    displayProfileModal();
 }
 
 // ============ script for admin page ==============
 if (paramIndex('administration') !== -1) {
     displayAdminPart();
+    displayAdminModal();
 }
-
 
 function formVerification() {
     // lock the submit button if checkbox is not checked
@@ -246,6 +247,86 @@ function displayError(inputElement, errorMessage) {
     inputElement.parentNode.insertBefore(errorElement, inputElement.nextSibling);
 }
 
+function displayProfileModal() {
+    let modal = document.querySelector('#modal');
+    let profileRideDeleteButtons = document.querySelectorAll('.profileRideDeleteButton');
+    let accountDeleteButton = document.querySelector('#accountDelete');
+    let confirmationButton = document.querySelector('#confirmationButton');
+    let cancelButton = document.querySelector('#cancelButton');
+
+    let href = '';
+    
+    accountDeleteButton.addEventListener('click', function() {
+        modal.showModal();
+        if (paramIndex('profil') !== -1) {
+            confirmationButton.addEventListener('click', function() {
+                href = 'profil/supprimer' ;
+                confirmationButton.setAttribute('href', href);
+                modal.close();
+            })
+        }
+    });
+
+    profileRideDeleteButtons.forEach(profileRideDeleteButton => {
+        profileRideDeleteButton.addEventListener('click', function() {
+            modal.showModal();
+            let idBalade = profileRideDeleteButton.getAttribute('data-idBalade');
+            if (paramIndex('profil') !== -1) {
+                confirmationButton.addEventListener('click', function() {
+                    href = 'profil/supprimer/' + idBalade;
+                    confirmationButton.setAttribute('href', href);
+                    modal.close();
+                })
+            }
+        })
+    })
+    
+    cancelButton.addEventListener('click', function() {
+        modal.close();
+    })
+}
+
+function displayAdminModal() {
+    let modal = document.querySelector('#modal');
+    let adminAccountDeleteButtons = document.querySelectorAll('.adminAccountDeleteButton');
+    let adminRideDeleteButtons = document.querySelectorAll('.adminRideDeleteButton');
+    let confirmationButton = document.querySelector('#confirmationButton');
+    let cancelButton = document.querySelector('#cancelButton');
+
+    let href = '';
+
+    adminAccountDeleteButtons.forEach(adminAccountDeleteButton => {
+        adminAccountDeleteButton.addEventListener('click', function() {
+            modal.showModal();
+            let idUser = adminAccountDeleteButton.getAttribute('data-idUser');
+            if (paramIndex('administration') !== -1) {
+                confirmationButton.addEventListener('click', function() {
+                    href = 'administration/supprimer/utilisateur/' + idUser;
+                    confirmationButton.setAttribute('href', href);
+                    modal.close();
+                })
+            }
+        })
+    })
+
+    adminRideDeleteButtons.forEach(adminRideDeleteButton => {
+        adminRideDeleteButton.addEventListener('click', function() {
+            modal.showModal();
+            let idBalade = adminRideDeleteButton.getAttribute('data-idBalade');
+            if (paramIndex('administration') !== -1) {
+                confirmationButton.addEventListener('click', function() {
+                    href = 'administration/supprimer/balade/' + idBalade;
+                    confirmationButton.setAttribute('href', href);
+                    modal.close();
+                })
+            }
+        })
+    })
+
+    cancelButton.addEventListener('click', function() {
+        modal.close();
+    })
+}
 // looking for the presence of an element in url
 function paramIndex($param) {
     let url = window.location.href;

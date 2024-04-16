@@ -23,6 +23,7 @@ class AdminController extends RideModel{
 
         $title = 'Administration - Ride Connect';
         include ROOT.'/app/views/admin.php';
+        include ROOT.'/app/views/confirmationModal.php';
     }
 
     // get all users
@@ -125,7 +126,7 @@ class AdminController extends RideModel{
         
         if (isset($result)) {
             if($result) {
-                $_SESSION['error'] = "La balade a bien été supprimée.";
+                $_SESSION['message'] = "La balade a bien été supprimée.";
                 $title = 'Profil - Ride Connect';
                 header('Location: '.BASE_URL.'/ride-connect/administration');
                 exit;

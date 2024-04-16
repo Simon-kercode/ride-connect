@@ -517,9 +517,10 @@ header {
         }
     }
 
-    #rgpd {
+    #rgpdContainer {
         display: flex;
         margin-top: 20px;
+        align-items: center;
 
         input {
             margin-right: 8px;
@@ -817,7 +818,10 @@ header {
         color: $backgroundDarkGrey;
         margin: 20px 0;
     }
-
+    h1 {
+        color: white;
+        margin-left: 16px;
+    }
     #profileContent {
         margin: 30px 30px;
         width: 90%;
@@ -1004,6 +1008,29 @@ header {
     }
 }
 
+/*============== modal ================= */
+#modal {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border: solid 1px $detailsBlue;
+    padding: 50px;
+    
+}
+#modal-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    #modalBtn {
+        display: flex;
+        margin-top: 50px;
+        a {
+            margin-right: 8px;
+        }
+    }
+}
 /*============== footer ================ */
 
 footer {
@@ -1203,7 +1230,7 @@ footer {
     #profilePage {
         display: flex;
         h1 {
-            color: white;
+            margin-left: 0;
         }
         h2 {
             margin: 15px 0;

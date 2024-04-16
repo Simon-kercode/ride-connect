@@ -39,7 +39,8 @@
                             </p>
                         </div>
                         <div class="btnRow">
-                            <a class="dangerButton" href='administration/supprimer/utilisateur/<?=$user->idUser ?>'>Supprimer</a>
+                            <button class="dangerButton adminAccountDeleteButton" data-idUser="<?=$user->idUser?>">Supprimer</button>
+                            <!-- <a class="dangerButton deleteButton" href='administration/supprimer/utilisateur/<?=$user->idUser ?>'>Supprimer</a> -->
                             <?php if($user->isAdmin == 1) { ?>
                                 <a class="dangerButton" href='administration/revokeAdmin/utilisateur/<?=$user->idUser ?>'> Retirer administrateur</a>
                             <?php } else { ?>
@@ -105,7 +106,8 @@
                                 </article>
                             </a>
                             <div>
-                                <a class="dangerButton" href='administration/supprimer/balade/<?=$ride->idBalade?>'>Supprimer</a>
+                                <button class="dangerButton adminRideDeleteButton" data-idBalade="<?=$ride->idBalade?>">Supprimer</button>
+                                <!-- <a class="dangerButton deleteButton" href='administration/supprimer/balade/<?=$ride->idBalade?>'>Supprimer</a> -->
                             </div>
                         </div>
                     <?php  endforeach ?>

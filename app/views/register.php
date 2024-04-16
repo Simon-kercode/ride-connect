@@ -26,7 +26,7 @@
                 <input type="text" name="firstname" placeholder="Votre Prénom" value="<?= isset($_POST['firstname']) ? $_POST['firstname'] : ''?>">
             </div>
         </div>
-        <div id="rgpd">
+        <div id="rgpdContainer">
             <input type="checkbox" id="rgpd" name="rgpd" class="checkbox">
             <label for="rgpd"> En m'inscrivant, j'accepte la <a href="confidentialite">politique de confidentialité</a> de Ride Connect</label>
         </div>

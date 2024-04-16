@@ -17,9 +17,9 @@
     <!-- leaflet draw js -->
     <script src="https://unpkg.com/leaflet-draw/dist/leaflet.draw.js"></script>
     <?php
-    $url = $_SERVER['REQUEST_URI'];
-    $startIndex = strpos($url, '/ride-connect');
-    $newUrl = substr($url, $startIndex);
+        $url = $_SERVER['REQUEST_URI'];
+        $startIndex = strpos($url, '/ride-connect');
+        $newUrl = substr($url, $startIndex);
     ?>
     <?php if ($newUrl === '/ride-connect/balades/organiser') { ?>
     <!-- script to draw an itinerary in organisation page -->
