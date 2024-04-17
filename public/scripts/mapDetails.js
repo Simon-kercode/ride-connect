@@ -4,9 +4,29 @@ L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     attribution: '© OpenStreetMap contributors'
 }).addTo(map);
 
+let startIcon = L.icon({
+    iconUrl: 'api/style/images/marker-icon-green.png',
+    iconSize: [25, 41],
+    iconAnchor: [12, 41],
+    popupAnchor: [1, -34],
+    shadowUrl: 'api/style/images/marker-shadow.png',
+    shadowSize: [41, 41],
+    shadowAnchor: [12, 41],
+    iconColor: 'red'
+})
+let endIcon = L.icon({
+    iconUrl: 'api/style/images/marker-icon-red.png',
+    iconSize: [25, 41],
+    iconAnchor: [12, 41],
+    popupAnchor: [1, -34],
+    shadowUrl: 'api/style/images/marker-shadow.png',
+    shadowSize: [41, 41],
+    shadowAnchor: [12, 41],
+    iconColor: 'red'
+})
 function createRoute(waypoints) {
-
     if (waypoints.length >= 2) {
+
         // Use OpenRouteService to get the route
         fetch(`https://api.openrouteservice.org/v2/directions/driving-car/geojson`, {
             method: 'POST',
@@ -26,14 +46,24 @@ function createRoute(waypoints) {
             .then(data => {
                 routeLayer = L.geoJSON(data).addTo(map)
                 map.fitBounds(routeLayer.getBounds())
+                
+                L.marker([data.metadata.query.coordinates[0][1], data.metadata.query.coordinates[0][0]], {icon: startIcon}).addTo(map);
+                L.marker([data.metadata.query.coordinates[data.metadata.query.coordinates.length -1][1], 
+                    data.metadata.query.coordinates[data.metadata.query.coordinates.length -1][0]], {icon: endIcon}).addTo(map);
+                // L.marker([waypoints[0].lng, waypoints[0].lat]).addTo(map);
+
+
 
                 let route = data.features[0].properties;
                 displayGPS(route);
 
             })
-            .catch(error => console.error(error));
-
-        
+            .catch(error => {
+                let mapError = document.createElement('p');
+                mapError.className = "error";
+                mapError.textContent = "Erreur lors de la restitution de l'itinéraire."
+                mapError.parentNode.insertBefore(mapError, map.nextSibling);
+            });
     }
 }
 

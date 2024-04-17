@@ -636,6 +636,12 @@ header {
     .reductContainer {
         margin: 50px 16px 50px 16px;
     }
+    #redPoint {
+        color: red;
+    }
+    #greenPoint {
+        color: green;
+    }
 
     div .flex {
         align-items: center;
@@ -1271,6 +1277,9 @@ footer {
         }
         h2 {
             margin: 15px 0;
+        }
+        #adminContent {
+            width: 70%;
         }
         #messagesList {
             width: 75%;

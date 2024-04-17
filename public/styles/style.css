@@ -573,6 +573,12 @@ header #menuLinks #profileLink img {
 #rideDetailsPage .reductContainer {
   margin: 50px 16px 50px 16px;
 }
+#rideDetailsPage #redPoint {
+  color: red;
+}
+#rideDetailsPage #greenPoint {
+  color: green;
+}
 #rideDetailsPage div .flex {
   align-items: center;
 }
@@ -1159,6 +1165,9 @@ footer #copyright {
   }
   #adminPage h2 {
     margin: 15px 0;
+  }
+  #adminPage #adminContent {
+    width: 70%;
   }
   #adminPage #messagesList {
     width: 75%;
