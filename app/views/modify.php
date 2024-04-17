@@ -51,7 +51,7 @@
         </div>
         <p>* : Champs obligatoires</p>
         <p class="error"><?php if(isset($error) && !empty($error)) echo $error ?></p>
-        <input type="submit"class="formBtn" value="Enregistrer">
+        <input type="submit" class="formBtn" value="Enregistrer">
     </form>
     
     <script>document.addEventListener('DOMContentLoaded', function(event) {

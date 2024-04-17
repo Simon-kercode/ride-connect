@@ -12,21 +12,28 @@ class Model extends DbConnector {
 
     
     public function request(string $sql, array $params = null) {
-        // getting DbConnector instance
-        $this->db = DbConnector::getInstance();
+        try{
+            // getting DbConnector instance
+            $this->db = DbConnector::getInstance();
 
-        if ($params !== null) {
-            // prepared request
-            $query = $this->db->prepare($sql);
-            $query->execute($params);
+            if ($params !== null) {
+                // prepared request
+                $query = $this->db->prepare($sql);
+                $query->execute($params);
 
-            return $query;
+                return $query;
+            }
+            else {
+                // simple request
+                return $this->db->query($sql);
+            }
         }
-        else {
-            // simple request
-            return $this->db->query($sql);
+        catch(PDOException $e) {
+            error_log($e->getMessage());
+            
+            include ROOT.'/app/views/404.php';
+            exit;
         }
-
     }
 
     public function getLastId() {

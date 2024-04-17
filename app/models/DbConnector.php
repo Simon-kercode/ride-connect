@@ -3,7 +3,7 @@ namespace app\models;
 
 use PDO;
 use PDOException;
-
+use Exception;
 
 class DbConnector extends PDO {
 
@@ -22,20 +22,25 @@ class DbConnector extends PDO {
         }
         catch(PDOException $e) {
             error_log($e->getMessage());
+            throw (new PDOException ("Erreur de connexion à la base de données."));
         }
     }
 
     public static function getInstance(): ?self {
-        if(self::$instance === null) {
+        
             try {
+                if(self::$instance === null) {
                 self::$instance = new self();
+                
+                }
             } catch(PDOException $e) {
                 error_log($e->getMessage());
-                $_SESSION['error'] = "Cette fonctionnalité est actuellement indisponible. Nos excuses pour la gêne occasionée.";
-                return null;
+                include ROOT.'/app/views/breakdown.php';
+                exit;
             }
+            return self::$instance;
         }
-        return self::$instance;
-    }
+        
+    
 
 }

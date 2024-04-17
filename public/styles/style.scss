@@ -1094,6 +1094,22 @@ footer {
     }
 }
 
+/*============ breakdown =================*/
+
+#breakdownPage {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    img {
+        width: 600px;
+    }
+    p {
+        border: solid 1px $detailsBlue;
+        border-radius: 10px;
+        padding: 15px;
+    }
+}
 /*============== Responsive ==============*/
 @media screen and (min-width: 576px) {
     /*===============login====================*/
