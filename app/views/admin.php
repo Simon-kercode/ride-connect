@@ -2,14 +2,15 @@
 
 <main id="adminPage">
 <aside class="aside">
-    <h1>Administration</h1>
-    <p class="userInfo"><?php if (isset($_SESSION['message']) && !empty($_SESSION['message'])) echo $_SESSION['message']; unset($_SESSION['message']); ?></p>
-    <p class="error"><?php if (isset($_SESSION['error']) && !empty($_SESSION['error'])) echo $_SESSION['error']; unset($_SESSION['error']); ?></p>
+<div id="adminAsideTitle">
+        <h1>Administration</h1>
+        <p class="userInfo"><?php if (isset($_SESSION['message']) && !empty($_SESSION['message'])) echo $_SESSION['message']; unset($_SESSION['message']); ?></p>
+        <p class="error"><?php if (isset($_SESSION['error']) && !empty($_SESSION['error'])) echo $_SESSION['error']; unset($_SESSION['error']); ?></p>
+    </div>
     <div class="asideBtn">
         <button class="button" id="usersBtn">Utilisateurs</button>
         <button class="button" id="ridesBtn">Balades</button>
         <button class="button" id="messagesBtn">Messages</button>
-        <!-- <button id="mySubscribedRidesBtn">Balades prévues</button> -->
     </div>
 </aside>
     <!-- ================ users list section ===============-->
@@ -40,7 +41,6 @@
                         </div>
                         <div class="btnRow">
                             <button class="dangerButton adminAccountDeleteButton" data-idUser="<?=$user->idUser?>">Supprimer</button>
-                            <!-- <a class="dangerButton deleteButton" href='administration/supprimer/utilisateur/<?=$user->idUser ?>'>Supprimer</a> -->
                             <?php if($user->isAdmin == 1) { ?>
                                 <a class="dangerButton" href='administration/revokeAdmin/utilisateur/<?=$user->idUser ?>'> Retirer administrateur</a>
                             <?php } else { ?>
@@ -107,7 +107,6 @@
                             </a>
                             <div>
                                 <button class="dangerButton adminRideDeleteButton" data-idBalade="<?=$ride->idBalade?>">Supprimer</button>
-                                <!-- <a class="dangerButton deleteButton" href='administration/supprimer/balade/<?=$ride->idBalade?>'>Supprimer</a> -->
                             </div>
                         </div>
                     <?php  endforeach ?>

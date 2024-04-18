@@ -130,13 +130,18 @@ $detailsBlue: #007db3;
 
     @media screen and (min-width: 1200px) {
         .rideContainer {
-            grid-template-columns: repeat(4, 1fr);
+            grid-template-columns: repeat(3, 1fr);
 
             .rideItem {
                 width: 230px;
             }
         }
 
+    }
+    @media screen and (min-width: 1536px) {
+        .rideContainer {
+            grid-template-columns: repeat(4, 1fr);
+        }
     }
 }
 
@@ -824,9 +829,21 @@ header {
         color: $backgroundDarkGrey;
         margin: 20px 0;
     }
-    h1 {
-        color: white;
-        margin-left: 16px;
+    aside {
+        #profileAsideTitle {
+            width: 100%;
+            h1 {
+                color: white;
+                text-align: left;
+                margin-left: 30px;
+            }
+            .particle {
+                margin-bottom: 16px;
+            }
+            .userInfo, .error {
+                text-align: center;
+            }
+        }
     }
     #profileContent {
         margin: 30px 30px;
@@ -890,10 +907,14 @@ header {
                 .btnRow {
                     display: flex;
                     justify-content: center;
+                    align-items: center;
                     padding-top: 30px;
                     a {
                         padding: 3px;
                         margin-bottom: 0
+                    }
+                    .dangerButton {
+                        padding: 3px;
                     }
                 }
             }
@@ -910,9 +931,16 @@ header {
 /*============== Admin ================ */
 
 #adminPage {
-    h1 {
-        margin: 16px auto;
+    #adminAsideTitle {
+        width: 100%;
+        h1 {
+        margin: 16px 30px;
         color: white;
+        }
+        .userInfo,
+        .error {
+            text-align: center;
+        }
     }
     #adminContent {
         margin: 8px 16px;

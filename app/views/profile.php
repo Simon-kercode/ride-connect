@@ -3,10 +3,12 @@
 <main id="profilePage">
     
     <aside class="aside">
-        <p class="userInfo"><?php if (isset($_SESSION['message']) && !empty($_SESSION['message'])) echo $_SESSION['message']; unset($_SESSION['message']); ?></p>
-        <p class="error"><?php if (isset($_SESSION['error']) && !empty($_SESSION['error'])) echo $_SESSION['error']; unset($_SESSION['error']); ?></p>
-        <h1>Mon profil</h1>
-        <p class="particle"><?=substr($_SESSION['user']['pseudo'], 0, 1)?></p>
+    <div id="profileAsideTitle">
+            <h1>Mon profil</h1>
+            <p class="particle"><?=substr($_SESSION['user']['pseudo'], 0, 1)?></p>
+            <p class="userInfo"><?php if (isset($_SESSION['message']) && !empty($_SESSION['message'])) echo $_SESSION['message']; unset($_SESSION['message']); ?></p>
+            <p class="error"><?php if (isset($_SESSION['error']) && !empty($_SESSION['error'])) echo $_SESSION['error']; unset($_SESSION['error']); ?></p>
+        </div>
         <div class="asideBtn">
             <button class="button" id="myInfoBtn">Mes informations</button>
             <button class="button" id="myRidesBtn">Mes balades</button>
@@ -131,7 +133,6 @@
                         <div class="btnRow">
                             <a class="button" href="balades/<?= $ride->idBalade?>/modifier">Modifier</a>
                             <button class="profileRideDeleteButton dangerButton" data-idBalade="<?=$ride->idBalade?>">Supprimer</button>
-                            <!-- <a id="accountDeleteButton" class="dangerButton deleteButton" href="profil/supprimer/<?=$ride->idBalade?>">Supprimer</a> -->
                         </div>
                         </div>
                     <?php endforeach ?>

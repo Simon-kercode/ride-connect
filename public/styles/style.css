@@ -74,6 +74,7 @@ a {
 
 .logo {
   width: 200px;
+  height: -moz-fit-content;
   height: fit-content;
 }
 
@@ -214,10 +215,15 @@ a {
 }
 @media screen and (min-width: 1200px) {
   .rides .rideContainer {
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(3, 1fr);
   }
   .rides .rideContainer .rideItem {
     width: 230px;
+  }
+}
+@media screen and (min-width: 1536px) {
+  .rides .rideContainer {
+    grid-template-columns: repeat(4, 1fr);
   }
 }
 
@@ -746,9 +752,19 @@ header #menuLinks #profileLink img {
   color: #878787;
   margin: 20px 0;
 }
-#profilePage h1 {
+#profilePage aside #profileAsideTitle {
+  width: 100%;
+}
+#profilePage aside #profileAsideTitle h1 {
   color: white;
-  margin-left: 16px;
+  text-align: left;
+  margin-left: 30px;
+}
+#profilePage aside #profileAsideTitle .particle {
+  margin-bottom: 16px;
+}
+#profilePage aside #profileAsideTitle .userInfo, #profilePage aside #profileAsideTitle .error {
+  text-align: center;
 }
 #profilePage #profileContent {
   margin: 30px 30px;
@@ -817,11 +833,15 @@ header #menuLinks #profileLink img {
 #profilePage #profileContent #myRides .rideContainer .btnRow {
   display: flex;
   justify-content: center;
+  align-items: center;
   padding-top: 30px;
 }
 #profilePage #profileContent #myRides .rideContainer .btnRow a {
   padding: 3px;
   margin-bottom: 0;
+}
+#profilePage #profileContent #myRides .rideContainer .btnRow .dangerButton {
+  padding: 3px;
 }
 #profilePage #profileContent .rdv {
   margin-top: 20px;
@@ -831,9 +851,16 @@ header #menuLinks #profileLink img {
 }
 
 /*============== Admin ================ */
-#adminPage h1 {
-  margin: 16px auto;
+#adminPage #adminAsideTitle {
+  width: 100%;
+}
+#adminPage #adminAsideTitle h1 {
+  margin: 16px 30px;
   color: white;
+}
+#adminPage #adminAsideTitle .userInfo,
+#adminPage #adminAsideTitle .error {
+  text-align: center;
 }
 #adminPage #adminContent {
   margin: 8px 16px;
