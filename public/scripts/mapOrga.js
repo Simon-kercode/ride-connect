@@ -57,7 +57,6 @@ document.querySelector('#orgaForm').addEventListener('submit', async function (e
 
     // getting infos points
     let pointsInfos = await getPointsInfos(waypoints);
-    console.log(pointsInfos);
 
     pointsInfosInput.value = JSON.stringify(pointsInfos);
     routeInfosInput.value = JSON.stringify(routeInfos);
@@ -72,7 +71,6 @@ document.querySelector('#orgaForm').addEventListener('submit', async function (e
 function createRoute() {
     // Get markers coordinates
     waypoints = drawnItems.getLayers().map(layer => layer.getLatLng());
-    // console.log(waypoints);
 
     if (startPointMarker !== null) {
         waypoints.unshift(startPointMarker._latlng);
